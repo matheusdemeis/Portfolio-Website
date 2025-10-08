@@ -1,5 +1,5 @@
 export const profileImages = [
-    'images/profile.jpg',
-    'images/snowboarding1.jpg',
-    'images/snowboarding2.jpg'
+    '/profile.JPG',
+    '/snowboarding1.jpg',
+    '/snowboarding2.JPG'
   ];
