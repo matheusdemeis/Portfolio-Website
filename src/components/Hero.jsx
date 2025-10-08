@@ -23,7 +23,7 @@ export default function Hero() {
               Full Stack Web Developer
             </p>
             <a 
-              href="#contact"
+              href="https://drive.google.com/file/d/1K8iufmZizryV3Iw3g0ExrlCMxVNVw_x_/view?usp=drive_link"
               className="inline-block bg-gradient-to-r from-blue-500 to-cyan-500 px-8 py-3 rounded-lg font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition transform hover:scale-105"
             >
               Resume
