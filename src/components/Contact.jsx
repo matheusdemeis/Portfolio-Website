@@ -4,14 +4,11 @@ export default function Contact() {
   return (
     <section id="contact" className="py-20 px-4 bg-slate-800/50">
       <div className="max-w-4xl mx-auto text-center">
-        <h3 className="text-4xl font-bold mb-8">Let's Work Together</h3>
+        <h3 className="text-4xl font-bold mb-8">Contact Me!</h3>
         <p className="text-lg text-slate-300 mb-12">
-          I'm always interested in hearing about new projects and opportunities.
+          I'm currently looking for internships and junior developer opportunities.
         </p>
         <div className="flex justify-center gap-6 mb-12">
-          <a href="#" className="p-3 bg-slate-700 rounded-lg hover:bg-cyan-500 transition hover:text-slate-900">
-            <Mail size={24} />
-          </a>
           <a href="https://github.com/MatheusDemeis" className="p-3 bg-slate-700 rounded-lg hover:bg-cyan-500 transition hover:text-slate-900">
             <Github size={24} />
           </a>

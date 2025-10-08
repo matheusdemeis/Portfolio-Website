@@ -5,7 +5,7 @@ export default function Skills() {
     <section id="skills" className="py-20 px-4">
       <div className="max-w-6xl mx-auto">
         <h3 className="text-4xl font-bold mb-12 text-center">Skills</h3>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8">
           {Object.entries(skills).map(([category, items]) => (
             <div key={category} className="bg-slate-700/50 border border-slate-600 rounded-lg p-6">
               <h4 className="text-xl font-bold mb-4 text-cyan-400">{category}</h4>

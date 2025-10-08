@@ -1,5 +1,6 @@
 export const skills = {
-    'Frontend': ['React', 'TypeScript', 'Tailwind CSS', 'JavaScript'],
-    'Backend': ['Node.js', 'Python', 'PostgreSQL', 'MongoDB'],
-    'Tools': ['Git', 'Docker', 'AWS', 'Figma']
-  };
+  'Frontend': ['React', 'Next.js', 'TypeScript', 'JavaScript', 'Tailwind CSS'],
+  'Backend': ['Node.js', 'Python', 'Java', 'C++', 'Express.js'],
+  'Database': ['PostgreSQL', 'MongoDB', 'MySQL'],
+  'Tools': ['GitHub', 'Vercel', 'Figma', 'Notion', 'zsh (bash)']
+};
