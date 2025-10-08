@@ -26,7 +26,7 @@ export default function Hero() {
               href="#contact"
               className="inline-block bg-gradient-to-r from-blue-500 to-cyan-500 px-8 py-3 rounded-lg font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition transform hover:scale-105"
             >
-              Get in Touch
+              Resume
             </a>
           </div>
           <div className="flex justify-center">

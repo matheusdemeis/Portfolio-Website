@@ -12,15 +12,15 @@ export default function Contact() {
           <a href="#" className="p-3 bg-slate-700 rounded-lg hover:bg-cyan-500 transition hover:text-slate-900">
             <Mail size={24} />
           </a>
-          <a href="#" className="p-3 bg-slate-700 rounded-lg hover:bg-cyan-500 transition hover:text-slate-900">
+          <a href="https://github.com/MatheusDemeis" className="p-3 bg-slate-700 rounded-lg hover:bg-cyan-500 transition hover:text-slate-900">
             <Github size={24} />
           </a>
-          <a href="#" className="p-3 bg-slate-700 rounded-lg hover:bg-cyan-500 transition hover:text-slate-900">
+          <a href="https://www.linkedin.com/in/matheus-demeis/" className="p-3 bg-slate-700 rounded-lg hover:bg-cyan-500 transition hover:text-slate-900">
             <Linkedin size={24} />
           </a>
         </div>
         <a 
-          href="mailto:hello@example.com"
+          href="mailto:matheus.demeis@gmail.com"
           className="inline-block border-2 border-cyan-400 text-cyan-400 px-8 py-3 rounded-lg font-semibold hover:bg-cyan-400 hover:text-slate-900 transition"
         >
           Send Me an Email
