@@ -1,17 +1,10 @@
 export const projects = [
     {
-      id: 1,
-      title: 'E-Commerce Platform',
-      description: 'Full-stack e-commerce solution with payment integration and admin dashboard.',
-      tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-      link: '#'
-    },
-    {
       id: 2,
-      title: 'Task Management App',
-      description: 'Collaborative task manager with real-time updates and team features.',
-      tags: ['React', 'Firebase', 'Tailwind CSS'],
-      link: '#'
+      title: 'Marketplace App',
+      description: 'A marketplace app connecting buyers and sellers with real-time chat functionality.',
+      tags: ['Typescript', 'SASS', 'Firebase', 'Prisma'],
+      link: 'https://github.com/IDSP-LendItOut/LendItOut'
     },
     {
       id: 3,
