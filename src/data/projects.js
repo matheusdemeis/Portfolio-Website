@@ -8,9 +8,9 @@ export const projects = [
     },
     {
       id: 3,
-      title: 'AI Chatbot',
-      description: 'Intelligent chatbot powered by machine learning for customer support.',
-      tags: ['Python', 'TensorFlow', 'React', 'API'],
-      link: '#'
+      title: 'Tandem',
+      description: 'Tandem is a scheduling app that helps tradeworkers manage busy work hours, coordinate childcare, and stay organized throughout the week.',
+      tags: ['Typescript', 'Next.js', 'React', 'Tailwind CSS'],
+      link: 'https://github.com/IDSP-TRADECARE/Tandem'
     }
   ];
