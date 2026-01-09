@@ -12,5 +12,12 @@ export const projects = [
       description: 'Tandem is a scheduling app that helps tradeworkers manage busy work hours, coordinate childcare, and stay organized throughout the week.',
       tags: ['Typescript', 'Next.js', 'React', 'Tailwind CSS'],
       link: 'https://github.com/IDSP-TRADECARE/Tandem'
-    }
+    },
+    // {
+    //   id: 4,
+    //   title: 'MkDocks',
+    //   description: '',
+    //   tags: [],
+    //   link: 'https://github.com/MatheusDemeis/COMM-2116-Notion'
+    // }
   ];
