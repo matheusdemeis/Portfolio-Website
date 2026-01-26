@@ -19,12 +19,6 @@ export default function Contact() {
             <Linkedin size={24} />
           </a>
         </div>
-        <a 
-          href="mailto:your-email@example.com"
-          className="inline-block border-2 border-primary text-primary px-8 py-3 rounded-lg font-semibold hover:bg-primary hover:text-slate-900 transition"
-        >
-          Send Me an Email
-        </a>
       </div>
     </section>
   );
