@@ -10,7 +10,7 @@ export default function Projects() {
           {projects.map((project) => (
             <div 
               key={project.id}
-              className="bg-slate-700/50 border border-slate-600 rounded-lg p-6 hover:border-cyan-500 transition hover:shadow-lg hover:shadow-cyan-500/20"
+              className="bg-slate-700/50 border border-slate-600 rounded-lg p-6 hover:border-primary transition hover:shadow-lg hover:shadow-primary/20"
             >
               <h4 className="text-xl font-bold mb-3">{project.title}</h4>
               <p className="text-slate-300 mb-4">{project.description}</p>
@@ -18,7 +18,7 @@ export default function Projects() {
                 {project.tags.map((tag) => (
                   <span 
                     key={tag}
-                    className="bg-slate-600 text-cyan-300 text-sm px-3 py-1 rounded-full"
+                    className="bg-secondary text-primary text-sm px-3 py-1 rounded-full"
                   >
                     {tag}
                   </span>
@@ -26,7 +26,7 @@ export default function Projects() {
               </div>
               <a 
                 href={project.link}
-                className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition"
+                className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition"
               >
                 View Project <ExternalLink size={16} />
               </a>
