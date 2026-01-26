@@ -26,7 +26,7 @@ export default function Hero() {
               Building clean, functional web applications with modern technologies
             </p>
             <a 
-              href="https://drive.google.com/file/d/1K8iufmZizryV3Iw3g0ExrlCMxVNVw_x_/view?usp=drive_link"
+              href="https://drive.google.com/file/d/1ZdFIWai4tuV6fbujF35RjfooWv5E45zw/view?usp=drive_link"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block bg-primary text-secondary px-8 py-3 rounded-lg font-semibold hover:bg-primary/90 transition"
