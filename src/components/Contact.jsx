@@ -9,13 +9,13 @@ export default function Contact() {
           I'm always interested in hearing about new projects and opportunities.
         </p>
         <div className="flex justify-center gap-6 mb-12">
-          <a href="mailto:your-email@example.com" className="p-3 bg-slate-700 rounded-lg hover:bg-primary transition hover:text-slate-900">
+          <a href="mailto:matheus.demeis@gmail.com" className="p-3 bg-slate-700 rounded-lg hover:bg-primary transition hover:text-slate-900">
             <Mail size={24} />
           </a>
-          <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-700 rounded-lg hover:bg-primary transition hover:text-slate-900">
+          <a href="https://github.com/MatheusDemeis" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-700 rounded-lg hover:bg-primary transition hover:text-slate-900">
             <Github size={24} />
           </a>
-          <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-700 rounded-lg hover:bg-primary transition hover:text-slate-900">
+          <a href="https://linkedin.com/in/matheus-demeis" target="_blank" rel="noopener noreferrer" className="p-3 bg-slate-700 rounded-lg hover:bg-primary transition hover:text-slate-900">
             <Linkedin size={24} />
           </a>
         </div>
