@@ -5,7 +5,7 @@ export const projects = [
       id: 3,
       title: 'Tandem',
       description: 'Tandem is a scheduling app that helps tradeworkers manage busy work hours, coordinate childcare, and stay organized throughout the week.',
-      tags: ['Typescript', 'Next.js', 'React', 'Tailwind CSS'],
+      tags: ['Typescript', 'Next.js', 'React', 'Tailwind CSS', 'Agile Methodology'],
       link: 'https://github.com/IDSP-TRADECARE/Tandem',
       blog: {
         title: 'Tandem Blog',
@@ -22,7 +22,7 @@ export const projects = [
       role: 'Full stack web developer',
       year: '2025',
       rationale: [
-        'Worked in a team of three devs and five designers',
+        'Worked in a team of three devs and five designers.',
         'Connected the UI to real-time data so work, childcare, and personal blocks stay in sync.',
         'Implemented uploading systems with voice, manual and document input.'
       ],
