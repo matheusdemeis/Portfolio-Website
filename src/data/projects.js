@@ -15,11 +15,11 @@ export const projects = [
       },
       brand: {
         name: 'Tandem',
-        tone: 'Practical, calm scheduling',
+        tone: 'Bridging the gap between work and childcare.',
         accent: '#4A9B9B'
       },
       timeline: '16 weeks',
-      role: 'UX Strategy, UI Design',
+      role: 'Full stack web developer',
       year: '2025',
       rationale: [
         'Reduce scheduling stress with a focused weekly view and quick actions.',
@@ -28,16 +28,16 @@ export const projects = [
       ],
       visuals: [
         {
-          title: 'Weekly Schedule Grid',
-          description: 'High-contrast time blocks with glanceable categories.'
+          title: '-----------',
+          description: '-----------',
         },
         {
-          title: 'Shared Responsibilities',
-          description: 'Assigned tasks with status indicators to avoid missed steps.'
+          title: '-----------',
+          description: '-----------',
         },
         {
-          title: 'Notification Ladder',
-          description: 'Priority tiering for reminders so critical tasks surface first.'
+          title: '-----------',
+          description: '-----------',
         }
       ]
     },
@@ -53,7 +53,7 @@ export const projects = [
         accent: '#38BDF8'
       },
       timeline: '4 weeks',
-      role: 'Product + UI Design, Frontend Dev',
+      role: 'Full stack web developer',
       year: '2025',
       rationale: [
         'Design a trust-first flow so users feel safe listing and borrowing items.',
@@ -62,16 +62,16 @@ export const projects = [
       ],
       visuals: [
         {
-          title: 'Listing Cards System',
-          description: 'Image-first cards with consistent pricing and availability layout.'
+          title: '-----------',
+          description: '-----------',
         },
         {
-          title: 'Trust & Verification Badges',
-          description: 'Color-coded signals for verified sellers and safe transactions.'
+          title: '-----------',
+          description: '-----------',
         },
         {
-          title: 'Chat + Checkout Panel',
-          description: 'Split layout that keeps conversation and checkout visible together.'
+          title: '-----------',
+          description: '-----------',
         }
       ]
     },
