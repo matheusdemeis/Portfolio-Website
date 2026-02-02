@@ -8,7 +8,8 @@ export default function Projects() {
         <div className="text-center mb-12">
           <h3 className="text-4xl font-bold">Project Page</h3>
           <p className="text-slate-300 mt-3 max-w-2xl mx-auto">
-            A visual and written showcase of some of my favorite projects, highlighting both purpose and execution.
+            A visual and written showcase of some of my favorite projects,
+            <span className="block">highlighting both purpose and execution.</span>
           </p>
         </div>
         <div className="space-y-10">
