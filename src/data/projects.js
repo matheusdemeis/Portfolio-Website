@@ -22,9 +22,9 @@ export const projects = [
       role: 'Full stack web developer',
       year: '2025',
       rationale: [
-        'Reduce scheduling stress with a focused weekly view and quick actions.',
-        'Use approachable color coding to distinguish work, childcare, and personal blocks.',
-        'Design for fast handoff between partners and caregivers.'
+        'Worked in a team of three devs and five designers',
+        'Connected the UI to real-time data so work, childcare, and personal blocks stay in sync.',
+        'Implemented uploading systems with voice, manual and document input.'
       ],
       visuals: [
         {
@@ -56,9 +56,7 @@ export const projects = [
       role: 'Full stack web developer',
       year: '2025',
       rationale: [
-        'Design a trust-first flow so users feel safe listing and borrowing items.',
-        'Keep the UI lightweight to support quick listing and instant chat.',
-        'Highlight verified profiles and clear pricing to reduce friction.'
+        ''
       ],
       visuals: [
         {
