@@ -117,7 +117,7 @@ export default function Projects() {
                 </div>
 
                 <div>
-                  <h5 className="text-xl font-semibold mb-3">Project Graphics</h5>
+                  <h5 className="text-xl font-semibold mb-3">Project Highlights</h5>
                   <div className="grid gap-4">
                     {project.visuals.map((visual) => (
                       <div
