@@ -6,7 +6,7 @@ export default function Projects() {
     <section id="projects" className="py-20 px-4 bg-slate-800/50">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
-          <h3 className="text-4xl font-bold">Project Page</h3>
+          <h3 className="text-4xl font-bold">Projects</h3>
           <p className="text-slate-300 mt-3 max-w-2xl mx-auto">
             A visual and written showcase of some of my favorite projects,
             <span className="block">highlighting both purpose and execution.</span>
@@ -24,7 +24,7 @@ export default function Projects() {
                     <span
                       className="text-xs uppercase tracking-[0.3em] text-slate-300"
                     >
-                      Project Page
+                      Project
                     </span>
                     <span
                       className="text-xs font-semibold px-3 py-1 rounded-full"
