@@ -3,18 +3,24 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { profileImages } from '../data/images';
 
 /* ─── Hero ──────────────────────────────────────────────
-   Entrance: staggered fade-up for name → subtitle → CTA
-   Slope line: faint diagonal behind content (downhill metaphor)
-   Photo card: tilt on hover, micro-parallax on mouse move
+   Intent: communicate momentum / downhill flow abstractly.
+   Every animation here is deliberately understated.
+
+   1. Entrance  – staggered fade-up, runs once on mount
+   2. Slope line – faint diagonal suggesting downhill motion
+   3. Parallax  – photo card + bg gradient track the mouse
+   4. Photo     – hover tilt, shadow bloom, border glow
+   5. CTA       – arrow nudge, pressed feedback
    ────────────────────────────────────────────────────── */
 
 export default function Hero() {
   const [profileImage, setProfileImage] = useState(0);
   const prefersReduced = useReducedMotion();
   const cardRef = useRef(null);
+  const bgRef = useRef(null);
   const sectionRef = useRef(null);
 
-  /* ── Rotating profile images ────────────────────────── */
+  /* ── Rotating profile images ───────────────────────── */
   useEffect(() => {
     const interval = setInterval(() => {
       setProfileImage((prev) => (prev + 1) % profileImages.length);
@@ -22,37 +28,58 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, []);
 
-  /* ── Micro-parallax: photo card follows mouse 3-6px ── */
+  /* ── Micro-parallax on mouse move ──────────────────── *
+   * Photo card: ±3px translation (subtle, premium feel)
+   * Background: ±1px shift (barely perceptible depth)
+   * Disabled on mobile & reduced-motion                  */
   const handleMouseMove = useCallback(
     (e) => {
-      if (prefersReduced) return;
-      // Disable on mobile-width viewports
-      if (window.innerWidth < 768) return;
-      const card = cardRef.current;
-      if (!card) return;
+      if (prefersReduced || window.innerWidth < 768) return;
 
-      const rect = sectionRef.current.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width - 0.5) * 6;  // ±3px
-      const y = ((e.clientY - rect.top) / rect.height - 0.5) * 6;
-      card.style.transform = `translate(${x}px, ${y}px)`;
+      const rect = sectionRef.current?.getBoundingClientRect();
+      if (!rect) return;
+
+      // Normalise cursor position to -0.5…+0.5
+      const nx = (e.clientX - rect.left) / rect.width - 0.5;
+      const ny = (e.clientY - rect.top) / rect.height - 0.5;
+
+      // Photo card: ±3px translation + ±1.5deg tilt
+      if (cardRef.current) {
+        cardRef.current.style.transform =
+          `translate(${nx * 6}px, ${ny * 6}px) rotateY(${nx * 1.5}deg) rotateX(${-ny * 1.5}deg)`;
+      }
+
+      // Background gradient: ±1px (barely-there depth cue)
+      if (bgRef.current) {
+        bgRef.current.style.transform =
+          `translate(${nx * 2}px, ${ny * 2}px)`;
+      }
     },
     [prefersReduced]
   );
 
   const handleMouseLeave = useCallback(() => {
-    if (cardRef.current) cardRef.current.style.transform = 'translate(0,0)';
+    if (cardRef.current)
+      cardRef.current.style.transform = 'translate(0,0) rotateY(0) rotateX(0)';
+    if (bgRef.current)
+      bgRef.current.style.transform = 'translate(0,0)';
   }, []);
 
-  /* ── Stagger entrance variants (run once) ──────────── */
+  /* ── Stagger entrance variants (run once) ──────────── *
+   * ~120ms between each element, 14px upward travel      */
   const container = {
     hidden: {},
-    show: { transition: { staggerChildren: 0.18 } },
+    show: { transition: { staggerChildren: 0.12 } },
   };
   const fadeUp = prefersReduced
     ? { hidden: {}, show: {} }
     : {
-        hidden: { opacity: 0, y: 18 },
-        show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: 'easeOut' } },
+        hidden: { opacity: 0, y: 14 },
+        show: {
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] },
+        },
       };
 
   return (
@@ -62,19 +89,34 @@ export default function Hero() {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      {/* ── Slope line: faint diagonal (downhill / journey metaphor) ── */}
+      {/* ── Background gradient layer (receives micro-parallax) ── */}
+      <div
+        ref={bgRef}
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          willChange: 'transform',
+          transition: 'transform 0.3s ease-out',
+          zIndex: 0,
+        }}
+      />
+
+      {/* ── Slope line: faint diagonal (downhill / journey metaphor) ──
+           A single thin line at ~-8° suggests momentum and downhill
+           movement. Low opacity so it's felt, not seen.              */}
       {!prefersReduced && (
         <div
           aria-hidden="true"
           className="slope-line pointer-events-none absolute"
           style={{
-            top: '15%',
+            top: '18%',
             left: '-10%',
             width: '140%',
             height: '1px',
-            background: 'linear-gradient(90deg, transparent 0%, rgba(203,180,138,0.07) 30%, rgba(203,180,138,0.07) 70%, transparent 100%)',
+            background:
+              'linear-gradient(90deg, transparent 0%, rgba(203,180,138,0.06) 25%, rgba(203,180,138,0.08) 50%, rgba(203,180,138,0.06) 75%, transparent 100%)',
             transform: 'rotate(-8deg)',
-            filter: 'blur(1px)',
+            filter: 'blur(0.5px)',
             zIndex: 0,
           }}
         />
@@ -87,7 +129,7 @@ export default function Hero() {
         animate="show"
       >
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* ── Text column: staggered entrance ── */}
+          {/* ── Text column: staggered entrance ────────── */}
           <div>
             <motion.h2
               variants={fadeUp}
@@ -110,18 +152,18 @@ export default function Hero() {
               Building clean, functional web applications with modern technologies
             </motion.p>
 
-            {/* ── Resume button with micro-interaction ── */}
+            {/* ── Resume CTA: arrow nudge + pressed feedback ── */}
             <motion.a
               variants={fadeUp}
               href="https://drive.google.com/file/d/1ZdFIWai4tuV6fbujF35RjfooWv5E45zw/view?usp=drive_link"
               target="_blank"
               rel="noopener noreferrer"
-              className="resume-btn inline-flex items-center gap-2 bg-primary text-secondary px-8 py-3 rounded-lg font-semibold transition-all duration-200 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 active:scale-[0.97]"
-              whileHover={prefersReduced ? {} : { scale: 1.02 }}
+              className="resume-btn inline-flex items-center gap-2 bg-primary text-secondary px-8 py-3 rounded-lg font-semibold transition-all duration-200 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/15 active:scale-[0.97]"
+              whileHover={prefersReduced ? {} : { scale: 1.015 }}
               whileTap={prefersReduced ? {} : { scale: 0.97 }}
             >
               View Resume
-              {/* Arrow shifts right on hover via CSS (see globals.css) */}
+              {/* Arrow shifts right on hover (CSS in globals.css) */}
               <svg
                 className="resume-arrow w-4 h-4 transition-transform duration-200"
                 fill="none"
@@ -134,25 +176,25 @@ export default function Hero() {
             </motion.a>
           </div>
 
-          {/* ── Photo card: parallax + hover tilt + glow ── */}
-          <div className="flex justify-center">
-            <motion.div
+          {/* ── Photo card: parallax + hover glow ─────── *
+           *  Parallax (mouse-tracking) applied via ref     *
+           *  Hover glow/shadow applied via CSS class       *
+           *  Kept separate to avoid transform conflicts    */}
+          <div className="flex justify-center" style={{ perspective: '800px' }}>
+            <div
               ref={cardRef}
-              className="photo-card relative"
-              style={{ transition: 'transform 0.15s ease-out' }}
-              whileHover={
-                prefersReduced
-                  ? {}
-                  : { rotateY: 2, rotateX: -1, scale: 1.01 }
-              }
-              transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+              className="photo-card"
+              style={{
+                willChange: 'transform',
+                transition: 'transform 0.2s ease-out',
+              }}
             >
               <img
                 src={profileImages[profileImage]}
                 alt="Profile"
                 className="w-80 h-80 rounded-lg border-2 border-primary object-cover shadow-xl transition-all duration-500 photo-card-img"
               />
-            </motion.div>
+            </div>
           </div>
         </div>
       </motion.div>

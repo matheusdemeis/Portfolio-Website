@@ -1,31 +1,34 @@
 /* ── Micro-interaction styles ──────────────────────────
    Companion CSS for Hero.jsx motion features.
-   Kept minimal — animations are in Framer Motion / inline.
+   Kept minimal — bulk of animation is in Framer Motion.
    ──────────────────────────────────────────────────── */
 
-/* Resume button: arrow shifts right on hover */
+/* Resume button: arrow nudges right on hover */
 .resume-btn:hover .resume-arrow {
   transform: translateX(3px);
 }
 
-/* Photo card: soft glow on hover using accent colour */
+/* Photo card: soft shadow bloom + accent-colour border glow on hover.
+   Creates a warm, premium "lift" without being distracting. */
 .photo-card:hover .photo-card-img {
   box-shadow:
     0 20px 40px -12px rgba(0, 0, 0, 0.35),
-    0 0 24px rgba(203, 180, 138, 0.12);
-  border-color: rgba(203, 180, 138, 0.7);
+    0 0 20px rgba(203, 180, 138, 0.1);
+  border-color: rgba(203, 180, 138, 0.65);
 }
 
-/* Slope line: very subtle horizontal drift */
+/* Slope line: very slow horizontal drift (22s loop).
+   Suggests continuous downhill motion — the snowboarding metaphor.
+   Deliberately slow so it's felt subconsciously, not watched. */
 @keyframes slope-drift {
   0%, 100% { transform: rotate(-8deg) translateX(0); }
-  50%      { transform: rotate(-8deg) translateX(12px); }
+  50%      { transform: rotate(-8deg) translateX(10px); }
 }
 .slope-line {
-  animation: slope-drift 22s ease-in-out infinite;
+  animation: slope-drift 24s ease-in-out infinite;
 }
 
-/* ── Accessibility: disable all custom motion ────────── */
+/* ── Accessibility: kill all custom motion ───────────── */
 @media (prefers-reduced-motion: reduce) {
   .slope-line {
     animation: none !important;
@@ -33,7 +36,8 @@
   .resume-btn:hover .resume-arrow {
     transform: none;
   }
-  .photo-card-img {
+  .photo-card-img,
+  .photo-card {
     transition: none !important;
   }
 }
