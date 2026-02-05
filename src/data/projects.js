@@ -3,6 +3,7 @@ import tandemBlogImage from '../assets/tandem/tandem-blog.png';
 export const projects = [
     {
       id: 3,
+      slug: 'tandem',
       title: 'Tandem',
       description: 'Tandem is a scheduling app that helps tradeworkers manage busy work hours, coordinate childcare, and stay organized throughout the week.',
       tags: ['Typescript', 'Next.js', 'React', 'Tailwind CSS', 'Agile Methodology'],
@@ -43,6 +44,7 @@ export const projects = [
     },
     {
       id: 2,
+      slug: 'marketplace-app',
       title: 'Marketplace App',
       description: 'A marketplace app connecting buyers and sellers with real-time chat functionality.',
       tags: ['Typescript', 'SASS', 'Firebase', 'Prisma'],
