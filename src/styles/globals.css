@@ -1,0 +1,39 @@
+/* ── Micro-interaction styles ──────────────────────────
+   Companion CSS for Hero.jsx motion features.
+   Kept minimal — animations are in Framer Motion / inline.
+   ──────────────────────────────────────────────────── */
+
+/* Resume button: arrow shifts right on hover */
+.resume-btn:hover .resume-arrow {
+  transform: translateX(3px);
+}
+
+/* Photo card: soft glow on hover using accent colour */
+.photo-card:hover .photo-card-img {
+  box-shadow:
+    0 20px 40px -12px rgba(0, 0, 0, 0.35),
+    0 0 24px rgba(203, 180, 138, 0.12);
+  border-color: rgba(203, 180, 138, 0.7);
+}
+
+/* Slope line: very subtle horizontal drift */
+@keyframes slope-drift {
+  0%, 100% { transform: rotate(-8deg) translateX(0); }
+  50%      { transform: rotate(-8deg) translateX(12px); }
+}
+.slope-line {
+  animation: slope-drift 22s ease-in-out infinite;
+}
+
+/* ── Accessibility: disable all custom motion ────────── */
+@media (prefers-reduced-motion: reduce) {
+  .slope-line {
+    animation: none !important;
+  }
+  .resume-btn:hover .resume-arrow {
+    transform: none;
+  }
+  .photo-card-img {
+    transition: none !important;
+  }
+}

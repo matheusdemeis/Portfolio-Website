@@ -1,8 +1,19 @@
+import { motion, useReducedMotion } from 'framer-motion';
 import { skills } from '../data/skills';
 
+/* ── Skills: fades in + slides up 16px on first scroll into view ── */
 export default function Skills() {
+  const prefersReduced = useReducedMotion();
+
   return (
-    <section id="skills" className="py-20 px-4">
+    <motion.section
+      id="skills"
+      className="py-20 px-4"
+      initial={prefersReduced ? {} : { opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+    >
       <div className="max-w-6xl mx-auto">
         <h3 className="text-4xl font-bold mb-12 text-center">Skills</h3>
         <div className="grid md:grid-cols-2 gap-8">
@@ -21,6 +32,6 @@ export default function Skills() {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
