@@ -47,10 +47,18 @@ export default function Projects() {
               data-project-card
               className="group h-full rounded-2xl border border-slate-600 bg-slate-700/40 p-6 transition hover:border-primary/70 hover:bg-slate-700/60"
             >
-              <div
-                className="h-12 w-12 rounded-xl mb-4"
-                style={{ background: `linear-gradient(140deg, ${project.brand.accent}66, transparent)` }}
-              />
+              {project.logo ? (
+                <img
+                  src={project.logo}
+                  alt={`${project.brand.name} logo`}
+                  className="h-12 w-12 rounded-xl mb-4 object-cover"
+                />
+              ) : (
+                <div
+                  className="h-12 w-12 rounded-xl mb-4"
+                  style={{ background: `linear-gradient(140deg, ${project.brand.accent}66, transparent)` }}
+                />
+              )}
               <div className="flex items-center gap-3 mb-2">
                 <span className="text-xs uppercase tracking-[0.3em] text-slate-300">Project</span>
                 <span
