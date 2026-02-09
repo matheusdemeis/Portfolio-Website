@@ -130,24 +130,46 @@ export default function ProjectDetail() {
           </div>
 
           <div>
-            <h3 className="text-2xl font-semibold mb-4">Project Highlights</h3>
-            <div className="grid gap-4">
-              {project.visuals.map((visual, index) => (
-                <div
-                  key={`${visual.title}-${index}`}
-                  className="rounded-xl border border-slate-700 bg-slate-900/60 p-4"
-                >
+            {project.demoUrl ? (
+              <>
+                <h3 className="text-2xl font-semibold mb-4">Live Demo</h3>
+                <div className="mx-auto flex justify-center">
                   <div
-                    className="h-16 rounded-lg mb-4"
-                    style={{
-                      background: `linear-gradient(120deg, ${project.brand.accent}33, transparent)`
-                    }}
-                  />
-                  <p className="font-semibold mb-1">{visual.title}</p>
-                  <p className="text-slate-300 text-sm">{visual.description}</p>
+                    className="overflow-hidden rounded-[2.5rem] border-[14px] border-gray-800 bg-gray-800 shadow-2xl"
+                    style={{ width: '402px', height: '874px' }}
+                  >
+                    <iframe
+                      src={project.demoUrl}
+                      className="h-full w-full"
+                      title={`${project.brand.name} App`}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+                    />
+                  </div>
                 </div>
-              ))}
-            </div>
+              </>
+            ) : (
+              <>
+                <h3 className="text-2xl font-semibold mb-4">Project Highlights</h3>
+                <div className="grid gap-4">
+                  {project.visuals.map((visual, index) => (
+                    <div
+                      key={`${visual.title}-${index}`}
+                      className="rounded-xl border border-slate-700 bg-slate-900/60 p-4"
+                    >
+                      <div
+                        className="h-16 rounded-lg mb-4"
+                        style={{
+                          background: `linear-gradient(120deg, ${project.brand.accent}33, transparent)`
+                        }}
+                      />
+                      <p className="font-semibold mb-1">{visual.title}</p>
+                      <p className="text-slate-300 text-sm">{visual.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
           </div>
         </div>
 
