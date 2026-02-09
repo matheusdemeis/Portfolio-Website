@@ -1,17 +1,32 @@
 import { Menu, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 export default function Navbar({ isMenuOpen, setIsMenuOpen }) {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  /* Navigate to a section on the home page.
+     If already on "/", just scroll. Otherwise navigate first, then scroll. */
+  const goToSection = (e, hash) => {
+    e.preventDefault();
+    if (location.pathname === '/') {
+      document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      navigate('/', { state: { scrollTo: hash } });
+    }
+    setIsMenuOpen(false);
+  };
+
   return (
     <nav className="fixed w-full top-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-primary/20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           
           <div className="hidden md:flex gap-8 text-center justify-end items-center flex-1">
-            <a href="/#about" className="hover:text-primary transition">About</a>
+            <a href="/#about" onClick={(e) => goToSection(e, 'about')} className="hover:text-primary transition">About</a>
             <Link to="/projects" className="hover:text-primary transition">Projects</Link>
-            <a href="/#skills" className="hover:text-primary transition">Skills</a>
-            <a href="/#contact" className="hover:text-primary transition">Contact</a>
+            <a href="/#skills" onClick={(e) => goToSection(e, 'skills')} className="hover:text-primary transition">Skills</a>
+            <a href="/#contact" onClick={(e) => goToSection(e, 'contact')} className="hover:text-primary transition">Contact</a>
           </div>
 
           <button 
@@ -27,7 +42,7 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }) {
             <a
               href="/#about"
               className="hover:text-primary transition"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={(e) => goToSection(e, 'about')}
             >
               About
             </a>
@@ -41,14 +56,14 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }) {
             <a
               href="/#skills"
               className="hover:text-primary transition"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={(e) => goToSection(e, 'skills')}
             >
               Skills
             </a>
             <a
               href="/#contact"
               className="hover:text-primary transition"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={(e) => goToSection(e, 'contact')}
             >
               Contact
             </a>
