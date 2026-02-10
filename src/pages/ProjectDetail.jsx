@@ -119,11 +119,30 @@ export default function ProjectDetail() {
                   </div>
                 </div>
                 <p className="text-slate-300 text-sm mb-4">{project.blog.description}</p>
+                <div className="flex flex-wrap items-center gap-6">
+                  <a
+                    href={project.blog.url}
+                    className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition"
+                  >
+                    Visit Blog <ExternalLink size={16} />
+                  </a>
+                  <a
+                    href={project.link}
+                    className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition"
+                  >
+                    GitHub Repository <ExternalLink size={16} />
+                  </a>
+                </div>
+              </div>
+            )}
+
+            {!project.blog && (
+              <div className="mt-8">
                 <a
-                  href={project.blog.url}
+                  href={project.link}
                   className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition"
                 >
-                  Visit Blog <ExternalLink size={16} />
+                  GitHub Repository <ExternalLink size={16} />
                 </a>
               </div>
             )}
@@ -173,14 +192,6 @@ export default function ProjectDetail() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-wrap items-center justify-end gap-4">
-          <a
-            href={project.link}
-            className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition"
-          >
-            GitHub Repository <ExternalLink size={16} />
-          </a>
-        </div>
       </div>
     </section>
   );
