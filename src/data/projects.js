@@ -6,7 +6,7 @@ export const projects = [
   {
     id: 2,
     slug: 'tandem',
-    demoUrl: import.meta.env.VITE_TANDEM_IFRAME_URL || null,
+    demoUrl: 'https://tandem-app.com/',
     logo: tandemLogo,
     title: 'Tandem, bridging the gap between work and childcare',
     description:
