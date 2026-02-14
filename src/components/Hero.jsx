@@ -155,7 +155,7 @@ export default function Hero() {
             {/* ── Resume CTA: arrow nudge + pressed feedback ── */}
             <motion.a
               variants={fadeUp}
-              href="https://drive.google.com/file/d/1ZdFIWai4tuV6fbujF35RjfooWv5E45zw/view?usp=drive_link"
+              href="https://drive.google.com/file/d/1pBZ59EEspNCc_PsjDEmAxCLtuVbtd6uD/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               className="resume-btn inline-flex items-center gap-2 bg-primary text-secondary px-8 py-3 rounded-lg font-semibold transition-all duration-200 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/15 active:scale-[0.97]"
