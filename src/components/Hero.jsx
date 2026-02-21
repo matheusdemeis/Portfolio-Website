@@ -1,229 +1,303 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
-import { profileImages } from '../data/images';
+import { useEffect, useRef, useCallback } from "react";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 
-const rioBg = '/rio-bg.jpg';
+const snowboarding = "/snowboarding.jpg";
+
+// Brand colors (matched to your logo)
+const BRAND_BLUE = "#0E334F";
+const BRAND_GOLD = "#CBAB7D";
+const BRAND_GOLD_SOFT = "#F3E2C6";
 
 export default function Hero() {
-  const [profileImage, setProfileImage] = useState(0);
   const prefersReduced = useReducedMotion();
   const heroRef = useRef(null);
-  const cardRef = useRef(null);
   const bgRef = useRef(null);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setProfileImage((prev) => (prev + 1) % profileImages.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
+  // rAF throttle for mousemove
+  const rafId = useRef(null);
+  const lastPos = useRef({ nx: 0, ny: 0 });
 
   const { scrollY } = useScroll();
   const contentOpacity = useTransform(scrollY, [0, 300], [1, 0]);
-  const contentY = useTransform(scrollY, [0, 300], ['0px', '-60px']);
+  const contentY = useTransform(scrollY, [0, 300], ["0px", "-60px"]);
 
-  const handleMouseMove = useCallback((e) => {
-    if (prefersReduced || window.innerWidth < 768) return;
-    const nx = e.clientX / window.innerWidth - 0.5;
-    const ny = e.clientY / window.innerHeight - 0.5;
+  const applyParallax = useCallback(() => {
+    rafId.current = null;
+    const { nx, ny } = lastPos.current;
+
     if (bgRef.current) {
       bgRef.current.style.transform = `translate(${nx * 12}px, ${ny * 12}px) scale(1.05)`;
     }
-    if (cardRef.current) {
-      cardRef.current.style.transform =
-        `translate(${nx * 6}px, ${ny * 6}px) rotateY(${nx * 2}deg) rotateX(${-ny * 2}deg)`;
-    }
-  }, [prefersReduced]);
+  }, []);
+
+  const handleMouseMove = useCallback(
+    (e) => {
+      if (prefersReduced || window.innerWidth < 768) return;
+
+      const nx = e.clientX / window.innerWidth - 0.5;
+      const ny = e.clientY / window.innerHeight - 0.5;
+
+      lastPos.current = { nx, ny };
+
+      if (rafId.current) return;
+      rafId.current = requestAnimationFrame(applyParallax);
+    },
+    [prefersReduced, applyParallax]
+  );
 
   const handleMouseLeave = useCallback(() => {
-    if (bgRef.current) bgRef.current.style.transform = 'translate(0,0) scale(1.05)';
-    if (cardRef.current) cardRef.current.style.transform = 'translate(0,0) rotateY(0) rotateX(0)';
+    if (rafId.current) cancelAnimationFrame(rafId.current);
+    rafId.current = null;
+
+    if (bgRef.current) bgRef.current.style.transform = "translate(0,0) scale(1.05)";
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (rafId.current) cancelAnimationFrame(rafId.current);
+    };
   }, []);
 
   const stagger = {
     hidden: {},
     show: { transition: { staggerChildren: 0.15, delayChildren: 0.4 } },
   };
-  const fadeUp = prefersReduced ? { hidden: {}, show: {} } : {
-    hidden: { opacity: 0, y: 24 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1] } },
-  };
-  const fadeIn = prefersReduced ? { hidden: {}, show: {} } : {
-    hidden: { opacity: 0 },
-    show: { opacity: 1, transition: { duration: 1.2, ease: 'easeOut' } },
-  };
+
+  const fadeUp = prefersReduced
+    ? { hidden: {}, show: {} }
+    : {
+        hidden: { opacity: 0, y: 24 },
+        show: {
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1] },
+        },
+      };
+
+  const fadeIn = prefersReduced
+    ? { hidden: {}, show: {} }
+    : {
+        hidden: { opacity: 0 },
+        show: { opacity: 1, transition: { duration: 1.2, ease: "easeOut" } },
+      };
 
   return (
-    <>
-      <section
-        ref={heroRef}
-        className="relative w-full overflow-hidden"
+    <section
+      ref={heroRef}
+      className="relative w-full overflow-hidden"
+      style={{ height: "100dvh" }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      {/* Background */}
+      <motion.div
+        aria-hidden="true"
         style={{
-          /* Pull up behind navbar so no gap top or bottom */
-          height: '100dvh',
-          position: 'relative',
+          position: "absolute",
+          inset: 0,
+          overflow: "hidden",
+          zIndex: 0,
+          pointerEvents: "none",
         }}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
       >
-        {/* Rio background — fills entire section including behind navbar */}
-        <motion.div aria-hidden="true" style={{ position: 'absolute', inset: 0, overflow: 'hidden', zIndex: 0 }}>
-          <div
-            ref={bgRef}
-            style={{
-              position: 'absolute',
-              inset: '-5%',
-              backgroundImage: `url(${rioBg})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center 35%',
-              transform: 'scale(1.05)',
-              willChange: 'transform',
-              transition: 'transform 0.5s ease-out',
-            }}
-          />
-          {/* Gradient: only darkens to ~70% at bottom — no full black */}
-          <div style={{
-            position: 'absolute', inset: 0,
-            background: 'linear-gradient(to bottom, rgba(8,12,22,0.3) 0%, rgba(8,12,22,0.4) 50%, rgba(8,12,22,0.68) 100%)',
-          }} />
-          <div style={{
-            position: 'absolute', inset: 0,
-            background: 'radial-gradient(ellipse at center, transparent 40%, rgba(8,12,22,0.45) 100%)',
-          }} />
-        </motion.div>
-
-        {/* Brazilian flag bar — sits at very top of section (behind navbar visually) */}
-        <motion.div
-          variants={fadeIn} initial="hidden" animate="show"
-          aria-hidden="true"
+        <div
+          ref={bgRef}
           style={{
-            position: 'absolute', top: 0, left: 0, right: 0,
-            height: '3px',
-            background: 'linear-gradient(90deg, #009C3B 0%, #FFDF00 50%, #002776 100%)',
-            zIndex: 10,
+            position: "absolute",
+            inset: "-5%",
+            backgroundImage: `url(${snowboarding})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center 45%",
+            transform: "scale(1.05)",
+            willChange: "transform",
+            transition: "transform 0.5s ease-out",
           }}
         />
 
-        {/* Main content — centered in full section height */}
+        {/* Overlay gradients */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(to bottom, rgba(8,12,22,0.28) 0%, rgba(8,12,22,0.42) 55%, rgba(8,12,22,0.72) 100%)",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "radial-gradient(ellipse at center, transparent 42%, rgba(8,12,22,0.45) 100%)",
+          }}
+        />
+      </motion.div>
+
+      {/* Top accent bar (brand colors) */}
+      <motion.div
+        variants={fadeIn}
+        initial="hidden"
+        animate="show"
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: "3px",
+          background: `linear-gradient(90deg, ${BRAND_BLUE} 0%, ${BRAND_GOLD} 55%, ${BRAND_GOLD_SOFT} 100%)`,
+          zIndex: 10,
+        }}
+      />
+
+      {/* Content */}
+      <motion.div
+        style={{ opacity: contentOpacity, y: contentY }}
+        className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4"
+      >
         <motion.div
-          style={{ opacity: contentOpacity, y: contentY }}
-          className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4"
+          variants={stagger}
+          initial="hidden"
+          animate="show"
+          className="flex flex-col items-center"
         >
-          <motion.div variants={stagger} initial="hidden" animate="show" className="flex flex-col items-center">
-
-            <motion.h1
-              variants={fadeUp}
-              style={{
-                fontSize: 'clamp(3.5rem, 11vw, 9rem)',
-                fontWeight: 900,
-                lineHeight: 0.95,
-                letterSpacing: '-0.03em',
-                color: '#ffffff',
-                marginBottom: '0.3rem',
-                textShadow: '0 4px 40px rgba(0,0,0,0.5)',
-              }}
-            >
-              Matheus
-            </motion.h1>
-
-            <motion.h1
-              variants={fadeUp}
-              style={{
-                fontSize: 'clamp(3.5rem, 11vw, 9rem)',
-                fontWeight: 900,
-                lineHeight: 0.95,
-                letterSpacing: '-0.03em',
-                background: 'linear-gradient(135deg, #FFDF00 0%, #CBB48A 55%, #ff9a3c 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                marginBottom: '1.75rem',
-                filter: 'drop-shadow(0 2px 24px rgba(255,200,50,0.35))',
-              }}
-            >
-              Demeis
-            </motion.h1>
-
-            <motion.p
-              variants={fadeUp}
-              style={{
-                fontSize: 'clamp(0.9rem, 2.2vw, 1.25rem)',
-                color: 'rgba(255,255,255,0.7)',
-                fontWeight: 400,
-                letterSpacing: '0.18em',
-                textTransform: 'uppercase',
-                marginBottom: '0.6rem',
-              }}
-            >
-              Full Stack Web Developer
-            </motion.p>
-
-            <motion.p
-              variants={fadeUp}
-              style={{
-                fontSize: 'clamp(0.85rem, 1.8vw, 1rem)',
-                color: 'rgba(255,255,255,0.45)',
-                fontStyle: 'italic',
-                marginBottom: '2.5rem',
-              }}
-            >
-              
-            </motion.p>
-
-            <motion.a
-              variants={fadeUp}
-              href="https://drive.google.com/file/d/1pBZ59EEspNCc_PsjDEmAxCLtuVbtd6uD/view?usp=sharing"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={prefersReduced ? {} : { scale: 1.04 }}
-              whileTap={prefersReduced ? {} : { scale: 0.97 }}
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: '8px',
-                background: 'linear-gradient(135deg, #FFDF00, #ff9a3c)',
-                color: '#0a0c16',
-                padding: '14px 34px',
-                borderRadius: '8px',
-                fontWeight: 700,
-                fontSize: '0.95rem',
-                letterSpacing: '0.04em',
-                textDecoration: 'none',
-                boxShadow: '0 4px 30px rgba(255,200,0,0.35)',
-              }}
-            >
-              View Resume
-              <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </motion.a>
-          </motion.div>
-        </motion.div>
-
-        {/* Bouncing scroll indicator */}
-        {!prefersReduced && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 2.2, duration: 0.8 }}
+          <motion.h1
+            variants={fadeUp}
             style={{
-              position: 'absolute', bottom: '2rem', left: '50%',
-              transform: 'translateX(-50%)',
-              zIndex: 10,
-              display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px',
+              fontSize: "clamp(3.4rem, 11vw, 9rem)",
+              fontWeight: 900,
+              lineHeight: 0.95,
+              letterSpacing: "-0.03em",
+              color: "#ffffff",
+              marginBottom: "0.3rem",
+              textShadow: "0 4px 40px rgba(0,0,0,0.5)",
             }}
           >
-            <span style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase' }}>
-              scroll
-            </span>
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
+            Matheus
+          </motion.h1>
+
+          <motion.h1
+            variants={fadeUp}
+            style={{
+              fontSize: "clamp(3.4rem, 11vw, 9rem)",
+              fontWeight: 900,
+              lineHeight: 0.95,
+              letterSpacing: "-0.03em",
+              background: `linear-gradient(135deg, ${BRAND_GOLD} 0%, ${BRAND_GOLD_SOFT} 45%, ${BRAND_GOLD} 100%)`,
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              marginBottom: "1.75rem",
+              filter: "drop-shadow(0 2px 22px rgba(203,171,125,0.28))",
+            }}
+          >
+            Demeis
+          </motion.h1>
+
+          <motion.p
+            variants={fadeUp}
+            style={{
+              fontSize: "clamp(0.9rem, 2.2vw, 1.25rem)",
+              color: "rgba(255,255,255,0.72)",
+              fontWeight: 400,
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              marginBottom: "2.2rem",
+              textShadow: "0 2px 16px rgba(0,0,0,0.35)",
+            }}
+          >
+          </motion.p>
+
+          <motion.a
+            variants={fadeUp}
+            href="https://drive.google.com/file/d/1pBZ59EEspNCc_PsjDEmAxCLtuVbtd6uD/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={prefersReduced ? {} : { scale: 1.04, filter: "brightness(1.05)" }}
+            whileTap={prefersReduced ? {} : { scale: 0.97 }}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+              background: `linear-gradient(135deg, ${BRAND_GOLD}, ${BRAND_GOLD_SOFT})`,
+              color: BRAND_BLUE,
+              padding: "14px 34px",
+              borderRadius: "10px",
+              fontWeight: 700,
+              fontSize: "0.95rem",
+              letterSpacing: "0.04em",
+              textDecoration: "none",
+              border: "1px solid rgba(203,171,125,0.55)",
+              boxShadow: "0 10px 38px rgba(203,171,125,0.28)",
+            }}
+          >
+            View Resume
+            <svg
+              width="16"
+              height="16"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              viewBox="0 0 24 24"
             >
-              <svg width="20" height="20" fill="none" stroke="rgba(255,255,255,0.35)" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-              </svg>
-            </motion.div>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M13 7l5 5m0 0l-5 5m5-5H6"
+              />
+            </svg>
+          </motion.a>
+        </motion.div>
+      </motion.div>
+
+      {/* Scroll indicator */}
+      {!prefersReduced && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2.2, duration: 0.8 }}
+          style={{
+            position: "absolute",
+            bottom: "2rem",
+            left: "50%",
+            transform: "translateX(-50%)",
+            zIndex: 10,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "6px",
+          }}
+        >
+          <span
+            style={{
+              color: "rgba(255,255,255,0.35)",
+              fontSize: "0.65rem",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+            }}
+          >
+            scroll
+          </span>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+          >
+            <svg
+              width="20"
+              height="20"
+              fill="none"
+              stroke="rgba(255,255,255,0.35)"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
           </motion.div>
-        )}
-      </section>
-    </>
+        </motion.div>
+      )}
+    </section>
   );
 }
