@@ -6,8 +6,7 @@ import Section from './Section';
 const socialLinks = [
   { label: 'GitHub', href: 'https://github.com/MatheusDemeis' },
   { label: 'LinkedIn', href: 'https://linkedin.com/in/matheus-demeis' },
-  { label: 'Email', href: 'mailto:matheus.demeis@gmail.com' },
-  {
+   {
     label: 'Resume',
     href: 'https://drive.google.com/file/d/1pBZ59EEspNCc_PsjDEmAxCLtuVbtd6uD/view?usp=sharing',
   },
@@ -40,17 +39,21 @@ export default function Hero() {
           <p className="mt-4 text-sm tracking-[0.06em] text-stone-400">
             Vancouver, BC
           </p>
-          <nav className="mt-8 flex flex-wrap gap-3 text-sm" aria-label="Social links">
-            {socialLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                target={link.href.startsWith('http') ? '_blank' : undefined}
-                rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                className="rounded-full border border-slate-700 bg-slate-900 px-4 py-1.5 text-stone-300 transition hover:border-primary hover:text-primary"
-              >
-                {link.label}
-              </a>
+          <nav className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm" aria-label="Social links">
+            {socialLinks.map((link, index) => (
+              <div key={link.label} className="flex items-center gap-3">
+                <a
+                  href={link.href}
+                  target={link.href.startsWith('http') ? '_blank' : undefined}
+                  rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  className="text-stone-300 underline underline-offset-4 decoration-slate-600 transition hover:text-primary hover:decoration-primary"
+                >
+                  {link.label}
+                </a>
+                {index < socialLinks.length - 1 && (
+                  <span aria-hidden="true" className="text-slate-600">/</span>
+                )}
+              </div>
             ))}
           </nav>
         </section>
