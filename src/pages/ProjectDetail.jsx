@@ -15,10 +15,10 @@ export default function ProjectDetail() {
           <h2 className="text-3xl font-bold mb-4">Project not found</h2>
           <p className="text-slate-300 mb-8">Try heading back to the projects list.</p>
           <Link
-            to="/projects"
+            to="/"
             className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition"
           >
-            <ArrowLeft size={18} /> Back to Projects
+            <ArrowLeft size={18} /> Back
           </Link>
         </div>
       </div>
@@ -29,10 +29,10 @@ export default function ProjectDetail() {
     <section className="pt-28 pb-20 px-4 bg-slate-800/50">
       <div className="max-w-6xl mx-auto">
         <Link
-          to="/projects"
+          to="/"
           className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition mb-8"
         >
-          <ArrowLeft size={18} /> Back to Projects
+          <ArrowLeft size={18} /> Back
         </Link>
 
         <header className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
