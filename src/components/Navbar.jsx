@@ -47,9 +47,9 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }) {
 
           <div className="hidden md:flex gap-8 text-center justify-end items-center flex-1">
             <a href="/#about" onClick={(e) => goToSection(e, 'about')} className="hover:text-primary transition">About</a>
-            <Link to="/projects" className="hover:text-primary transition">Projects</Link>
-            <a href="/#skills" onClick={(e) => goToSection(e, 'skills')} className="hover:text-primary transition">Skills</a>
-            <a href="/#contact" onClick={(e) => goToSection(e, 'contact')} className="hover:text-primary transition">Contact</a>
+            <a href="/#experience" onClick={(e) => goToSection(e, 'experience')} className="hover:text-primary transition">Experience</a>
+            <a href="/#projects" onClick={(e) => goToSection(e, 'projects')} className="hover:text-primary transition">Projects</a>
+            <Link to="/projects" className="hover:text-primary transition">All Projects</Link>
           </div>
 
           <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -60,9 +60,9 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }) {
         {isMenuOpen && (
           <div className="md:hidden pb-4 flex flex-col gap-4">
             <a href="/#about" className="hover:text-primary transition" onClick={(e) => goToSection(e, 'about')}>About</a>
-            <Link to="/projects" className="hover:text-primary transition" onClick={() => setIsMenuOpen(false)}>Projects</Link>
-            <a href="/#skills" className="hover:text-primary transition" onClick={(e) => goToSection(e, 'skills')}>Skills</a>
-            <a href="/#contact" className="hover:text-primary transition" onClick={(e) => goToSection(e, 'contact')}>Contact</a>
+            <a href="/#experience" className="hover:text-primary transition" onClick={(e) => goToSection(e, 'experience')}>Experience</a>
+            <a href="/#projects" className="hover:text-primary transition" onClick={(e) => goToSection(e, 'projects')}>Projects</a>
+            <Link to="/projects" className="hover:text-primary transition" onClick={() => setIsMenuOpen(false)}>All Projects</Link>
           </div>
         )}
       </div>

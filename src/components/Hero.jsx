@@ -1,221 +1,112 @@
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { Link } from 'react-router-dom';
+import { projects } from '../data/projects';
 
-// Brand colors (matched to your logo)
-const BRAND_BLUE = "#0E334F";
-const BRAND_GOLD = "#CBAB7D";
-const BRAND_GOLD_SOFT = "#F3E2C6";
+const socialLinks = [
+  { label: 'GitHub', href: 'https://github.com/MatheusDemeis' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/matheus-demeis' },
+  { label: 'Email', href: 'mailto:matheus.demeis@gmail.com' },
+  {
+    label: 'Resume',
+    href: 'https://drive.google.com/file/d/1pBZ59EEspNCc_PsjDEmAxCLtuVbtd6uD/view?usp=sharing',
+  },
+];
+
+const experienceItems = [...projects]
+  .sort((a, b) => Number(b.year) - Number(a.year))
+  .map((project) => ({
+    id: project.id,
+    title: project.brand.name,
+    role: project.role,
+    timeline: project.timeline,
+    year: project.year,
+    summary: project.description,
+  }));
 
 export default function Hero() {
-  const prefersReduced = useReducedMotion();
-
-  const { scrollY } = useScroll();
-  const contentOpacity = useTransform(scrollY, [0, 300], [1, 0]);
-  const contentY = useTransform(scrollY, [0, 300], ["0px", "-60px"]);
-
-  const stagger = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.15, delayChildren: 0.4 } },
-  };
-
-  const fadeUp = prefersReduced
-    ? { hidden: {}, show: {} }
-    : {
-        hidden: { opacity: 0, y: 24 },
-        show: {
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1] },
-        },
-      };
-
-  const fadeIn = prefersReduced
-    ? { hidden: {}, show: {} }
-    : {
-        hidden: { opacity: 0 },
-        show: { opacity: 1, transition: { duration: 1.2, ease: "easeOut" } },
-      };
-
   return (
-    <section
-      className="relative w-full overflow-hidden"
-      style={{ height: "100dvh" }}
-    >
-      <div
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "radial-gradient(circle at 20% 10%, rgba(203,171,125,0.08), transparent 40%), #080c16",
-        }}
-      />
+    <main className="px-6 py-28 sm:py-32">
+      <div className="mx-auto w-full max-w-3xl">
+        <section className="mb-16 border-b border-slate-800 pb-12">
+          <h1 className="text-5xl font-semibold tracking-tight text-white sm:text-7xl">Matheus Demeis</h1>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300 sm:text-xl">
+            Full stack web developer building modern, scalable products with clean interfaces
+            and practical backend architecture.
+          </p>
+          <p className="mt-4 text-sm uppercase tracking-[0.2em] text-slate-500">Vancouver, BC</p>
+          <nav className="mt-8 flex flex-wrap gap-5 text-sm text-slate-300" aria-label="Social links">
+            {socialLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target={link.href.startsWith('http') ? '_blank' : undefined}
+                rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                className="underline decoration-slate-600 underline-offset-4 transition hover:text-primary hover:decoration-primary"
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
+        </section>
 
-      {/* Top accent bar (brand colors) */}
-      <motion.div
-        variants={fadeIn}
-        initial="hidden"
-        animate="show"
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          height: "3px",
-          background: `linear-gradient(90deg, ${BRAND_BLUE} 0%, ${BRAND_GOLD} 55%, ${BRAND_GOLD_SOFT} 100%)`,
-          zIndex: 10,
-        }}
-      />
+        <section id="about" className="mb-14">
+          <p className="mb-4 font-mono text-sm text-primary">~/about</p>
+          <div className="space-y-4 text-base leading-relaxed text-slate-300">
+            <p>
+              I am a full stack web developer focused on thoughtful product development and
+              reliable implementation.
+            </p>
+            <p>
+              Video games sparked my curiosity for technology, and that curiosity continues to
+              drive how I build, iterate, and collaborate on software.
+            </p>
+          </div>
+        </section>
 
-      {/* Content */}
-      <motion.div
-        style={{ opacity: contentOpacity, y: contentY }}
-        className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4"
-      >
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          animate="show"
-          className="flex flex-col items-center"
-        >
-          <motion.h1
-            variants={fadeUp}
-            style={{
-              fontSize: "clamp(3.4rem, 11vw, 9rem)",
-              fontWeight: 900,
-              lineHeight: 0.95,
-              letterSpacing: "-0.03em",
-              color: "#ffffff",
-              marginBottom: "0.3rem",
-              textShadow: "0 4px 40px rgba(0,0,0,0.5)",
-            }}
-          >
-            Matheus
-          </motion.h1>
+        <section id="experience" className="mb-14">
+          <p className="mb-4 font-mono text-sm text-primary">~/experience</p>
+          <div className="space-y-6">
+            {experienceItems.map((item) => (
+              <article key={item.id} className="border-l border-slate-800 pl-4">
+                <p className="text-xs uppercase tracking-[0.18em] text-slate-500">{item.year}</p>
+                <h2 className="mt-1 text-lg font-medium text-white">{item.role}</h2>
+                <p className="text-sm text-primary">{item.title} · {item.timeline}</p>
+                <p className="mt-2 text-sm leading-relaxed text-slate-300">{item.summary}</p>
+              </article>
+            ))}
+          </div>
+        </section>
 
-          <motion.h1
-            variants={fadeUp}
-            style={{
-              fontSize: "clamp(3.4rem, 11vw, 9rem)",
-              fontWeight: 900,
-              lineHeight: 0.95,
-              letterSpacing: "-0.03em",
-              background: `linear-gradient(135deg, ${BRAND_GOLD} 0%, ${BRAND_GOLD_SOFT} 45%, ${BRAND_GOLD} 100%)`,
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              marginBottom: "1.75rem",
-              filter: "drop-shadow(0 2px 22px rgba(203,171,125,0.28))",
-            }}
-          >
-            Demeis
-          </motion.h1>
-
-          <motion.p
-            variants={fadeUp}
-            style={{
-              fontSize: "clamp(0.9rem, 2.2vw, 1.25rem)",
-              color: "rgba(255,255,255,0.72)",
-              fontWeight: 400,
-              letterSpacing: "0.18em",
-              textTransform: "uppercase",
-              marginBottom: "2.2rem",
-              textShadow: "0 2px 16px rgba(0,0,0,0.35)",
-            }}
-          >
-            Full Stack Web Developer
-          </motion.p>
-
-          <motion.a
-            variants={fadeUp}
-            href="https://drive.google.com/file/d/1pBZ59EEspNCc_PsjDEmAxCLtuVbtd6uD/view?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={prefersReduced ? {} : { scale: 1.04, filter: "brightness(1.05)" }}
-            whileTap={prefersReduced ? {} : { scale: 0.97 }}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "8px",
-              background: `linear-gradient(135deg, ${BRAND_GOLD}, ${BRAND_GOLD_SOFT})`,
-              color: BRAND_BLUE,
-              padding: "14px 34px",
-              borderRadius: "10px",
-              fontWeight: 700,
-              fontSize: "0.95rem",
-              letterSpacing: "0.04em",
-              textDecoration: "none",
-              border: "1px solid rgba(203,171,125,0.55)",
-              boxShadow: "0 10px 38px rgba(203,171,125,0.28)",
-            }}
-          >
-            View Resume
-            <svg
-              width="16"
-              height="16"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M13 7l5 5m0 0l-5 5m5-5H6"
-              />
-            </svg>
-          </motion.a>
-        </motion.div>
-      </motion.div>
-
-      {/* Scroll indicator */}
-      {!prefersReduced && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2.2, duration: 0.8 }}
-          style={{
-            position: "absolute",
-            bottom: "2rem",
-            left: "50%",
-            transform: "translateX(-50%)",
-            zIndex: 10,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "6px",
-          }}
-        >
-          <span
-            style={{
-              color: "rgba(255,255,255,0.35)",
-              fontSize: "0.65rem",
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-            }}
-          >
-            scroll
-          </span>
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-          >
-            <svg
-              width="20"
-              height="20"
-              fill="none"
-              stroke="rgba(255,255,255,0.35)"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          </motion.div>
-        </motion.div>
-      )}
-    </section>
+        <section id="projects" className="mb-6">
+          <p className="mb-4 font-mono text-sm text-primary">~/projects</p>
+          <div className="space-y-5">
+            {projects.map((project) => (
+              <article key={project.id} className="rounded-lg border border-slate-800 bg-slate-900/40 p-4">
+                <div className="flex items-center justify-between gap-4">
+                  <h3 className="text-base font-medium text-white">{project.brand.name}</h3>
+                  <span className="text-xs uppercase tracking-[0.18em] text-slate-500">{project.year}</span>
+                </div>
+                <p className="mt-2 text-sm leading-relaxed text-slate-300">{project.description}</p>
+                <div className="mt-3 flex flex-wrap gap-4 text-sm">
+                  <Link
+                    to={`/projects/${project.slug}`}
+                    className="underline decoration-slate-600 underline-offset-4 transition hover:text-primary hover:decoration-primary"
+                  >
+                    View details
+                  </Link>
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline decoration-slate-600 underline-offset-4 transition hover:text-primary hover:decoration-primary"
+                  >
+                    GitHub
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      </div>
+    </main>
   );
 }
