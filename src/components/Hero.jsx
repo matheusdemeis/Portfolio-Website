@@ -24,23 +24,46 @@ const experienceItems = [...projects]
 
 export default function Hero() {
   return (
-    <main className="px-6 py-28 sm:py-32">
-      <div className="mx-auto w-full max-w-3xl">
+    <main className="px-6 py-24 sm:py-28">
+      <div className="mx-auto w-full max-w-5xl">
         <section className="mb-16 border-b border-slate-800 pb-12">
-          <h1 className="text-5xl font-semibold tracking-tight text-white sm:text-7xl">Matheus Demeis</h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300 sm:text-xl">
-            Full stack web developer building modern, scalable products with clean interfaces
-            and practical backend architecture.
-          </p>
-          <p className="mt-4 text-sm uppercase tracking-[0.2em] text-slate-500">Vancouver, BC</p>
-          <nav className="mt-8 flex flex-wrap gap-5 text-sm text-slate-300" aria-label="Social links">
+          <div className="grid gap-10 md:grid-cols-2 md:items-start">
+            <div>
+              <h1 className="text-5xl font-semibold tracking-tight leading-[1.08] text-white sm:text-6xl lg:text-7xl">
+                Matheus Demeis
+              </h1>
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-stone-300 sm:text-[1.2rem]">
+                Full-stack developer focused on shipping clean, scalable web apps, product-first
+                and detail-driven.
+              </p>
+            </div>
+
+            <div className="md:justify-self-end">
+              <dl className="space-y-3 text-sm sm:text-base">
+                <div className="flex gap-2">
+                  <dt className="w-20 text-stone-500">Location</dt>
+                  <dd className="text-stone-200">Vancouver, BC</dd>
+                </div>
+                <div className="flex gap-2">
+                  <dt className="w-20 text-stone-500">Currently</dt>
+                  <dd className="text-stone-200">Building InsurFlow + Tandem (BCIT FSWD).</dd>
+                </div>
+                <div className="flex gap-2">
+                  <dt className="w-20 text-stone-500">Focus</dt>
+                  <dd className="text-stone-200">SaaS product delivery, strong UX, reliable systems.</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+
+          <nav className="mt-8 flex flex-wrap gap-3 text-sm" aria-label="Social links">
             {socialLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 target={link.href.startsWith('http') ? '_blank' : undefined}
                 rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                className="underline decoration-slate-600 underline-offset-4 transition hover:text-primary hover:decoration-primary"
+                className="rounded-full border border-slate-700 bg-slate-900 px-4 py-1.5 text-stone-300 transition hover:border-primary hover:text-primary"
               >
                 {link.label}
               </a>
