@@ -19,16 +19,6 @@ export default function ProjectsCompact({ projects }) {
             </p>
           </div>
           <div className="flex gap-2 text-sm md:justify-end md:self-start">
-            {project.demoUrl && (
-              <a
-                href={project.demoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-md border border-slate-700 px-3 py-1.5 text-stone-300 transition hover:border-primary hover:text-primary"
-              >
-                Live
-              </a>
-            )}
             <a
               href={project.link}
               target="_blank"
