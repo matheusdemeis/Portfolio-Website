@@ -1,7 +1,4 @@
-import { useEffect, useRef, useCallback } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-
-const snowboarding = "/snowboarding.jpg";
 
 // Brand colors (matched to your logo)
 const BRAND_BLUE = "#0E334F";
@@ -10,53 +7,10 @@ const BRAND_GOLD_SOFT = "#F3E2C6";
 
 export default function Hero() {
   const prefersReduced = useReducedMotion();
-  const heroRef = useRef(null);
-  const bgRef = useRef(null);
-
-  // rAF throttle for mousemove
-  const rafId = useRef(null);
-  const lastPos = useRef({ nx: 0, ny: 0 });
 
   const { scrollY } = useScroll();
   const contentOpacity = useTransform(scrollY, [0, 300], [1, 0]);
   const contentY = useTransform(scrollY, [0, 300], ["0px", "-60px"]);
-
-  const applyParallax = useCallback(() => {
-    rafId.current = null;
-    const { nx, ny } = lastPos.current;
-
-    if (bgRef.current) {
-      bgRef.current.style.transform = `translate(${nx * 12}px, ${ny * 12}px) scale(1.05)`;
-    }
-  }, []);
-
-  const handleMouseMove = useCallback(
-    (e) => {
-      if (prefersReduced || window.innerWidth < 768) return;
-
-      const nx = e.clientX / window.innerWidth - 0.5;
-      const ny = e.clientY / window.innerHeight - 0.5;
-
-      lastPos.current = { nx, ny };
-
-      if (rafId.current) return;
-      rafId.current = requestAnimationFrame(applyParallax);
-    },
-    [prefersReduced, applyParallax]
-  );
-
-  const handleMouseLeave = useCallback(() => {
-    if (rafId.current) cancelAnimationFrame(rafId.current);
-    rafId.current = null;
-
-    if (bgRef.current) bgRef.current.style.transform = "translate(0,0) scale(1.05)";
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      if (rafId.current) cancelAnimationFrame(rafId.current);
-    };
-  }, []);
 
   const stagger = {
     hidden: {},
@@ -83,55 +37,18 @@ export default function Hero() {
 
   return (
     <section
-      ref={heroRef}
       className="relative w-full overflow-hidden"
       style={{ height: "100dvh" }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
     >
-      {/* Background */}
-      <motion.div
+      <div
         aria-hidden="true"
         style={{
           position: "absolute",
           inset: 0,
-          overflow: "hidden",
-          zIndex: 0,
-          pointerEvents: "none",
+          background:
+            "radial-gradient(circle at 20% 10%, rgba(203,171,125,0.08), transparent 40%), #080c16",
         }}
-      >
-        <div
-          ref={bgRef}
-          style={{
-            position: "absolute",
-            inset: "-5%",
-            backgroundImage: `url(${snowboarding})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center 45%",
-            transform: "scale(1.05)",
-            willChange: "transform",
-            transition: "transform 0.5s ease-out",
-          }}
-        />
-
-        {/* Overlay gradients */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(to bottom, rgba(8,12,22,0.28) 0%, rgba(8,12,22,0.42) 55%, rgba(8,12,22,0.72) 100%)",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "radial-gradient(ellipse at center, transparent 42%, rgba(8,12,22,0.45) 100%)",
-          }}
-        />
-      </motion.div>
+      />
 
       {/* Top accent bar (brand colors) */}
       <motion.div
