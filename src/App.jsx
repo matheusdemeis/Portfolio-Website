@@ -12,7 +12,7 @@ export default function App() {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-zinc-900 to-stone-900 text-white">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
       <Navbar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
