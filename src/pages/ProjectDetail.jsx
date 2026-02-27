@@ -97,23 +97,23 @@ export default function ProjectDetail() {
 
             {project.blog && (
               <div className="rounded-2xl border border-slate-700 bg-slate-900/60 p-5 mt-8">
-                <div className="h-52 md:h-64 rounded-xl mb-4 flex items-end p-4 overflow-hidden relative">
+                <div className="aspect-[16/5] w-full rounded-xl mb-4 flex items-end p-4 overflow-hidden relative bg-slate-950/70">
                   {project.blog.image && (
                     <img
                       src={project.blog.image}
                       alt={project.blog.title}
-                      className="absolute inset-0 w-full h-full object-contain object-top"
+                      className="absolute inset-0 z-0 w-full h-full object-contain object-center"
                     />
                   )}
                   <div
-                    className="absolute inset-0"
+                    className="absolute inset-0 z-10"
                     style={{
                       background: project.blog.image
-                        ? 'linear-gradient(135deg, rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.9))'
+                        ? 'linear-gradient(to top, rgba(15, 23, 42, 0.84) 5%, rgba(15, 23, 42, 0.2) 50%, rgba(15, 23, 42, 0.1) 100%)'
                         : `linear-gradient(135deg, ${project.brand.accent}66, transparent)`
                     }}
                   />
-                  <div className="relative z-10">
+                  <div className="relative z-20">
                     <p className="text-sm uppercase tracking-[0.2em] text-slate-200">Featured</p>
                     <p className="text-2xl font-semibold">{project.blog.title}</p>
                   </div>
