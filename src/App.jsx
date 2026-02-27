@@ -1,18 +1,14 @@
-import { useState } from 'react';
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import ProjectDetail from './pages/ProjectDetail';
 
 export default function App() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
-      <Navbar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route
