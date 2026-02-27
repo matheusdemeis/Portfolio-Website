@@ -93,22 +93,6 @@ export const projects = [
       'Emphasized real-world product development practices including customer discovery, market validation, and agile iteration.',
       'Demonstrated the ability to architect complex financial modeling logic while maintaining clean, modern infrastructure.',
     ],
-    visuals: [
-      {
-        title: 'Client Financial Profile Dashboard',
-        description:
-          'Interactive dashboard displaying assets, liabilities, income replacement scenarios, and net worth projections using dynamic visualizations.',
-      },
-      {
-        title: 'Financial Needs Analysis Workflow',
-        description:
-          'End-to-end workflow for capturing client data and generating automated recommendations and compliance documentation.',
-      },
-      {
-        title: 'Advisor SaaS Platform Interface',
-        description:
-          'Multi-tenant advisor portal featuring authentication, client management, and configurable financial modeling tools.',
-      },
-    ],
+    visuals: [],
   },
 ];

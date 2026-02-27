@@ -167,7 +167,7 @@ export default function ProjectDetail() {
                   </div>
                 </div>
               </>
-            ) : (
+            ) : project.visuals?.length ? (
               <>
                 <h3 className="text-2xl font-semibold mb-4">Project Highlights</h3>
                 <div className="grid gap-4">
@@ -188,7 +188,7 @@ export default function ProjectDetail() {
                   ))}
                 </div>
               </>
-            )}
+            ) : null}
           </div>
         </div>
 
