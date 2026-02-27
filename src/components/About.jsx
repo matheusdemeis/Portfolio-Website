@@ -1,18 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { profileImages } from '../data/images';
 
 export default function About() {
   const prefersReduced = useReducedMotion();
-  const [profileImage, setProfileImage] = useState(0);
-  const cardRef = useRef(null);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setProfileImage((prev) => (prev + 1) % profileImages.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <motion.section
@@ -25,8 +14,8 @@ export default function About() {
     >
       <div className="max-w-6xl mx-auto">
 
-        {/* Intro row: Hey I'm Matheus + photo */}
-        <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
+        {/* Intro row */}
+        <div className="mb-16">
           <motion.div
             initial={prefersReduced ? {} : { opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -40,28 +29,6 @@ export default function About() {
             <p className="text-lg text-slate-300">
               Building clean, functional web applications with modern technologies
             </p>
-          </motion.div>
-
-          <motion.div
-            className="flex justify-center"
-            style={{ perspective: '800px' }}
-            initial={prefersReduced ? {} : { opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.6, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
-          >
-            <div
-              ref={cardRef}
-              className="photo-card"
-              style={{ willChange: 'transform', transition: 'transform 0.2s ease-out' }}
-            >
-              <img
-                src={profileImages[profileImage]}
-                alt="Profile"
-                className="w-80 h-80 rounded-lg border-2 border-primary object-cover shadow-xl transition-all duration-500 photo-card-img"
-                style={{ boxShadow: '0 8px 40px rgba(0,0,0,0.5), 0 0 0 2px var(--color-primary, #CBB48A)' }}
-              />
-            </div>
           </motion.div>
         </div>
 
