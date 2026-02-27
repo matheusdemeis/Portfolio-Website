@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
 import { projects } from '../data/projects';
 import Experience from './Experience';
+import ProjectsCompact from './ProjectsCompact';
 import Section from './Section';
 
 const socialLinks = [
@@ -92,33 +92,7 @@ export default function Hero() {
         </Section>
 
         <Section id="projects" title="Projects" className="mb-6">
-          <div className="space-y-5">
-            {projects.map((project) => (
-              <article key={project.id} className="rounded-lg border border-slate-800 bg-slate-900/40 p-4">
-                <div className="flex items-center justify-between gap-4">
-                  <h3 className="text-base font-medium text-white">{project.brand.name}</h3>
-                  <span className="text-xs uppercase tracking-[0.18em] text-slate-500">{project.year}</span>
-                </div>
-                <p className="mt-2 text-sm leading-relaxed text-stone-300">{project.description}</p>
-                <div className="mt-3 flex flex-wrap gap-4 text-sm">
-                  <Link
-                    to={`/projects/${project.slug}`}
-                    className="underline decoration-slate-600 underline-offset-4 transition hover:text-primary hover:decoration-primary"
-                  >
-                    View details
-                  </Link>
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline decoration-slate-600 underline-offset-4 transition hover:text-primary hover:decoration-primary"
-                  >
-                    GitHub
-                  </a>
-                </div>
-              </article>
-            ))}
-          </div>
+          <ProjectsCompact projects={projects} />
         </Section>
       </div>
     </main>
