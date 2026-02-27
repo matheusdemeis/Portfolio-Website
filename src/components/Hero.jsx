@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { projects } from '../data/projects';
+import Experience from './Experience';
 import Section from './Section';
 
 const socialLinks = [
@@ -20,7 +21,8 @@ const experienceItems = [...projects]
     role: project.role,
     timeline: project.timeline,
     year: project.year,
-    summary: project.description,
+    impacts: project.rationale.slice(0, 3),
+    tech: project.tags.slice(0, 4),
   }));
 
 export default function Hero() {
@@ -86,16 +88,7 @@ export default function Hero() {
         </Section>
 
         <Section id="experience" title="Experience">
-          <div className="space-y-6">
-            {experienceItems.map((item) => (
-              <article key={item.id} className="border-l border-slate-800 pl-4">
-                <p className="text-xs uppercase tracking-[0.18em] text-slate-500">{item.year}</p>
-                <h2 className="mt-1 text-lg font-medium text-white">{item.role}</h2>
-                <p className="text-sm text-primary">{item.title} · {item.timeline}</p>
-                <p className="mt-2 text-sm leading-relaxed text-stone-300">{item.summary}</p>
-              </article>
-            ))}
-          </div>
+          <Experience items={experienceItems} />
         </Section>
 
         <Section id="projects" title="Projects" className="mb-6">
