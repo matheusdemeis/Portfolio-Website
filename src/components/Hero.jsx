@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { projects } from '../data/projects';
+import Section from './Section';
 
 const socialLinks = [
   { label: 'GitHub', href: 'https://github.com/MatheusDemeis' },
@@ -71,9 +72,8 @@ export default function Hero() {
           </nav>
         </section>
 
-        <section id="about" className="mb-14">
-          <p className="mb-4 font-mono text-sm text-primary">~/about</p>
-          <div className="space-y-4 text-base leading-relaxed text-slate-300">
+        <Section id="about" title="About">
+          <div className="space-y-4 text-[1.06rem] leading-relaxed text-stone-300">
             <p>
               I am a full stack web developer focused on thoughtful product development and
               reliable implementation.
@@ -83,24 +83,22 @@ export default function Hero() {
               drive how I build, iterate, and collaborate on software.
             </p>
           </div>
-        </section>
+        </Section>
 
-        <section id="experience" className="mb-14">
-          <p className="mb-4 font-mono text-sm text-primary">~/experience</p>
+        <Section id="experience" title="Experience">
           <div className="space-y-6">
             {experienceItems.map((item) => (
               <article key={item.id} className="border-l border-slate-800 pl-4">
                 <p className="text-xs uppercase tracking-[0.18em] text-slate-500">{item.year}</p>
                 <h2 className="mt-1 text-lg font-medium text-white">{item.role}</h2>
                 <p className="text-sm text-primary">{item.title} · {item.timeline}</p>
-                <p className="mt-2 text-sm leading-relaxed text-slate-300">{item.summary}</p>
+                <p className="mt-2 text-sm leading-relaxed text-stone-300">{item.summary}</p>
               </article>
             ))}
           </div>
-        </section>
+        </Section>
 
-        <section id="projects" className="mb-6">
-          <p className="mb-4 font-mono text-sm text-primary">~/projects</p>
+        <Section id="projects" title="Projects" className="mb-6">
           <div className="space-y-5">
             {projects.map((project) => (
               <article key={project.id} className="rounded-lg border border-slate-800 bg-slate-900/40 p-4">
@@ -108,7 +106,7 @@ export default function Hero() {
                   <h3 className="text-base font-medium text-white">{project.brand.name}</h3>
                   <span className="text-xs uppercase tracking-[0.18em] text-slate-500">{project.year}</span>
                 </div>
-                <p className="mt-2 text-sm leading-relaxed text-slate-300">{project.description}</p>
+                <p className="mt-2 text-sm leading-relaxed text-stone-300">{project.description}</p>
                 <div className="mt-3 flex flex-wrap gap-4 text-sm">
                   <Link
                     to={`/projects/${project.slug}`}
@@ -128,7 +126,7 @@ export default function Hero() {
               </article>
             ))}
           </div>
-        </section>
+        </Section>
       </div>
     </main>
   );
