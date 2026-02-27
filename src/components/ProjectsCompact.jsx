@@ -8,7 +8,7 @@ export default function ProjectsCompact({ projects }) {
     <div className="space-y-6">
       {featured && (
         <article className="rounded-xl border border-slate-800 bg-slate-900/55 p-5">
-          <p className="text-xs uppercase tracking-[0.14em] text-primary">Featured</p>
+          <p className="text-xs uppercase tracking-[0.14em] text-[#DF678F]">Featured</p>
           <div className="mt-2 flex flex-wrap items-center justify-between gap-3">
             <h3 className="text-xl font-medium text-white">{featured.brand.name}</h3>
             <span className="text-xs tracking-[0.12em] text-stone-500">{featured.year}</span>
@@ -20,7 +20,7 @@ export default function ProjectsCompact({ projects }) {
                 href={featured.demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-md border border-slate-700 px-3 py-1.5 text-stone-300 transition hover:border-primary hover:text-primary"
+                className="rounded-md border border-slate-700 px-3 py-1.5 text-stone-300 transition hover:border-[#DF678F] hover:text-[#DF678F]"
               >
                 Live
               </a>
@@ -29,13 +29,13 @@ export default function ProjectsCompact({ projects }) {
               href={featured.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-md border border-slate-700 px-3 py-1.5 text-stone-300 transition hover:border-primary hover:text-primary"
+              className="rounded-md border border-slate-700 px-3 py-1.5 text-stone-300 transition hover:border-[#DF678F] hover:text-[#DF678F]"
             >
               GitHub
             </a>
             <Link
               to={`/projects/${featured.slug}`}
-              className="rounded-md border border-slate-700 px-3 py-1.5 text-stone-300 transition hover:border-primary hover:text-primary"
+              className="rounded-md border border-slate-700 px-3 py-1.5 text-stone-300 transition hover:border-[#DF678F] hover:text-[#DF678F]"
             >
               Details
             </Link>
@@ -60,7 +60,7 @@ export default function ProjectsCompact({ projects }) {
                   href={project.demoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-md border border-slate-700 px-3 py-1.5 text-stone-300 transition hover:border-primary hover:text-primary"
+                  className="rounded-md border border-slate-700 px-3 py-1.5 text-stone-300 transition hover:border-[#DF678F] hover:text-[#DF678F]"
                 >
                   Live
                 </a>
@@ -69,7 +69,7 @@ export default function ProjectsCompact({ projects }) {
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-md border border-slate-700 px-3 py-1.5 text-stone-300 transition hover:border-primary hover:text-primary"
+                className="rounded-md border border-slate-700 px-3 py-1.5 text-stone-300 transition hover:border-[#DF678F] hover:text-[#DF678F]"
               >
                 GitHub
               </a>

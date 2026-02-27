@@ -31,7 +31,7 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }) {
 
   return (
     <nav
-      className="fixed w-full top-0 z-50 border-b border-primary/20"
+      className="fixed w-full top-0 z-50 border-b border-[#DF678F]/20"
       style={{
         background: 'rgba(15, 20, 35, 0.85)',
         backdropFilter: 'blur(12px)',
@@ -46,10 +46,10 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }) {
         <div className="flex justify-between items-center h-16">
 
           <div className="hidden md:flex gap-8 text-center justify-end items-center flex-1">
-            <a href="/#about" onClick={(e) => goToSection(e, 'about')} className="hover:text-primary transition">About</a>
-            <a href="/#experience" onClick={(e) => goToSection(e, 'experience')} className="hover:text-primary transition">Experience</a>
-            <a href="/#projects" onClick={(e) => goToSection(e, 'projects')} className="hover:text-primary transition">Projects</a>
-            <Link to="/projects" className="hover:text-primary transition">All Projects</Link>
+            <a href="/#about" onClick={(e) => goToSection(e, 'about')} className="hover:text-[#DF678F] transition">About</a>
+            <a href="/#experience" onClick={(e) => goToSection(e, 'experience')} className="hover:text-[#DF678F] transition">Experience</a>
+            <a href="/#projects" onClick={(e) => goToSection(e, 'projects')} className="hover:text-[#DF678F] transition">Projects</a>
+            <Link to="/projects" className="hover:text-[#DF678F] transition">All Projects</Link>
           </div>
 
           <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -59,10 +59,10 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }) {
 
         {isMenuOpen && (
           <div className="md:hidden pb-4 flex flex-col gap-4">
-            <a href="/#about" className="hover:text-primary transition" onClick={(e) => goToSection(e, 'about')}>About</a>
-            <a href="/#experience" className="hover:text-primary transition" onClick={(e) => goToSection(e, 'experience')}>Experience</a>
-            <a href="/#projects" className="hover:text-primary transition" onClick={(e) => goToSection(e, 'projects')}>Projects</a>
-            <Link to="/projects" className="hover:text-primary transition" onClick={() => setIsMenuOpen(false)}>All Projects</Link>
+            <a href="/#about" className="hover:text-[#DF678F] transition" onClick={(e) => goToSection(e, 'about')}>About</a>
+            <a href="/#experience" className="hover:text-[#DF678F] transition" onClick={(e) => goToSection(e, 'experience')}>Experience</a>
+            <a href="/#projects" className="hover:text-[#DF678F] transition" onClick={(e) => goToSection(e, 'projects')}>Projects</a>
+            <Link to="/projects" className="hover:text-[#DF678F] transition" onClick={() => setIsMenuOpen(false)}>All Projects</Link>
           </div>
         )}
       </div>

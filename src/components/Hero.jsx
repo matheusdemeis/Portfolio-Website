@@ -66,7 +66,7 @@ export default function Hero() {
                 href={link.href}
                 target={link.href.startsWith('http') ? '_blank' : undefined}
                 rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                className="rounded-full border border-slate-700 bg-slate-900 px-4 py-1.5 text-stone-300 transition hover:border-primary hover:text-primary"
+                className="rounded-full border border-slate-700 bg-slate-900 px-4 py-1.5 text-stone-300 transition hover:border-[#DF678F] hover:text-[#DF678F]"
               >
                 {link.label}
               </a>
@@ -75,14 +75,14 @@ export default function Hero() {
         </section>
 
         <Section id="about" title="About">
-          <div className="space-y-4 text-[1.06rem] leading-relaxed text-stone-300">
+          <div className="space-y-4 text-[1.06rem] leading-relaxed text-stone-300 sm:text-[1.1rem]">
             <p>
-              I am a full stack web developer focused on thoughtful product development and
-              reliable implementation.
+              I build web products with a product mindset: clear user value first, then durable
+              implementation decisions that hold up as features scale.
             </p>
             <p>
-              Video games sparked my curiosity for technology, and that curiosity continues to
-              drive how I build, iterate, and collaborate on software.
+              I care about shipping consistently, validating quickly, and iterating like a
+              builder-operator with an entrepreneurial lens.
             </p>
           </div>
         </Section>

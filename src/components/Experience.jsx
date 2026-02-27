@@ -13,7 +13,7 @@ export default function Experience({ items }) {
             <ul className="mt-3 space-y-2 text-sm leading-relaxed text-stone-300">
               {item.impacts.map((impact) => (
                 <li key={impact} className="flex gap-2">
-                  <span className="mt-[0.5rem] h-1 w-1 rounded-full bg-primary" aria-hidden="true" />
+                  <span className="mt-[0.5rem] h-1 w-1 rounded-full bg-[#DF678F]" aria-hidden="true" />
                   <span>{impact}</span>
                 </li>
               ))}
