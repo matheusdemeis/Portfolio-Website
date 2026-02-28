@@ -26,8 +26,8 @@ export default function ProjectDetail() {
   }
 
   return (
-    <section className="pt-28 pb-20 px-4 bg-slate-800/50">
-      <div className="max-w-6xl mx-auto">
+    <section className="overflow-x-clip bg-slate-800/50 px-4 pb-20 pt-24 sm:px-6 sm:pt-28">
+      <div className="mx-auto max-w-6xl">
         <Link
           to="/"
           className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition mb-8"
@@ -35,9 +35,9 @@ export default function ProjectDetail() {
           <ArrowLeft size={18} /> Back
         </Link>
 
-        <header className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
-          <div>
-            <div className="flex items-center gap-3 mb-3">
+        <header className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+          <div className="min-w-0">
+            <div className="mb-3 flex flex-wrap items-center gap-3">
               <span className="text-xs uppercase tracking-[0.3em] text-slate-300">Project</span>
               <span
                 className="text-xs font-semibold px-3 py-1 rounded-full"
@@ -49,37 +49,37 @@ export default function ProjectDetail() {
             <h2 className="text-4xl md:text-5xl font-bold mb-3">{project.title}</h2>
             <p className="text-slate-300 max-w-2xl">{project.description}</p>
           </div>
-          <div className="grid grid-cols-2 gap-4 text-sm text-slate-200">
-            <div className="bg-slate-900/50 rounded-lg p-4">
+          <div className="grid w-full grid-cols-1 gap-3 text-sm text-slate-200 sm:grid-cols-2 lg:max-w-xl">
+            <div className="min-w-0 rounded-lg bg-slate-900/50 p-4">
               <p className="text-slate-400">Role</p>
-              <p className="font-semibold">{project.role}</p>
+              <p className="break-words font-semibold">{project.role}</p>
             </div>
-            <div className="bg-slate-900/50 rounded-lg p-4">
+            <div className="min-w-0 rounded-lg bg-slate-900/50 p-4">
               <p className="text-slate-400">Timeline</p>
               <p className="font-semibold">{project.timeline}</p>
             </div>
-            <div className="bg-slate-900/50 rounded-lg p-4">
+            <div className="min-w-0 rounded-lg bg-slate-900/50 p-4">
               <p className="text-slate-400">Year</p>
               <p className="font-semibold">{project.year}</p>
             </div>
-            <div className="bg-slate-900/50 rounded-lg p-4">
+            <div className="min-w-0 rounded-lg bg-slate-900/50 p-4">
               <p className="text-slate-400">Brand tone</p>
-              <p className="font-semibold">{project.brand.tone}</p>
+              <p className="break-words font-semibold">{project.brand.tone}</p>
             </div>
           </div>
         </header>
 
-        <div className="mt-10 grid lg:grid-cols-[1.2fr_1fr] gap-8">
-          <div>
+        <div className="mt-10 grid gap-8 lg:grid-cols-[1.2fr_1fr]">
+          <div className="min-w-0">
             <h3 className="text-2xl font-semibold mb-4">Rationale</h3>
             <ul className="space-y-3 text-slate-300">
               {project.rationale.map((item, index) => (
-                <li key={`${item}-${index}`} className="flex gap-3">
+                <li key={`${item}-${index}`} className="flex min-w-0 gap-3">
                   <span
                     className="mt-2 h-2 w-2 rounded-full"
                     style={{ backgroundColor: project.brand.accent }}
                   />
-                  <span>{item}</span>
+                  <span className="break-words">{item}</span>
                 </li>
               ))}
             </ul>
@@ -88,7 +88,7 @@ export default function ProjectDetail() {
               {project.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="bg-slate-900/60 text-slate-100 text-sm px-3 py-1 rounded-full"
+                  className="max-w-full break-words rounded-full bg-slate-900/60 px-3 py-1 text-sm text-slate-100"
                 >
                   {tag}
                 </span>
@@ -97,7 +97,7 @@ export default function ProjectDetail() {
 
             {project.blog && (
               <div className="rounded-2xl border border-slate-700 bg-slate-900/60 p-5 mt-8">
-                <div className="aspect-[16/5] w-full rounded-xl mb-4 flex items-end p-4 overflow-hidden relative bg-slate-950/70">
+                <div className="relative mb-4 flex w-full aspect-[16/9] items-end overflow-hidden rounded-xl bg-slate-950/70 p-4 sm:aspect-[16/6]">
                   {project.blog.image && (
                     <img
                       src={project.blog.image}
@@ -148,14 +148,14 @@ export default function ProjectDetail() {
             )}
           </div>
 
-          <div>
+          <div className="min-w-0">
             {project.demoUrl ? (
               <>
                 <h3 className="text-2xl font-semibold mb-4">Live Demo</h3>
                 <div className="mx-auto flex justify-center">
                   <div
-                    className="overflow-hidden rounded-[2.5rem] border-[14px] border-gray-800 bg-gray-800 shadow-2xl"
-                    style={{ width: '402px', height: '874px' }}
+                    className="w-full max-w-[402px] overflow-hidden rounded-[2rem] border-[10px] border-gray-800 bg-gray-800 shadow-2xl sm:rounded-[2.5rem] sm:border-[14px]"
+                    style={{ aspectRatio: '402 / 874' }}
                   >
                     <iframe
                       src={project.demoUrl}
