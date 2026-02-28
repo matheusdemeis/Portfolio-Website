@@ -30,7 +30,7 @@ export default function ProjectDetail() {
       <div className="mx-auto max-w-6xl">
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition mb-8"
+          className="mb-8 inline-flex items-center gap-2 text-sm text-primary transition hover:text-primary/80 sm:text-base"
         >
           <ArrowLeft size={18} /> Back
         </Link>
@@ -46,8 +46,12 @@ export default function ProjectDetail() {
                 {project.brand.name}
               </span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-3">{project.title}</h2>
-            <p className="text-slate-300 max-w-2xl">{project.description}</p>
+            <h2 className="mb-3 break-words text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
+              {project.title}
+            </h2>
+            <p className="max-w-2xl text-sm leading-relaxed text-slate-300 sm:text-base">
+              {project.description}
+            </p>
           </div>
           <div className="grid w-full grid-cols-1 gap-3 text-sm text-slate-200 sm:grid-cols-2 lg:max-w-xl">
             <div className="min-w-0 rounded-lg bg-slate-900/50 p-4">
@@ -71,8 +75,8 @@ export default function ProjectDetail() {
 
         <div className="mt-10 grid gap-8 lg:grid-cols-[1.2fr_1fr]">
           <div className="min-w-0">
-            <h3 className="text-2xl font-semibold mb-4">Rationale</h3>
-            <ul className="space-y-3 text-slate-300">
+            <h3 className="mb-4 text-xl font-semibold sm:text-2xl">Rationale</h3>
+            <ul className="space-y-3 text-sm leading-relaxed text-slate-300 sm:text-base">
               {project.rationale.map((item, index) => (
                 <li key={`${item}-${index}`} className="flex min-w-0 gap-3">
                   <span
@@ -96,7 +100,7 @@ export default function ProjectDetail() {
             </div>
 
             {project.blog && (
-              <div className="rounded-2xl border border-slate-700 bg-slate-900/60 p-5 mt-8">
+              <div className="mt-8 rounded-2xl border border-slate-700 bg-slate-900/60 p-4 sm:p-5">
                 <div className="relative mb-4 flex w-full aspect-[16/9] items-end overflow-hidden rounded-xl bg-slate-950/70 p-4 sm:aspect-[16/6]">
                   {project.blog.image && (
                     <img
@@ -115,20 +119,22 @@ export default function ProjectDetail() {
                   />
                   <div className="relative z-20">
                     <p className="text-sm uppercase tracking-[0.2em] text-slate-200">Featured</p>
-                    <p className="text-2xl font-semibold">{project.blog.title}</p>
+                    <p className="break-words text-lg font-semibold leading-snug sm:text-2xl">
+                      {project.blog.title}
+                    </p>
                   </div>
                 </div>
-                <p className="text-slate-300 text-sm mb-4">{project.blog.description}</p>
-                <div className="flex flex-wrap items-center gap-6">
+                <p className="mb-4 text-sm leading-relaxed text-slate-300">{project.blog.description}</p>
+                <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
                   <a
                     href={project.blog.url}
-                    className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition"
+                    className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-slate-700 bg-slate-900/70 px-4 py-2 text-primary transition hover:text-primary/80 sm:min-h-0 sm:w-auto sm:justify-start sm:border-none sm:bg-transparent sm:px-0 sm:py-0"
                   >
                     Visit Blog <ExternalLink size={16} />
                   </a>
                   <a
                     href={project.link}
-                    className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition"
+                    className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-slate-700 bg-slate-900/70 px-4 py-2 text-primary transition hover:text-primary/80 sm:min-h-0 sm:w-auto sm:justify-start sm:border-none sm:bg-transparent sm:px-0 sm:py-0"
                   >
                     GitHub Repository <ExternalLink size={16} />
                   </a>
@@ -140,7 +146,7 @@ export default function ProjectDetail() {
               <div className="mt-8">
                 <a
                   href={project.link}
-                  className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition"
+                  className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-slate-700 bg-slate-900/70 px-4 py-2 text-primary transition hover:text-primary/80 sm:min-h-0 sm:w-auto sm:justify-start sm:border-none sm:bg-transparent sm:px-0 sm:py-0"
                 >
                   GitHub Repository <ExternalLink size={16} />
                 </a>
@@ -151,7 +157,7 @@ export default function ProjectDetail() {
           <div className="min-w-0">
             {project.demoUrl ? (
               <>
-                <h3 className="text-2xl font-semibold mb-4">Live Demo</h3>
+                <h3 className="mb-4 text-xl font-semibold sm:text-2xl">Live Demo</h3>
                 <div className="mx-auto flex justify-center">
                   <div
                     className="w-full max-w-[402px] overflow-hidden rounded-[2rem] border-[10px] border-gray-800 bg-gray-800 shadow-2xl sm:rounded-[2.5rem] sm:border-[14px]"
@@ -169,7 +175,7 @@ export default function ProjectDetail() {
               </>
             ) : project.visuals?.length ? (
               <>
-                <h3 className="text-2xl font-semibold mb-4">Project Highlights</h3>
+                <h3 className="mb-4 text-xl font-semibold sm:text-2xl">Project Highlights</h3>
                 <div className="grid gap-4">
                   {project.visuals.map((visual, index) => (
                     <div
