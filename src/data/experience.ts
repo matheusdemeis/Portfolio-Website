@@ -1,4 +1,6 @@
-export const experience = [
+import type { ExperienceItem } from '../types';
+
+export const experience: ExperienceItem[] = [
   {
     id: 'vero ventures',
     year: '2026',
@@ -10,8 +12,8 @@ export const experience = [
       'Helped define the technical stack and application architecture',
       'Built and shipped core features in a production-ready environment',
       'Collaborated in code reviews and iterative product development',
-      'Worked closely with senior developers to ensure scalability and clean architecture'
+      'Worked closely with senior developers to ensure scalability and clean architecture',
     ],
     tech: ['Next.js', 'TypeScript', 'PostgreSQL', 'Drizzle ORM'],
-  }
+  },
 ];

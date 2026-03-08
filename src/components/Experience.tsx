@@ -1,4 +1,11 @@
-export default function Experience({ items }) {
+import type { ReactElement } from 'react';
+import type { ExperienceItem } from '../types';
+
+interface ExperienceProps {
+  items: ExperienceItem[];
+}
+
+export default function Experience({ items }: ExperienceProps): ReactElement {
   return (
     <div className="space-y-8">
       {items.map((item) => (

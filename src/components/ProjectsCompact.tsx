@@ -1,6 +1,14 @@
+import type { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
+import type { Project } from '../types';
 
-export default function ProjectsCompact({ projects }) {
+interface ProjectsCompactProps {
+  projects: Project[];
+}
+
+export default function ProjectsCompact({
+  projects,
+}: ProjectsCompactProps): ReactElement {
   const sorted = [...projects].sort((a, b) => Number(b.year) - Number(a.year));
 
   return (

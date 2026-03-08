@@ -1,10 +1,16 @@
+import type { ReactElement } from 'react';
 import { projects } from '../data/projects';
 import { experience } from '../data/experience';
 import Experience from './Experience';
 import ProjectsCompact from './ProjectsCompact';
 import Section from './Section';
 
-const socialLinks = [
+interface SocialLink {
+  label: string;
+  href: string;
+}
+
+const socialLinks: SocialLink[] = [
   { label: 'GitHub', href: 'https://github.com/MatheusDemeis' },
   { label: 'LinkedIn', href: 'https://linkedin.com/in/matheus-demeis' },
   {
@@ -13,7 +19,7 @@ const socialLinks = [
   },
 ];
 
-export default function Hero() {
+export default function Hero(): ReactElement {
   return (
     <main className="px-6 py-24 sm:py-28">
       <div className="mx-auto w-full max-w-5xl">
@@ -32,7 +38,7 @@ export default function Hero() {
             className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm"
             aria-label="Social links"
           >
-            {socialLinks.map((link, index) => (
+            {socialLinks.map((link, index: number) => (
               <div key={link.label} className="flex items-center gap-3">
                 <a
                   href={link.href}

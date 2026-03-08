@@ -1,12 +1,16 @@
-import { useMemo } from 'react';
+import { useMemo, type ReactElement } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ExternalLink, ArrowLeft } from 'lucide-react';
 import { projects } from '../data/projects';
+import type { Project } from '../types';
 
-export default function ProjectDetail() {
-  const { slug } = useParams();
+export default function ProjectDetail(): ReactElement {
+  const { slug } = useParams<{ slug: string }>();
 
-  const project = useMemo(() => projects.find((item) => item.slug === slug), [slug]);
+  const project = useMemo(
+    () => projects.find((item: Project) => item.slug === slug),
+    [slug],
+  );
 
   if (!project) {
     return (
@@ -77,7 +81,7 @@ export default function ProjectDetail() {
           <div className="min-w-0">
             <h3 className="mb-4 text-xl font-semibold sm:text-2xl">Rationale</h3>
             <ul className="space-y-3 text-sm leading-relaxed text-slate-300 sm:text-base">
-              {project.rationale.map((item, index) => (
+              {project.rationale.map((item: string, index: number) => (
                 <li key={`${item}-${index}`} className="flex min-w-0 gap-3">
                   <span
                     className="mt-2 h-2 w-2 rounded-full"
@@ -89,7 +93,7 @@ export default function ProjectDetail() {
             </ul>
 
             <div className="flex flex-wrap gap-2 mt-6">
-              {project.tags.map((tag) => (
+              {project.tags.map((tag: string) => (
                 <span
                   key={tag}
                   className="max-w-full break-words rounded-full bg-slate-900/60 px-3 py-1 text-sm text-slate-100"
@@ -114,7 +118,7 @@ export default function ProjectDetail() {
                     style={{
                       background: project.blog.image
                         ? 'linear-gradient(to top, rgba(15, 23, 42, 0.84) 5%, rgba(15, 23, 42, 0.2) 50%, rgba(15, 23, 42, 0.1) 100%)'
-                        : `linear-gradient(135deg, ${project.brand.accent}66, transparent)`
+                        : `linear-gradient(135deg, ${project.brand.accent}66, transparent)`,
                     }}
                   />
                   <div className="relative z-20">
@@ -177,7 +181,7 @@ export default function ProjectDetail() {
               <>
                 <h3 className="mb-4 text-xl font-semibold sm:text-2xl">Project Highlights</h3>
                 <div className="grid gap-4">
-                  {project.visuals.map((visual, index) => (
+                  {project.visuals.map((visual, index: number) => (
                     <div
                       key={`${visual.title}-${index}`}
                       className="rounded-xl border border-slate-700 bg-slate-900/60 p-4"
@@ -185,7 +189,7 @@ export default function ProjectDetail() {
                       <div
                         className="h-16 rounded-lg mb-4"
                         style={{
-                          background: `linear-gradient(120deg, ${project.brand.accent}33, transparent)`
+                          background: `linear-gradient(120deg, ${project.brand.accent}33, transparent)`,
                         }}
                       />
                       <p className="font-semibold mb-1">{visual.title}</p>
@@ -197,7 +201,6 @@ export default function ProjectDetail() {
             ) : null}
           </div>
         </div>
-
       </div>
     </section>
   );
