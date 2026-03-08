@@ -1,8 +1,9 @@
 import tandemBlogImage from '../assets/tandem/tandem-blog.png';
 import tandemLogo from '../assets/tandem/tandem-logo.png';
 import insurflowLogo from '../assets/insurflow/insurflow.png';
+import type { Project } from '../types';
 
-export const projects = [
+export const projects: Project[] = [
   {
     id: 2,
     slug: 'tandem',

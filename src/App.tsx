@@ -1,10 +1,11 @@
+import type { ReactElement } from 'react';
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import ProjectDetail from './pages/ProjectDetail';
 
-export default function App() {
+export default function App(): ReactElement {
   const location = useLocation();
 
   return (
