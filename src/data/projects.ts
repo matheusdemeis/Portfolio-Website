@@ -117,7 +117,7 @@ export const projects: Project[] = [
     link: 'https://github.com/matheusdemeis/vibe-playlist',
 
     brand: {
-      name: 'VibePlaylist',
+      name: 'VibePlay',
       tone: 'Creative, modern music-discovery tool focused on personalized playlist generation',
       accent: '#1DB954',
     },
