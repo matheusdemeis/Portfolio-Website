@@ -96,4 +96,43 @@ export const projects: Project[] = [
     ],
     visuals: [],
   },
+  {
+    id: 3,
+    slug: 'VibePlay',
+    logo: '',
+    title: 'VibePlay',
+    description:
+      'A full-stack web application that generates Spotify playlists based on moods, genres, or artists. Users authenticate with Spotify, generate curated playlists using the Spotify Web API, and save them directly to their Spotify account.',
+    tags: [
+      'Next.js',
+      'TypeScript',
+      'Spotify Web API',
+      'OAuth 2.0',
+      'REST APIs',
+      'TailwindCSS',
+      'Product Development',
+      'Full-Stack Development',
+    ],
+
+    link: 'https://github.com/matheusdemeis/vibe-playlist',
+
+    brand: {
+      name: 'VibePlaylist',
+      tone: 'Creative, modern music-discovery tool focused on personalized playlist generation',
+      accent: '#1DB954',
+    },
+
+    timeline: '2026',
+    role: 'Full Stack Developer',
+    year: '2026',
+
+    rationale: [
+      'Built to explore the Spotify Web API and demonstrate full OAuth authentication flows with a real third-party platform.',
+      'Designed a system that generates playlists dynamically based on user input such as vibe, genre, or favorite artists.',
+      'Implemented playlist creation and track insertion directly into user Spotify accounts using authenticated API requests.',
+      'Focused on building a clean, responsive UI while maintaining a reliable API integration flow and handling edge cases like API errors and permission scopes.',
+    ],
+
+    visuals: [],
+  },
 ];
