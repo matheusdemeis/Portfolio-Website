@@ -29,6 +29,32 @@ export default function ProjectDetail(): ReactElement {
     );
   }
 
+  const projectLinks = (
+    <div className="flex flex-wrap items-center gap-3">
+      <a
+        href={project.link}
+        className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-slate-700 bg-slate-900/70 px-4 py-2 text-primary transition hover:text-primary/80 sm:min-h-0 sm:justify-start sm:border-none sm:bg-transparent sm:px-0 sm:py-0"
+      >
+        GitHub Repository <ExternalLink size={16} />
+      </a>
+      {project.liveUrl && (
+        <>
+          <span className="hidden text-slate-500 sm:inline" aria-hidden="true">
+            |
+          </span>
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-slate-700 bg-slate-900/70 px-4 py-2 text-primary transition hover:text-primary/80 sm:min-h-0 sm:justify-start sm:border-none sm:bg-transparent sm:px-0 sm:py-0"
+          >
+            View Live App <ExternalLink size={16} />
+          </a>
+        </>
+      )}
+    </div>
+  );
+
   return (
     <section className="overflow-x-clip bg-slate-800/50 px-4 pb-20 pt-24 sm:px-6 sm:pt-28">
       <div className="mx-auto max-w-6xl">
@@ -136,25 +162,13 @@ export default function ProjectDetail(): ReactElement {
                   >
                     Visit Blog <ExternalLink size={16} />
                   </a>
-                  <a
-                    href={project.link}
-                    className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-slate-700 bg-slate-900/70 px-4 py-2 text-primary transition hover:text-primary/80 sm:min-h-0 sm:w-auto sm:justify-start sm:border-none sm:bg-transparent sm:px-0 sm:py-0"
-                  >
-                    GitHub Repository <ExternalLink size={16} />
-                  </a>
+                  {projectLinks}
                 </div>
               </div>
             )}
 
             {!project.blog && (
-              <div className="mt-8">
-                <a
-                  href={project.link}
-                  className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-slate-700 bg-slate-900/70 px-4 py-2 text-primary transition hover:text-primary/80 sm:min-h-0 sm:w-auto sm:justify-start sm:border-none sm:bg-transparent sm:px-0 sm:py-0"
-                >
-                  GitHub Repository <ExternalLink size={16} />
-                </a>
-              </div>
+              <div className="mt-8">{projectLinks}</div>
             )}
           </div>
 

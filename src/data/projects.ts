@@ -80,6 +80,7 @@ export const projects: Project[] = [
       'FinTech',
     ],
     link: 'https://github.com/Vero-Ventures/insurflow',
+    liveUrl: 'https://insurflow.biz/',
     brand: {
       name: 'InsurFlow',
       tone: 'Modern, professional, data-driven InsurTech platform focused on advisor productivity',
@@ -115,6 +116,7 @@ export const projects: Project[] = [
     ],
 
     link: 'https://github.com/matheusdemeis/vibe-playlist',
+    liveUrl: 'https://vibe-play-livid.vercel.app/',
 
     brand: {
       name: 'VibePlay',

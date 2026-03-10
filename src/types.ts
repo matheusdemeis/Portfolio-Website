@@ -20,6 +20,7 @@ export interface Project {
   id: number;
   slug: string;
   demoUrl?: string;
+  liveUrl?: string;
   logo: string;
   title: string;
   description: string;
