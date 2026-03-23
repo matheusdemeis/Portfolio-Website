@@ -110,10 +110,12 @@ export default function ProjectDetail(): ReactElement {
               <p className="text-slate-400">Brand tone</p>
               <p className="break-words font-semibold">{project.brand.tone}</p>
             </div>
-            <div className="min-w-0 rounded-lg bg-slate-900/50 p-4">
-              <p className="text-slate-400">Stack</p>
-              <p className="break-words font-semibold">{displayStack}</p>
-            </div>
+            {caseStudy && (
+              <div className="min-w-0 rounded-lg bg-slate-900/50 p-4">
+                <p className="text-slate-400">Stack</p>
+                <p className="break-words font-semibold">{displayStack}</p>
+              </div>
+            )}
           </div>
         </header>
 
