@@ -54,6 +54,10 @@ export default function ProjectDetail(): ReactElement {
       )}
     </div>
   );
+  const caseStudy = project.caseStudy;
+  const displayStack = (project.stack && project.stack.length > 0 ? project.stack : project.tags).join(
+    ', ',
+  );
 
   return (
     <section className="overflow-x-clip bg-slate-800/50 px-4 pb-20 pt-24 sm:px-6 sm:pt-28">
@@ -88,6 +92,12 @@ export default function ProjectDetail(): ReactElement {
               <p className="text-slate-400">Role</p>
               <p className="break-words font-semibold">{project.role}</p>
             </div>
+            {project.team && (
+              <div className="min-w-0 rounded-lg bg-slate-900/50 p-4">
+                <p className="text-slate-400">Team</p>
+                <p className="break-words font-semibold">{project.team}</p>
+              </div>
+            )}
             <div className="min-w-0 rounded-lg bg-slate-900/50 p-4">
               <p className="text-slate-400">Timeline</p>
               <p className="font-semibold">{project.timeline}</p>
@@ -100,43 +110,170 @@ export default function ProjectDetail(): ReactElement {
               <p className="text-slate-400">Brand tone</p>
               <p className="break-words font-semibold">{project.brand.tone}</p>
             </div>
+            <div className="min-w-0 rounded-lg bg-slate-900/50 p-4">
+              <p className="text-slate-400">Stack</p>
+              <p className="break-words font-semibold">{displayStack}</p>
+            </div>
           </div>
         </header>
 
-        <div className="mt-10 grid gap-8 lg:grid-cols-[1.2fr_1fr]">
-          <div className="min-w-0">
-            <h3 className="mb-4 text-xl font-semibold sm:text-2xl">Rationale</h3>
-            <ul className="space-y-3 text-sm leading-relaxed text-slate-300 sm:text-base">
-              {project.rationale.map((item: string, index: number) => (
-                <li key={`${item}-${index}`} className="flex min-w-0 gap-3">
-                  <span
-                    className="mt-2 h-2 w-2 rounded-full"
-                    style={{ backgroundColor: project.brand.accent }}
-                  />
-                  <span className="break-words">{item}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="flex flex-wrap gap-2 mt-6">
-              {project.tags.map((tag: string) => (
-                <span
-                  key={tag}
-                  className="max-w-full break-words rounded-full bg-slate-900/60 px-3 py-1 text-sm text-slate-100"
-                >
-                  {tag}
-                </span>
-              ))}
+        {caseStudy ? (
+          <article className="mt-10 space-y-10">
+            <div
+              className="rounded-2xl border border-slate-700 bg-slate-900/60 p-5 sm:p-6"
+              style={{
+                backgroundImage: `linear-gradient(120deg, ${project.brand.accent}1f, rgba(15, 23, 42, 0.55))`,
+              }}
+            >
+              <p className="text-xs uppercase tracking-[0.25em] text-slate-300">Impact</p>
+              <p className="mt-2 text-base leading-relaxed text-slate-100 sm:text-lg">{caseStudy.impact}</p>
             </div>
 
-            {project.blog && (
-              <div className="mt-8 rounded-2xl border border-slate-700 bg-slate-900/60 p-4 sm:p-5">
+            <section>
+              <h3 className="mb-3 text-xl font-semibold sm:text-2xl">Problem</h3>
+              <p className="max-w-4xl text-sm leading-relaxed text-slate-300 sm:text-base">
+                {caseStudy.problem}
+              </p>
+            </section>
+
+            <section>
+              <h3 className="mb-3 text-xl font-semibold sm:text-2xl">Goal</h3>
+              <p className="max-w-4xl text-sm leading-relaxed text-slate-300 sm:text-base">
+                {caseStudy.goal}
+              </p>
+            </section>
+
+            <section>
+              <h3 className="mb-3 text-xl font-semibold sm:text-2xl">Approach</h3>
+              <p className="max-w-4xl text-sm leading-relaxed text-slate-300 sm:text-base">
+                {caseStudy.approach}
+              </p>
+            </section>
+
+            <section>
+              <h3 className="mb-4 text-xl font-semibold sm:text-2xl">Solution</h3>
+              <ul className="space-y-3 text-sm leading-relaxed text-slate-300 sm:text-base">
+                {caseStudy.solution.map((item: string, index: number) => (
+                  <li key={`${item}-${index}`} className="flex min-w-0 gap-3">
+                    <span
+                      className="mt-2 h-2 w-2 rounded-full"
+                      style={{ backgroundColor: project.brand.accent }}
+                    />
+                    <span className="break-words">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            {project.demoUrl && (
+              <section>
+                <h3 className="mb-4 text-xl font-semibold sm:text-2xl">Solution in Practice</h3>
+                <p className="mb-5 max-w-4xl text-sm leading-relaxed text-slate-300 sm:text-base">
+                  {caseStudy.demoCaption}
+                </p>
+                <div className="rounded-2xl border border-slate-700 bg-slate-900/50 p-4 sm:p-6">
+                  <div className="mx-auto flex justify-center">
+                    <div
+                      className="w-full max-w-[402px] overflow-hidden rounded-[2rem] border-[10px] border-gray-800 bg-gray-800 shadow-2xl sm:rounded-[2.5rem] sm:border-[14px]"
+                      style={{ aspectRatio: '402 / 874' }}
+                    >
+                      <iframe
+                        src={project.demoUrl}
+                        className="h-full w-full"
+                        title={`${project.brand.name} App`}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+                      />
+                    </div>
+                  </div>
+                  {!!caseStudy.demoCallouts?.length && (
+                    <ul className="mt-5 space-y-2 text-sm text-slate-300">
+                      {caseStudy.demoCallouts.map((item: string, index: number) => (
+                        <li key={`${item}-${index}`} className="flex min-w-0 gap-3">
+                          <span
+                            className="mt-2 h-2 w-2 rounded-full"
+                            style={{ backgroundColor: project.brand.accent }}
+                          />
+                          <span className="break-words">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </section>
+            )}
+
+            <section>
+              <h3 className="mb-4 text-xl font-semibold sm:text-2xl">Technical Build</h3>
+              <ul className="space-y-3 text-sm leading-relaxed text-slate-300 sm:text-base">
+                {caseStudy.technicalBuild.map((item: string, index: number) => (
+                  <li key={`${item}-${index}`} className="flex min-w-0 gap-3">
+                    <span
+                      className="mt-2 h-2 w-2 rounded-full"
+                      style={{ backgroundColor: project.brand.accent }}
+                    />
+                    <span className="break-words">{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {project.tags.map((tag: string) => (
+                  <span
+                    key={tag}
+                    className="max-w-full break-words rounded-full bg-slate-900/60 px-3 py-1 text-sm text-slate-100"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </section>
+
+            <section>
+              <h3 className="mb-4 text-xl font-semibold sm:text-2xl">Challenges</h3>
+              <ul className="space-y-3 text-sm leading-relaxed text-slate-300 sm:text-base">
+                {caseStudy.challenges.map((item: string, index: number) => (
+                  <li key={`${item}-${index}`} className="flex min-w-0 gap-3">
+                    <span
+                      className="mt-2 h-2 w-2 rounded-full"
+                      style={{ backgroundColor: project.brand.accent }}
+                    />
+                    <span className="break-words">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section>
+              <h3 className="mb-3 text-xl font-semibold sm:text-2xl">Outcome</h3>
+              <p className="max-w-4xl text-sm leading-relaxed text-slate-300 sm:text-base">
+                {caseStudy.outcome}
+              </p>
+            </section>
+
+            <section>
+              <h3 className="mb-4 text-xl font-semibold sm:text-2xl">Learnings</h3>
+              <ul className="space-y-3 text-sm leading-relaxed text-slate-300 sm:text-base">
+                {caseStudy.learnings.map((item: string, index: number) => (
+                  <li key={`${item}-${index}`} className="flex min-w-0 gap-3">
+                    <span
+                      className="mt-2 h-2 w-2 rounded-full"
+                      style={{ backgroundColor: project.brand.accent }}
+                    />
+                    <span className="break-words">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section className="rounded-2xl border border-slate-700 bg-slate-900/60 p-4 sm:p-5">
+              <h3 className="mb-4 text-xl font-semibold sm:text-2xl">Further Reading & Links</h3>
+              {project.blog && (
                 <div className="relative mb-4 flex w-full aspect-[16/9] items-end overflow-hidden rounded-xl bg-slate-950/70 p-4 sm:aspect-[16/6]">
                   {project.blog.image && (
                     <img
                       src={project.blog.image}
                       alt={project.blog.title}
-                      className="absolute inset-0 z-0 w-full h-full object-contain object-center"
+                      className="absolute inset-0 z-0 h-full w-full object-contain object-center"
                     />
                   )}
                   <div
@@ -154,67 +291,95 @@ export default function ProjectDetail(): ReactElement {
                     </p>
                   </div>
                 </div>
+              )}
+              {project.blog && (
                 <p className="mb-4 text-sm leading-relaxed text-slate-300">{project.blog.description}</p>
-                <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+              )}
+              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+                {project.blog && (
                   <a
                     href={project.blog.url}
                     className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-slate-700 bg-slate-900/70 px-4 py-2 text-primary transition hover:text-primary/80 sm:min-h-0 sm:w-auto sm:justify-start sm:border-none sm:bg-transparent sm:px-0 sm:py-0"
                   >
                     Visit Blog <ExternalLink size={16} />
                   </a>
-                  {projectLinks}
-                </div>
+                )}
+                {projectLinks}
               </div>
-            )}
-
-            {!project.blog && (
-              <div className="mt-8">{projectLinks}</div>
-            )}
-          </div>
-
-          <div className="min-w-0">
-            {project.demoUrl ? (
-              <>
-                <h3 className="mb-4 text-xl font-semibold sm:text-2xl">Live Demo</h3>
-                <div className="mx-auto flex justify-center">
-                  <div
-                    className="w-full max-w-[402px] overflow-hidden rounded-[2rem] border-[10px] border-gray-800 bg-gray-800 shadow-2xl sm:rounded-[2.5rem] sm:border-[14px]"
-                    style={{ aspectRatio: '402 / 874' }}
-                  >
-                    <iframe
-                      src={project.demoUrl}
-                      className="h-full w-full"
-                      title={`${project.brand.name} App`}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+            </section>
+          </article>
+        ) : (
+          <div className="mt-10 grid gap-8 lg:grid-cols-[1.2fr_1fr]">
+            <div className="min-w-0">
+              <h3 className="mb-4 text-xl font-semibold sm:text-2xl">Project Notes</h3>
+              <ul className="space-y-3 text-sm leading-relaxed text-slate-300 sm:text-base">
+                {project.rationale.map((item: string, index: number) => (
+                  <li key={`${item}-${index}`} className="flex min-w-0 gap-3">
+                    <span
+                      className="mt-2 h-2 w-2 rounded-full"
+                      style={{ backgroundColor: project.brand.accent }}
                     />
-                  </div>
-                </div>
-              </>
-            ) : project.visuals?.length ? (
-              <>
-                <h3 className="mb-4 text-xl font-semibold sm:text-2xl">Project Highlights</h3>
-                <div className="grid gap-4">
-                  {project.visuals.map((visual, index: number) => (
+                    <span className="break-words">{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {project.tags.map((tag: string) => (
+                  <span
+                    key={tag}
+                    className="max-w-full break-words rounded-full bg-slate-900/60 px-3 py-1 text-sm text-slate-100"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <div className="mt-8">{projectLinks}</div>
+            </div>
+
+            <div className="min-w-0">
+              {project.demoUrl ? (
+                <>
+                  <h3 className="mb-4 text-xl font-semibold sm:text-2xl">Live Demo</h3>
+                  <div className="mx-auto flex justify-center">
                     <div
-                      key={`${visual.title}-${index}`}
-                      className="rounded-xl border border-slate-700 bg-slate-900/60 p-4"
+                      className="w-full max-w-[402px] overflow-hidden rounded-[2rem] border-[10px] border-gray-800 bg-gray-800 shadow-2xl sm:rounded-[2.5rem] sm:border-[14px]"
+                      style={{ aspectRatio: '402 / 874' }}
                     >
-                      <div
-                        className="h-16 rounded-lg mb-4"
-                        style={{
-                          background: `linear-gradient(120deg, ${project.brand.accent}33, transparent)`,
-                        }}
+                      <iframe
+                        src={project.demoUrl}
+                        className="h-full w-full"
+                        title={`${project.brand.name} App`}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
                       />
-                      <p className="font-semibold mb-1">{visual.title}</p>
-                      <p className="text-slate-300 text-sm">{visual.description}</p>
                     </div>
-                  ))}
-                </div>
-              </>
-            ) : null}
+                  </div>
+                </>
+              ) : project.visuals?.length ? (
+                <>
+                  <h3 className="mb-4 text-xl font-semibold sm:text-2xl">Project Highlights</h3>
+                  <div className="grid gap-4">
+                    {project.visuals.map((visual, index: number) => (
+                      <div
+                        key={`${visual.title}-${index}`}
+                        className="rounded-xl border border-slate-700 bg-slate-900/60 p-4"
+                      >
+                        <div
+                          className="mb-4 h-16 rounded-lg"
+                          style={{
+                            background: `linear-gradient(120deg, ${project.brand.accent}33, transparent)`,
+                          }}
+                        />
+                        <p className="mb-1 font-semibold">{visual.title}</p>
+                        <p className="text-sm text-slate-300">{visual.description}</p>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              ) : null}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );

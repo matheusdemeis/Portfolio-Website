@@ -16,6 +16,20 @@ export interface ProjectVisual {
   description: string;
 }
 
+export interface ProjectCaseStudy {
+  impact: string;
+  problem: string;
+  goal: string;
+  approach: string;
+  solution: string[];
+  technicalBuild: string[];
+  challenges: string[];
+  outcome: string;
+  learnings: string[];
+  demoCaption?: string;
+  demoCallouts?: string[];
+}
+
 export interface Project {
   id: number;
   slug: string;
@@ -30,8 +44,11 @@ export interface Project {
   brand: ProjectBrand;
   timeline: string;
   role: string;
+  team?: string;
   year: string;
+  stack?: string[];
   rationale: string[];
+  caseStudy?: ProjectCaseStudy;
   visuals?: ProjectVisual[];
 }
 
