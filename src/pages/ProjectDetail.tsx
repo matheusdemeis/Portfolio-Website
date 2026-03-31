@@ -7,6 +7,7 @@ import type { Project } from '../types';
 export default function ProjectDetail(): ReactElement {
   const { slug } = useParams<{ slug: string }>();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
 
   const project = useMemo(
     () => projects.find((item: Project) => item.slug === slug),
@@ -15,6 +16,7 @@ export default function ProjectDetail(): ReactElement {
 
   useEffect(() => {
     setCurrentImageIndex(0);
+    setIsImageModalOpen(false);
   }, [slug]);
 
   if (!project) {
@@ -65,6 +67,42 @@ export default function ProjectDetail(): ReactElement {
   );
   const imageCount = project.images?.length ?? 0;
   const activeImage = imageCount > 0 ? project.images?.[currentImageIndex % imageCount] : undefined;
+  const goToPreviousImage = (): void => {
+    setCurrentImageIndex((prev: number) => (prev === 0 ? imageCount - 1 : prev - 1));
+  };
+  const goToNextImage = (): void => {
+    setCurrentImageIndex((prev: number) => (prev === imageCount - 1 ? 0 : prev + 1));
+  };
+
+  useEffect(() => {
+    if (!isImageModalOpen) {
+      return;
+    }
+
+    const onKeyDown = (event: KeyboardEvent): void => {
+      if (event.key === 'Escape') {
+        setIsImageModalOpen(false);
+        return;
+      }
+
+      if (imageCount <= 1) {
+        return;
+      }
+
+      if (event.key === 'ArrowLeft') {
+        setCurrentImageIndex((prev: number) => (prev === 0 ? imageCount - 1 : prev - 1));
+      }
+
+      if (event.key === 'ArrowRight') {
+        setCurrentImageIndex((prev: number) => (prev === imageCount - 1 ? 0 : prev + 1));
+      }
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [imageCount, isImageModalOpen]);
 
   return (
     <section className="overflow-x-clip bg-slate-800/50 px-4 pb-20 pt-24 sm:px-6 sm:pt-28">
@@ -370,22 +408,25 @@ export default function ProjectDetail(): ReactElement {
                   <div className="rounded-2xl border border-slate-700 bg-slate-900/60 p-4 sm:p-5">
                     <div className="overflow-hidden rounded-xl border border-slate-700 bg-slate-950/70">
                       <div className="aspect-[16/10] w-full">
-                        <img
-                          src={activeImage}
-                          alt={`${project.brand.name} screenshot ${currentImageIndex + 1}`}
-                          className="h-full w-full object-contain"
-                          loading="lazy"
-                        />
+                        <button
+                          type="button"
+                          onClick={() => setIsImageModalOpen(true)}
+                          className="h-full w-full"
+                          aria-label={`Open ${project.brand.name} screenshot ${currentImageIndex + 1} in full view`}
+                        >
+                          <img
+                            src={activeImage}
+                            alt={`${project.brand.name} screenshot ${currentImageIndex + 1}`}
+                            className="h-full w-full object-contain"
+                            loading="lazy"
+                          />
+                        </button>
                       </div>
                     </div>
                     <div className="mt-4 flex items-center justify-between gap-3">
                       <button
                         type="button"
-                        onClick={() =>
-                          setCurrentImageIndex((prev: number) =>
-                            prev === 0 ? imageCount - 1 : prev - 1,
-                          )
-                        }
+                        onClick={goToPreviousImage}
                         className="inline-flex min-h-11 items-center justify-center rounded-lg border border-slate-700 bg-slate-900/70 px-4 py-2 text-sm text-slate-100 transition hover:border-slate-500"
                       >
                         Prev
@@ -395,11 +436,7 @@ export default function ProjectDetail(): ReactElement {
                       </p>
                       <button
                         type="button"
-                        onClick={() =>
-                          setCurrentImageIndex((prev: number) =>
-                            prev === imageCount - 1 ? 0 : prev + 1,
-                          )
-                        }
+                        onClick={goToNextImage}
                         className="inline-flex min-h-11 items-center justify-center rounded-lg border border-slate-700 bg-slate-900/70 px-4 py-2 text-sm text-slate-100 transition hover:border-slate-500"
                       >
                         Next
@@ -433,6 +470,60 @@ export default function ProjectDetail(): ReactElement {
           </div>
         )}
       </div>
+
+      {isImageModalOpen && activeImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4 py-6"
+          onClick={() => setIsImageModalOpen(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${project.brand.name} screenshot zoom view`}
+        >
+          <div
+            className="relative w-full max-w-6xl"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setIsImageModalOpen(false)}
+              className="absolute right-0 top-0 z-10 inline-flex min-h-11 items-center justify-center rounded-lg border border-slate-600 bg-slate-900/85 px-4 py-2 text-sm text-slate-100 transition hover:border-slate-400"
+              aria-label="Close zoomed image"
+            >
+              Close
+            </button>
+            <div className="overflow-hidden rounded-2xl border border-slate-700 bg-slate-950/95 p-3 pt-14 sm:p-5 sm:pt-16">
+              <div className="flex max-h-[80vh] items-center justify-center">
+                <img
+                  src={activeImage}
+                  alt={`${project.brand.name} screenshot ${currentImageIndex + 1}`}
+                  className="max-h-[72vh] w-full object-contain"
+                />
+              </div>
+              {imageCount > 1 && (
+                <div className="mt-4 flex items-center justify-between gap-3">
+                  <button
+                    type="button"
+                    onClick={goToPreviousImage}
+                    className="inline-flex min-h-11 items-center justify-center rounded-lg border border-slate-700 bg-slate-900/70 px-4 py-2 text-sm text-slate-100 transition hover:border-slate-500"
+                  >
+                    Prev
+                  </button>
+                  <p className="text-sm text-slate-300">
+                    {(currentImageIndex % imageCount) + 1} / {imageCount}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={goToNextImage}
+                    className="inline-flex min-h-11 items-center justify-center rounded-lg border border-slate-700 bg-slate-900/70 px-4 py-2 text-sm text-slate-100 transition hover:border-slate-500"
+                  >
+                    Next
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
