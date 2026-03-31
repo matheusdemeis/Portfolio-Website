@@ -36,6 +36,7 @@ export interface Project {
   demoUrl?: string;
   liveUrl?: string;
   logo: string;
+  images?: string[];
   title: string;
   description: string;
   tags: string[];

@@ -1,6 +1,9 @@
 import tandemBlogImage from '../assets/tandem/tandem-blog.png';
 import tandemLogo from '../assets/tandem/tandem-logo.png';
 import insurflowLogo from '../assets/insurflow/insurflow.png';
+import vibeplayImage1 from '../assets/vibeplay/vibeplay.png';
+import vibeplayImage2 from '../assets/vibeplay/vibeplay2.png';
+import vibeplayImage3 from '../assets/vibeplay/vibeplay3.png';
 import type { Project } from '../types';
 
 export const projects: Project[] = [
@@ -143,6 +146,7 @@ export const projects: Project[] = [
     id: 3,
     slug: 'VibePlay',
     logo: '',
+    images: [vibeplayImage1, vibeplayImage2, vibeplayImage3],
     title: 'VibePlay',
     description:
       'A full-stack web application that generates Spotify playlists based on moods, genres, or artists. Users authenticate with Spotify, generate curated playlists using the Spotify Web API, and save them directly to their Spotify account.',

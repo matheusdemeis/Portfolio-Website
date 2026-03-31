@@ -1,4 +1,4 @@
-import { useMemo, type ReactElement } from 'react';
+import { useEffect, useMemo, useState, type ReactElement } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ExternalLink, ArrowLeft } from 'lucide-react';
 import { projects } from '../data/projects';
@@ -6,11 +6,16 @@ import type { Project } from '../types';
 
 export default function ProjectDetail(): ReactElement {
   const { slug } = useParams<{ slug: string }>();
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const project = useMemo(
     () => projects.find((item: Project) => item.slug === slug),
     [slug],
   );
+
+  useEffect(() => {
+    setCurrentImageIndex(0);
+  }, [slug]);
 
   if (!project) {
     return (
@@ -58,6 +63,8 @@ export default function ProjectDetail(): ReactElement {
   const displayStack = (project.stack && project.stack.length > 0 ? project.stack : project.tags).join(
     ', ',
   );
+  const imageCount = project.images?.length ?? 0;
+  const activeImage = imageCount > 0 ? project.images?.[currentImageIndex % imageCount] : undefined;
 
   return (
     <section className="overflow-x-clip bg-slate-800/50 px-4 pb-20 pt-24 sm:px-6 sm:pt-28">
@@ -354,6 +361,49 @@ export default function ProjectDetail(): ReactElement {
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
                       />
+                    </div>
+                  </div>
+                </>
+              ) : imageCount > 0 ? (
+                <>
+                  <h3 className="mb-4 text-xl font-semibold sm:text-2xl">Project Preview</h3>
+                  <div className="rounded-2xl border border-slate-700 bg-slate-900/60 p-4 sm:p-5">
+                    <div className="overflow-hidden rounded-xl border border-slate-700 bg-slate-950/70">
+                      <div className="aspect-[16/10] w-full">
+                        <img
+                          src={activeImage}
+                          alt={`${project.brand.name} screenshot ${currentImageIndex + 1}`}
+                          className="h-full w-full object-contain"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+                    <div className="mt-4 flex items-center justify-between gap-3">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setCurrentImageIndex((prev: number) =>
+                            prev === 0 ? imageCount - 1 : prev - 1,
+                          )
+                        }
+                        className="inline-flex min-h-11 items-center justify-center rounded-lg border border-slate-700 bg-slate-900/70 px-4 py-2 text-sm text-slate-100 transition hover:border-slate-500"
+                      >
+                        Prev
+                      </button>
+                      <p className="text-sm text-slate-300">
+                        {(currentImageIndex % imageCount) + 1} / {imageCount}
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setCurrentImageIndex((prev: number) =>
+                            prev === imageCount - 1 ? 0 : prev + 1,
+                          )
+                        }
+                        className="inline-flex min-h-11 items-center justify-center rounded-lg border border-slate-700 bg-slate-900/70 px-4 py-2 text-sm text-slate-100 transition hover:border-slate-500"
+                      >
+                        Next
+                      </button>
                     </div>
                   </div>
                 </>
