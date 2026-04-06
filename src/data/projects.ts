@@ -5,6 +5,9 @@ import tandemUserFlow from '../assets/tandem/tandem_userflow.jpg';
 import tandemUserPersonas from '../assets/tandem/tandem_userpersonas.png';
 import tandemStyleGuide from '../assets/tandem/tandem_styleguide.png';
 import insurflowLogo from '../assets/insurflow/insurflow.png';
+import insurflowImage1 from '../assets/insurflow/insurflow1.png';
+import insurflowImage2 from '../assets/insurflow/insurflow2.png';
+import insurflowImage3 from '../assets/insurflow/insurflow3.png';
 import vibeplayImage1 from '../assets/vibeplay/vibeplay.png';
 import vibeplayImage2 from '../assets/vibeplay/vibeplay2.png';
 import vibeplayImage3 from '../assets/vibeplay/vibeplay3.png';
@@ -187,6 +190,7 @@ export const projects: Project[] = [
     id: 1,
     slug: 'InsurFlow',
     logo: insurflowLogo,
+    images: [insurflowImage1, insurflowImage2, insurflowImage3],
     title: 'InsurFlow, AI-Enabled InsurTech SaaS',
     description:
       'A full-stack SaaS platform designed to help life insurance advisors perform Financial Needs Analysis, automate compliance documentation, and replace legacy spreadsheet workflows.',
