@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState, type ReactElement } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ExternalLink, ArrowLeft } from 'lucide-react';
 import { projects } from '../data/projects';
-import type { Project } from '../types';
+import type { Project, ProjectCaseStudySection } from '../types';
 
 export default function ProjectDetail(): ReactElement {
   const { slug } = useParams<{ slug: string }>();
@@ -15,6 +15,7 @@ export default function ProjectDetail(): ReactElement {
   );
 
   useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
     setCurrentImageIndex(0);
     setIsImageModalOpen(false);
   }, [slug]);
@@ -73,6 +74,78 @@ export default function ProjectDetail(): ReactElement {
   const goToNextImage = (): void => {
     setCurrentImageIndex((prev: number) => (prev === imageCount - 1 ? 0 : prev + 1));
   };
+
+  const renderCaseStudySection = (section: ProjectCaseStudySection): ReactElement => (
+    <section key={section.title}>
+      <h3 className="mb-3 text-xl font-semibold sm:text-2xl">{section.title}</h3>
+      <div className="space-y-4 text-sm leading-relaxed text-slate-300 sm:text-base">
+        {section.paragraphs.map((paragraph: string, index: number) => (
+          <p key={`${section.title}-${index}`} className="max-w-4xl">
+            {paragraph}
+          </p>
+        ))}
+      </div>
+      {section.bullets?.length ? (
+        <ul className="mt-4 space-y-3 text-sm leading-relaxed text-slate-300 sm:text-base">
+          {section.bullets.map((item: string, index: number) => (
+            <li key={`${section.title}-${item}-${index}`} className="flex min-w-0 gap-3">
+              <span
+                className="mt-2 h-2 w-2 rounded-full"
+                style={{ backgroundColor: project.brand.accent }}
+              />
+              <span className="break-words">{item}</span>
+            </li>
+          ))}
+        </ul>
+      ) : null}
+      {section.featureVisuals?.length ? (
+        <div className="mt-6 space-y-6">
+          {section.featureVisuals.map((feature) => (
+            <div
+              key={`${section.title}-${feature.title}`}
+              className="grid gap-4 rounded-2xl border border-slate-700 bg-slate-900/50 p-4 md:grid-cols-[1.1fr_1fr] md:items-center sm:p-5"
+            >
+              <div className="space-y-2">
+                <h4 className="text-base font-semibold text-slate-100 sm:text-lg">{feature.title}</h4>
+                <p className="text-sm leading-relaxed text-slate-300 sm:text-base">{feature.description}</p>
+              </div>
+              <img
+                src={feature.image}
+                alt={feature.alt}
+                className="w-full rounded-xl shadow-md object-contain"
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
+      ) : null}
+      {section.images?.length ? (
+        <div className="mt-6 space-y-6">
+          {section.images.map((image, index: number) => (
+            <figure key={`${section.title}-${image.alt}-${index}`} className="space-y-3">
+              <img
+                src={image.src}
+                alt={image.alt}
+                className="w-full max-w-4xl rounded-xl shadow-md object-contain"
+                loading="lazy"
+              />
+              {image.caption ? <figcaption className="text-sm text-slate-400">{image.caption}</figcaption> : null}
+              {image.linkUrl ? (
+                <a
+                  href={image.linkUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm text-primary transition hover:text-primary/80"
+                >
+                  {image.linkLabel ?? 'Open in Figma'} <ExternalLink size={14} />
+                </a>
+              ) : null}
+            </figure>
+          ))}
+        </div>
+      ) : null}
+    </section>
+  );
 
   useEffect(() => {
     if (!isImageModalOpen) {
@@ -166,55 +239,11 @@ export default function ProjectDetail(): ReactElement {
 
         {caseStudy ? (
           <article className="mt-10 space-y-10">
-            <div
-              className="rounded-2xl border border-slate-700 bg-slate-900/60 p-5 sm:p-6"
-              style={{
-                backgroundImage: `linear-gradient(120deg, ${project.brand.accent}1f, rgba(15, 23, 42, 0.55))`,
-              }}
-            >
-              <p className="text-xs uppercase tracking-[0.25em] text-slate-300">Impact</p>
-              <p className="mt-2 text-base leading-relaxed text-slate-100 sm:text-lg">{caseStudy.impact}</p>
-            </div>
-
-            <section>
-              <h3 className="mb-3 text-xl font-semibold sm:text-2xl">Problem</h3>
-              <p className="max-w-4xl text-sm leading-relaxed text-slate-300 sm:text-base">
-                {caseStudy.problem}
-              </p>
-            </section>
-
-            <section>
-              <h3 className="mb-3 text-xl font-semibold sm:text-2xl">Goal</h3>
-              <p className="max-w-4xl text-sm leading-relaxed text-slate-300 sm:text-base">
-                {caseStudy.goal}
-              </p>
-            </section>
-
-            <section>
-              <h3 className="mb-3 text-xl font-semibold sm:text-2xl">Approach</h3>
-              <p className="max-w-4xl text-sm leading-relaxed text-slate-300 sm:text-base">
-                {caseStudy.approach}
-              </p>
-            </section>
-
-            <section>
-              <h3 className="mb-4 text-xl font-semibold sm:text-2xl">Solution</h3>
-              <ul className="space-y-3 text-sm leading-relaxed text-slate-300 sm:text-base">
-                {caseStudy.solution.map((item: string, index: number) => (
-                  <li key={`${item}-${index}`} className="flex min-w-0 gap-3">
-                    <span
-                      className="mt-2 h-2 w-2 rounded-full"
-                      style={{ backgroundColor: project.brand.accent }}
-                    />
-                    <span className="break-words">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </section>
+            {caseStudy.sections.map((section: ProjectCaseStudySection) => renderCaseStudySection(section))}
 
             {project.demoUrl && (
               <section>
-                <h3 className="mb-4 text-xl font-semibold sm:text-2xl">Solution in Practice</h3>
+                <h3 className="mb-4 text-xl font-semibold sm:text-2xl">Live Demo</h3>
                 <p className="mb-5 max-w-4xl text-sm leading-relaxed text-slate-300 sm:text-base">
                   {caseStudy.demoCaption}
                 </p>
@@ -249,68 +278,6 @@ export default function ProjectDetail(): ReactElement {
                 </div>
               </section>
             )}
-
-            <section>
-              <h3 className="mb-4 text-xl font-semibold sm:text-2xl">Technical Build</h3>
-              <ul className="space-y-3 text-sm leading-relaxed text-slate-300 sm:text-base">
-                {caseStudy.technicalBuild.map((item: string, index: number) => (
-                  <li key={`${item}-${index}`} className="flex min-w-0 gap-3">
-                    <span
-                      className="mt-2 h-2 w-2 rounded-full"
-                      style={{ backgroundColor: project.brand.accent }}
-                    />
-                    <span className="break-words">{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-5 flex flex-wrap gap-2">
-                {project.tags.map((tag: string) => (
-                  <span
-                    key={tag}
-                    className="max-w-full break-words rounded-full bg-slate-900/60 px-3 py-1 text-sm text-slate-100"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </section>
-
-            <section>
-              <h3 className="mb-4 text-xl font-semibold sm:text-2xl">Challenges</h3>
-              <ul className="space-y-3 text-sm leading-relaxed text-slate-300 sm:text-base">
-                {caseStudy.challenges.map((item: string, index: number) => (
-                  <li key={`${item}-${index}`} className="flex min-w-0 gap-3">
-                    <span
-                      className="mt-2 h-2 w-2 rounded-full"
-                      style={{ backgroundColor: project.brand.accent }}
-                    />
-                    <span className="break-words">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </section>
-
-            <section>
-              <h3 className="mb-3 text-xl font-semibold sm:text-2xl">Outcome</h3>
-              <p className="max-w-4xl text-sm leading-relaxed text-slate-300 sm:text-base">
-                {caseStudy.outcome}
-              </p>
-            </section>
-
-            <section>
-              <h3 className="mb-4 text-xl font-semibold sm:text-2xl">Learnings</h3>
-              <ul className="space-y-3 text-sm leading-relaxed text-slate-300 sm:text-base">
-                {caseStudy.learnings.map((item: string, index: number) => (
-                  <li key={`${item}-${index}`} className="flex min-w-0 gap-3">
-                    <span
-                      className="mt-2 h-2 w-2 rounded-full"
-                      style={{ backgroundColor: project.brand.accent }}
-                    />
-                    <span className="break-words">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </section>
 
             <section className="rounded-2xl border border-slate-700 bg-slate-900/60 p-4 sm:p-5">
               <h3 className="mb-4 text-xl font-semibold sm:text-2xl">Further Reading & Links</h3>
@@ -524,6 +491,7 @@ export default function ProjectDetail(): ReactElement {
           </div>
         </div>
       )}
+
     </section>
   );
 }

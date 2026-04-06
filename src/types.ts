@@ -16,16 +16,27 @@ export interface ProjectVisual {
   description: string;
 }
 
+export interface ProjectCaseStudySection {
+  title: string;
+  paragraphs: string[];
+  bullets?: string[];
+  images?: {
+    src: string;
+    alt: string;
+    caption?: string;
+    linkUrl?: string;
+    linkLabel?: string;
+  }[];
+  featureVisuals?: {
+    title: string;
+    description: string;
+    image: string;
+    alt: string;
+  }[];
+}
+
 export interface ProjectCaseStudy {
-  impact: string;
-  problem: string;
-  goal: string;
-  approach: string;
-  solution: string[];
-  technicalBuild: string[];
-  challenges: string[];
-  outcome: string;
-  learnings: string[];
+  sections: ProjectCaseStudySection[];
   demoCaption?: string;
   demoCallouts?: string[];
 }

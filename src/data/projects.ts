@@ -1,5 +1,9 @@
 import tandemBlogImage from '../assets/tandem/tandem-blog.png';
 import tandemLogo from '../assets/tandem/tandem-logo.png';
+import tandemMock from '../assets/tandem/Tandem_Mock.png';
+import tandemUserFlow from '../assets/tandem/tandem_userflow.jpg';
+import tandemUserPersonas from '../assets/tandem/tandem_userpersonas.png';
+import tandemStyleGuide from '../assets/tandem/tandem_styleguide.png';
 import insurflowLogo from '../assets/insurflow/insurflow.png';
 import vibeplayImage1 from '../assets/vibeplay/vibeplay.png';
 import vibeplayImage2 from '../assets/vibeplay/vibeplay2.png';
@@ -12,16 +16,17 @@ export const projects: Project[] = [
     slug: 'tandem',
     demoUrl: 'https://tandem-app.com/',
     logo: tandemLogo,
-    title: 'Tandem: Collaborative Scheduling for Families and Shift Workers',
+    title: 'Tandem: AI-Powered Childcare Scheduling for Trade Parents',
     description:
-      'Tandem is a collaborative scheduling platform that helps busy families and shift workers coordinate work hours, childcare, and shared responsibilities in real time.',
+      'Tandem is an AI-powered childcare scheduling app that helps trade parents in British Columbia coordinate unpredictable work schedules, childcare coverage, nanny bookings, and shared caregivers.',
     tags: [
       'Next.js',
       'TypeScript',
       'React',
+      'Tailwind CSS',
       'PostgreSQL',
       'Drizzle ORM',
-      'Real-Time Data',
+      'AI Scheduling',
       'Agile Development',
       'Team Collaboration',
     ],
@@ -35,51 +40,122 @@ export const projects: Project[] = [
     },
     brand: {
       name: 'Tandem',
-      tone: 'A collaborative productivity tool focused on simplifying scheduling for busy households.',
+      tone: 'A practical childcare coordination app for trade parents with changing schedules.',
       accent: '#4A9B9B',
     },
     timeline: '16 weeks',
     role: 'Full Stack Developer',
     team: '3 Developers + 5 Designers',
     year: '2025',
-    stack: ['Next.js', 'TypeScript', 'React', 'PostgreSQL', 'Drizzle ORM', 'Real-time data'],
+    stack: ['Next.js', 'TypeScript', 'React', 'Tailwind CSS', 'PostgreSQL', 'Drizzle ORM', 'AI Scheduling'],
     rationale: [
-      'Designed to solve real-world scheduling conflicts experienced by shift-based workers and families.',
-      'Built collaboratively with designers to create a clean, intuitive planning experience.',
-      'Focused on synchronizing multiple schedule types into one unified system.',
-      'Demonstrates experience integrating UI with live data and scalable backend architecture.',
+      'Built around a real scheduling problem for trade parents who need childcare to adapt to changing work hours.',
+      'Translated team research into a product flow that could handle planning, booking, and shared caregiving in one place.',
+      'Focused on keeping the interface understandable while supporting more complex scheduling logic underneath.',
+      'Shows my experience working across frontend structure, component logic, and data-driven product features.',
     ],
     caseStudy: {
-      impact:
-        'Tandem made day-to-day coordination more visible, less reactive, and easier to manage across multiple people.',
-      problem:
-        'Families with shift-based schedules often plan in fragments: one person tracks work hours, another tracks childcare, and updates happen across messages, memory, and last-minute calls. That lack of shared visibility creates avoidable conflicts, missed handoffs, and daily stress, especially when schedules change quickly.',
-      goal: 'Build a shared scheduling experience that helps households coordinate work and childcare in one place, stay aligned in real time, and reduce scheduling confusion without adding complexity.',
-      approach:
-        'We treated Tandem as a cross-functional product effort from the start. Designers focused on clarity and usability, while developers translated those flows into a reliable real-time experience. Our guiding principle was simple: if multiple people depend on the same schedule, everyone should be able to understand and trust it at a glance.',
-      solution: [
-        'Shared schedule visibility: a unified view of work, childcare, and availability.',
-        'Real-time updates: changes are reflected quickly so everyone stays in sync.',
-        'Coordination-first planning: features are designed around handoffs and shared responsibilities, not just individual events.',
-        'Conflict prevention: better visibility helps spot overlaps and gaps before they become problems.',
-      ],
-      technicalBuild: [
-        'Next.js, React, and TypeScript for fast iteration and maintainable UI development.',
-        'PostgreSQL with Drizzle ORM for structured, dependable scheduling data.',
-        'Real-time data handling to support shared, up-to-date planning across users.',
-      ],
-      challenges: [
-        'Keeping shared real-time schedule updates synchronized and predictable across users.',
-        'Simplifying a complex multi-person coordination problem into a clean interface.',
-        'Aligning implementation details with design intent in a cross-functional team.',
-      ],
-      outcome:
-        'By the end of the project, we delivered a functional collaborative scheduling platform demonstrating core household planning workflows end to end. The project proved we could build a credible product experience around a real user problem, with thoughtful UX and solid full-stack execution.',
-      learnings: [
-        'Translate real-world user pain points into practical product and technical decisions.',
-        'Collaborate closely with designers to preserve clarity during implementation.',
-        'Balance frontend usability with backend scheduling logic and data consistency.',
-        'Build features that are both technically sound and practical for everyday use.',
+      sections: [
+        {
+          title: '01. Project Overview',
+          paragraphs: [
+            'Tandem is an AI-powered childcare scheduling app for trade parents in British Columbia who work unpredictable hours and need a better way to coordinate childcare around changing shifts. I worked on the project as a full-stack developer in a team of eight, and my main contribution was implementing features, structuring reusable components, and connecting the UI to the data flow behind the product.',
+            'The stack used Next.js, React, TypeScript, Tailwind CSS, PostgreSQL, and Drizzle ORM. That setup let us build a modern frontend while still keeping the scheduling data organized and easy to work with.',
+          ],
+          images: [
+            {
+              src: tandemMock,
+              alt: 'Tandem app dashboard preview showing shared childcare scheduling',
+              caption: 'Tandem interface preview',
+            },
+          ],
+        },
+        {
+          title: '02. Problem Statement',
+          paragraphs: [
+            'Trade parents often deal with changing shifts, early starts, overtime, and last-minute schedule changes. That makes childcare planning harder than it sounds, because work schedules and care schedules do not always line up.',
+            'Most existing tools are built for more stable routines, so they do not handle childcare gaps, shared caregiving, or quick rescheduling very well. That usually leaves parents coordinating through messages, calls, and memory, which is stressful and easy to break when plans change.',
+          ],
+        },
+        {
+          title: '03. Key Features',
+          paragraphs: [
+            'As a team, we focused on making the product practical for real day-to-day use, balancing scheduling logic, booking workflows, and shared visibility in one experience.',
+          ],
+          bullets: [
+            'AI scheduling: I fully implemented the AI scheduling pipeline using Groq to parse raw inputs from PDF schedules and voice input into clean JSON, then mapped that structured data into our database so schedules could be surfaced clearly on the homepage.',
+            'Nanny booking: We built a booking flow where parents can review caregiver availability, submit requests, and track booking status without losing context.',
+            'Nanny sharing: We:supported shared caregiver coordination so multiple families could plan around the same nanny arrangement with less manual back-and-forth.',
+            'Shared visibility: We kept work shifts and childcare schedules connected in one place so household updates remained transparent and easier to manage.',
+          ],
+        },
+        {
+          title: '04. Research & Analysis',
+          paragraphs: [
+            'The team used interviews and surveys to understand how parents actually manage unpredictable schedules. One of the biggest takeaways was that the problem was not just finding childcare, but keeping everything aligned when plans change quickly.',
+            'That influenced development decisions pretty directly. It pushed us to prioritize flexible scheduling logic, clearer state changes, and a flow that could update without making users start over every time work changed.',
+          ],
+          bullets: [
+            'Keep the scheduling flow short enough to use quickly on a busy day.',
+            'Make conflicts easier to spot before they become a problem.',
+            'Support shared planning without making the UI feel crowded.',
+          ],
+          images: [
+            {
+              src: tandemUserPersonas,
+              alt: 'Tandem user personas used to guide product and flow decisions',
+              caption: 'User personas from early research',
+              linkUrl:
+                'https://www.figma.com/design/YszzNjMmTCjwBzJa5VBpNL/Tandem-App-Project?node-id=11023-21011&t=TRzCNkPmJS5u7xAs-0',
+              linkLabel: 'Open Personas in Figma',
+            },
+            {
+              src: tandemUserFlow,
+              alt: 'Tandem user flow diagram from research analysis',
+              caption: 'User flow used to validate scheduling interactions',
+              linkUrl:
+                'https://www.figma.com/design/YszzNjMmTCjwBzJa5VBpNL/Tandem-App-Project?node-id=11060-22776&t=h6eg8eUr56aQpeAi-0',
+              linkLabel: 'Open User Flow in Figma',
+            },
+          ],
+        },
+        {
+          title: '05. Code Rationale & Challenges',
+          paragraphs: [
+            'The hardest part on the development side was handling unpredictable scheduling logic without making the code messy. I tried to keep components focused and reuse state where it made sense, instead of packing everything into one large form or page. That made the app easier to maintain and easier for the rest of the team to build on.',
+            'A big trade-off was simplicity versus scalability. I leaned toward a straightforward implementation first because the product needed to stay understandable for users and for the team, but I still structured the code so the scheduling flow could grow later without a full rewrite.',
+          ],
+          bullets: [
+            'Managing state across scheduling and booking steps so updates stayed predictable.',
+            'Keeping work and childcare data in sync when multiple users depended on the same information.',
+            'Making the interface responsive without breaking the logic behind it.',
+            'Fixing edge cases where schedule updates could leave the UI in an inconsistent state.',
+          ],
+          images: [
+            {
+              src: tandemStyleGuide,
+              alt: 'Tandem style guide for visual consistency and component standards',
+              caption: 'Style guide reference used during implementation',
+              linkUrl:
+                'https://www.figma.com/design/YszzNjMmTCjwBzJa5VBpNL/Tandem-App-Project?node-id=11006-20590&t=qmkMnwELrzISRSVm-0',
+              linkLabel: 'Open Style Guide in Figma',
+            },
+          ],
+        },
+        {
+          title: '06. Marketing',
+          paragraphs: [
+            'Even though I was focused on development, I still had to think about how the project would be presented. The blog, demo, and project summary all needed to describe the app clearly, so I made sure the features we built were easy to explain and matched what users would actually see in the product.',
+            'That also affected implementation. If a feature was hard to demo or hard to explain, it usually meant the logic or flow needed to be simplified. Keeping the product understandable made it easier for the team to present the project and easier for me to maintain the code behind it.',
+          ],
+        },
+        {
+          title: '07. Reflection',
+          paragraphs: [
+            'This project taught me that good full-stack work is not just about making features work, but about making them easy to understand and maintain when a team is building together. Working with designers helped me translate UX ideas into actual components and state logic, and working with other developers pushed me to keep the code clean and practical.',
+            'If I had more time, I would tighten the scheduling validation, improve conflict detection, and add more edge-case handling around childcare changes. Even so, Tandem was a strong learning experience because it showed me how to build around a real-world problem and keep the product grounded in actual user needs.',
+          ],
+        },
       ],
       demoCaption:
         'This demo shows Tandem\'s shared scheduling flow in context, highlighting how updates and responsibilities stay visible across household members.',
