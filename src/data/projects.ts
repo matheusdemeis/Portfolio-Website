@@ -285,7 +285,8 @@ export const projects: Project[] = [
       'CRUD',
     ],
 
-    link: 'https://github.com/matheusdemeis',
+    link: 'https://github.com/matheusdemeis/bookstore-app',
+    liveUrl: 'https://bookstore-app-gjdgbyagbqcmgcds.canadacentral-01.azurewebsites.net/myorders',
 
     brand: {
       name: 'Bookstore',
