@@ -11,6 +11,9 @@ import insurflowImage3 from '../assets/insurflow/insurflow3.png';
 import vibeplayImage1 from '../assets/vibeplay/vibeplay.png';
 import vibeplayImage2 from '../assets/vibeplay/vibeplay2.png';
 import vibeplayImage3 from '../assets/vibeplay/vibeplay3.png';
+import bookstoreImage1 from '../assets/bookstore/bookstore1.png';
+import bookstoreImage2 from '../assets/bookstore/bookstore2.png';
+import bookstoreImage3 from '../assets/bookstore/bookstore3.png';
 import type { Project } from '../types';
 
 export const projects: Project[] = [
@@ -259,6 +262,47 @@ export const projects: Project[] = [
       'Designed a system that generates playlists dynamically based on user input such as vibe, genre, or favorite artists.',
       'Implemented playlist creation and track insertion directly into user Spotify accounts using authenticated API requests.',
       'Focused on building a clean, responsive UI while maintaining a reliable API integration flow and handling edge cases like API errors and permission scopes.',
+    ],
+
+    visuals: [],
+  },
+  {
+    id: 4,
+    slug: 'bookstore',
+    logo: '',
+    images: [bookstoreImage1, bookstoreImage2, bookstoreImage3],
+    title: 'Bookstore Web Application',
+    description:
+      'A full-stack bookstore web app where users can browse and sort books, view details, add items to a cart, place orders, and review order history with data persisted in Azure SQL.',
+    tags: [
+      'ASP.NET Core',
+      'C#',
+      'Entity Framework Core',
+      'Azure App Service',
+      'Azure SQL Database',
+      'Bootstrap',
+      'MVC',
+      'CRUD',
+    ],
+
+    link: 'https://github.com/matheusdemeis',
+
+    brand: {
+      name: 'Bookstore',
+      tone: 'Cloud-connected full-stack bookstore focused on practical e-commerce flow and clean CRUD architecture',
+      accent: '#22C55E',
+    },
+
+    timeline: 'Academic assignment',
+    role: 'Full Stack Developer',
+    year: '2026',
+
+    rationale: [
+      'I built this project to practice a complete e-commerce flow, from catalog browsing to order creation, using real backend logic and database persistence instead of hardcoded data.',
+      'Key features include a searchable visual catalog flow with sorting by price, detailed book pages, cart interactions, order placement, and order history with timestamps, quantities, and totals.',
+      'On the backend, I modeled Books, Orders, and OrderItems with Entity Framework Core so order creation and history retrieval could be handled cleanly through relational data instead of manual data wiring.',
+      'I deployed the app to Azure App Service and connected it to Azure SQL Database, which gave me hands-on experience with cloud deployment, connection management, and full-stack data flow in production-like conditions.',
+      'This project strengthened how I design MVC-based features with separation of concerns, and taught me to think more carefully about state management, database relationships, and maintainable backend structure.',
     ],
 
     visuals: [],
