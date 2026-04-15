@@ -8,6 +8,7 @@ import insurflowLogo from '../assets/insurflow/insurflow.png';
 import insurflowImage1 from '../assets/insurflow/insurflow1.png';
 import insurflowImage2 from '../assets/insurflow/insurflow2.png';
 import insurflowImage3 from '../assets/insurflow/insurflow3.png';
+import sudokuImage from '../assets/sudoku/sudoku.png';
 import vibeplayImage1 from '../assets/vibeplay/vibeplay.png';
 import vibeplayImage2 from '../assets/vibeplay/vibeplay2.png';
 import vibeplayImage3 from '../assets/vibeplay/vibeplay3.png';
@@ -306,6 +307,43 @@ export const projects: Project[] = [
       'This project strengthened how I design MVC-based features with separation of concerns, and taught me to think more carefully about state management, database relationships, and maintainable backend structure.',
     ],
 
+    visuals: [],
+  },
+  {
+    id: 5,
+    slug: 'sukodu',
+    logo: '',
+    images: [sudokuImage],
+    title: 'Sukodu',
+    description:
+      'A polished Sudoku web game focused on clean UI, responsive design, and smooth gameplay across desktop and mobile.',
+    tags: [
+      'Next.js',
+      'TypeScript',
+      'Tailwind CSS',
+      'Game Development',
+      'Responsive Design',
+      'UI/UX',
+      'Frontend Architecture',
+      'Interactive State Management',
+    ],
+    link: 'https://github.com/matheusdemeis/Sudoku',
+    liveUrl: 'https://sudoku-sigma-two.vercel.app/',
+    brand: {
+      name: 'Sukodu',
+      tone: 'Modern, focused, and playful Sudoku experience with polished interaction design.',
+      accent: '#F59E0B',
+    },
+    timeline: '2026',
+    role: 'Full Stack Developer',
+    year: '2026',
+    stack: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+    rationale: [
+      'Built to turn classic 9x9 Sudoku gameplay into a refined browser experience with modern UI patterns.',
+      'Designed to work smoothly on both desktop and mobile with a responsive board and touch-friendly controls.',
+      'Implemented practical gameplay systems like difficulty selection, timer tracking, and notes mode for pencil entries.',
+      'Focused on interaction polish with board highlighting, validation feedback, and mistake checking to keep play engaging.',
+    ],
     visuals: [],
   },
 ];

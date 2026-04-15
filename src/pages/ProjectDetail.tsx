@@ -41,6 +41,8 @@ export default function ProjectDetail(): ReactElement {
     <div className="flex flex-wrap items-center gap-3">
       <a
         href={project.link}
+        target="_blank"
+        rel="noopener noreferrer"
         className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-slate-700 bg-slate-900/70 px-4 py-2 text-primary transition hover:text-primary/80 sm:min-h-0 sm:justify-start sm:border-none sm:bg-transparent sm:px-0 sm:py-0"
       >
         GitHub Repository <ExternalLink size={16} />
@@ -63,6 +65,40 @@ export default function ProjectDetail(): ReactElement {
     </div>
   );
   const caseStudy = project.caseStudy;
+  const caseStudyTopLinks = caseStudy && (
+    <div className="mt-6 rounded-xl border border-slate-700 bg-slate-900/50 p-4 sm:p-5">
+      <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+        <a
+          href={project.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-slate-700 bg-slate-900/70 px-4 py-2 text-primary transition hover:text-primary/80 sm:min-h-0 sm:w-auto sm:justify-start sm:border-none sm:bg-transparent sm:px-0 sm:py-0"
+        >
+          GitHub <ExternalLink size={16} />
+        </a>
+        {project.liveUrl && (
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-slate-700 bg-slate-900/70 px-4 py-2 text-primary transition hover:text-primary/80 sm:min-h-0 sm:w-auto sm:justify-start sm:border-none sm:bg-transparent sm:px-0 sm:py-0"
+          >
+            Live <ExternalLink size={16} />
+          </a>
+        )}
+        {project.blog && (
+          <a
+            href={project.blog.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-slate-700 bg-slate-900/70 px-4 py-2 text-primary transition hover:text-primary/80 sm:min-h-0 sm:w-auto sm:justify-start sm:border-none sm:bg-transparent sm:px-0 sm:py-0"
+          >
+            Blog <ExternalLink size={16} />
+          </a>
+        )}
+      </div>
+    </div>
+  );
   const displayStack = (project.stack && project.stack.length > 0 ? project.stack : project.tags).join(
     ', ',
   );
@@ -190,7 +226,9 @@ export default function ProjectDetail(): ReactElement {
         <header className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
           <div className="min-w-0">
             <div className="mb-3 flex flex-wrap items-center gap-3">
-              <span className="text-xs uppercase tracking-[0.3em] text-slate-300">Project</span>
+              <span className="text-xs uppercase tracking-[0.3em] text-slate-300">
+                {caseStudy ? 'Case Study' : 'Project'}
+              </span>
               <span
                 className="text-xs font-semibold px-3 py-1 rounded-full"
                 style={{ backgroundColor: project.brand.accent, color: '#0f172a' }}
@@ -204,6 +242,7 @@ export default function ProjectDetail(): ReactElement {
             <p className="max-w-2xl text-sm leading-relaxed text-slate-300 sm:text-base">
               {project.description}
             </p>
+            {caseStudyTopLinks}
           </div>
           <div className="grid w-full grid-cols-1 gap-3 text-sm text-slate-200 sm:grid-cols-2 lg:max-w-xl">
             <div className="min-w-0 rounded-lg bg-slate-900/50 p-4">

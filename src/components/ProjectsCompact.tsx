@@ -20,7 +20,14 @@ export default function ProjectsCompact({
         >
           <p className="text-sm tracking-[0.12em] text-stone-500">{project.year}</p>
           <div>
-            <h3 className="text-lg font-medium text-white">{project.brand.name}</h3>
+            <div className="flex flex-wrap items-center gap-2">
+              <h3 className="text-lg font-medium text-white">{project.brand.name}</h3>
+              {project.caseStudy && (
+                <span className="rounded-full border border-slate-700 bg-slate-900/60 px-2 py-0.5 text-[10px] uppercase tracking-[0.14em] text-stone-300">
+                  Case Study
+                </span>
+              )}
+            </div>
             <p className="mt-2 text-sm leading-relaxed text-stone-300">{project.description}</p>
             <p className="mt-3 text-xs uppercase tracking-[0.12em] text-stone-500">
               Tech: {project.tags.slice(0, 4).join(' · ')}
