@@ -37,7 +37,7 @@ export const projects: Project[] = [
       'Agile Development',
       'Team Collaboration',
     ],
-    link: 'https://github.com/IDSP-TRADECARE/Tandem',
+    link: 'https://github.com/matheusdemeis/Tandem',
     blog: {
       title: 'Tandem Development Blog',
       description:
@@ -208,7 +208,7 @@ export const projects: Project[] = [
       'Product Development',
       'FinTech',
     ],
-    link: 'https://github.com/Vero-Ventures/insurflow',
+    link: 'https://github.com/matheusdemeis/insurflow',
     liveUrl: 'https://insurflow.biz/',
     brand: {
       name: 'InsurFlow',
