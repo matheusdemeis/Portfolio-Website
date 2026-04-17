@@ -6,7 +6,7 @@ export const experience: ExperienceItem[] = [
     year: '2026',
     role: 'Full Stack Developer',
     title: 'Vero Ventures',
-    timeline: 'January 2026 - Present',
+    timeline: 'January 2026 - April 2026',
     impacts: [
       'Part of a 5-person engineering team building InsurFlow, a greenfield SaaS product from scratch.',
       'Helped define the technical stack and application architecture',
