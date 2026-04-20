@@ -1,6 +1,7 @@
 import tandemBlogImage from '../assets/tandem/tandem-blog.png';
 import tandemLogo from '../assets/tandem/tandem-logo.png';
 import tandemMock from '../assets/tandem/Tandem_Mock.png';
+import tandemUpload from '../assets/tandem/upload.png';
 import tandemUserFlow from '../assets/tandem/tandem_userflow.jpg';
 import tandemUserPersonas from '../assets/tandem/tandem_userpersonas.png';
 import tandemStyleGuide from '../assets/tandem/tandem_styleguide.png';
@@ -22,6 +23,7 @@ export const projects: Project[] = [
     id: 2,
     slug: 'tandem',
     demoUrl: 'https://tandem-app.com/',
+    liveUrl: 'https://www.tandem-app.com/sign-in?redirect_url=https%3A%2F%2Fwww.tandem-app.com%2F',
     logo: tandemLogo,
     title: 'Tandem: AI-Powered Childcare Scheduling for Trade Parents',
     description:
@@ -66,8 +68,8 @@ export const projects: Project[] = [
         {
           title: '01. Project Overview',
           paragraphs: [
-            'Tandem is an AI-powered childcare scheduling app for trade parents in British Columbia who work unpredictable hours and need a better way to coordinate childcare around changing shifts. I worked on the project as a full-stack developer in a team of eight, and my main contribution was implementing features, structuring reusable components, and connecting the UI to the data flow behind the product.',
-            'The stack used Next.js, React, TypeScript, Tailwind CSS, PostgreSQL, and Drizzle ORM. That setup let us build a modern frontend while still keeping the scheduling data organized and easy to work with.',
+            'Tandem is an AI-powered childcare scheduling app for trade parents in British Columbia who work unpredictable hours and need a better way to coordinate care around changing shifts. I contributed as a full-stack developer on an eight-person team, focusing on feature implementation, reusable component structure, and reliable data flow between frontend and backend.',
+            'We built with Next.js, React, TypeScript, Tailwind CSS, PostgreSQL, and Drizzle ORM. This stack helped us move quickly on the interface while keeping scheduling data structured, traceable, and maintainable.',
           ],
           images: [
             {
@@ -78,29 +80,39 @@ export const projects: Project[] = [
           ],
         },
         {
-          title: '02. Problem Statement',
+          title: '02. Problem & Context',
           paragraphs: [
-            'Trade parents often deal with changing shifts, early starts, overtime, and last-minute schedule changes. That makes childcare planning harder than it sounds, because work schedules and care schedules do not always line up.',
-            'Most existing tools are built for more stable routines, so they do not handle childcare gaps, shared caregiving, or quick rescheduling very well. That usually leaves parents coordinating through messages, calls, and memory, which is stressful and easy to break when plans change.',
+            'Trade parents often deal with changing shifts, early starts, overtime, and last-minute updates. Childcare planning becomes difficult when work schedules and care schedules move out of sync.',
+            'Most existing tools are designed for stable routines, so they struggle with childcare gaps, shared caregiving, and fast rescheduling. In practice, that leaves families coordinating through messages, calls, and memory, which quickly breaks down when plans change.',
           ],
         },
         {
-          title: '03. Key Features',
+          title: '03. Features & Solution',
           paragraphs: [
-            'As a team, we focused on making the product practical for real day-to-day use, balancing scheduling logic, booking workflows, and shared visibility in one experience.',
+            'A major part of my contribution was the intake workflow that lets parents submit schedule data through PDF upload and voice input. The goal was to keep input fast for users while still producing dependable structured data.',
+            'One of the biggest implementation challenges was validating extraction quality across inconsistent PDF formats without making the flow complicated. We combined PDF parsing with the Web Speech API for voice capture, then used Groq to normalize extracted text into clean JSON so records could be inserted into PostgreSQL safely and consistently.',
           ],
           bullets: [
-            'AI scheduling: I fully implemented the AI scheduling pipeline using Groq to parse raw inputs from PDF schedules and voice input into clean JSON, then mapped that structured data into our database so schedules could be surfaced clearly on the homepage.',
+            'Upload + extraction pipeline: Implemented the schedule upload flow and validation checks to reduce malformed data before persistence.',
+            'Voice input pipeline: Integrated the Web Speech API to capture spoken schedule details as an alternative input path for busy users.',
+            'Groq normalization: Converted extracted and transcribed text into clean, predictable JSON so data could be mapped into PostgreSQL with fewer edge-case failures.',
             'Nanny booking: We built a booking flow where parents can review caregiver availability, submit requests, and track booking status without losing context.',
-            'Nanny sharing: We:supported shared caregiver coordination so multiple families could plan around the same nanny arrangement with less manual back-and-forth.',
+            'Nanny sharing: We supported shared caregiver coordination so multiple families could plan around the same nanny arrangement with less manual back-and-forth.',
             'Shared visibility: We kept work shifts and childcare schedules connected in one place so household updates remained transparent and easier to manage.',
+          ],
+          images: [
+            {
+              src: tandemUpload,
+              alt: 'Tandem upload screen for schedule PDF and voice input',
+              caption: 'Upload screen built for schedule intake with PDF parsing and voice input support.',
+            },
           ],
         },
         {
-          title: '04. Research & Analysis',
+          title: '04. Research & Team Process',
           paragraphs: [
-            'The team used interviews and surveys to understand how parents actually manage unpredictable schedules. One of the biggest takeaways was that the problem was not just finding childcare, but keeping everything aligned when plans change quickly.',
-            'That influenced development decisions pretty directly. It pushed us to prioritize flexible scheduling logic, clearer state changes, and a flow that could update without making users start over every time work changed.',
+            'We used interviews and surveys to understand how parents actually handle unpredictable schedules. A key takeaway was that the hardest part is not only finding childcare, but keeping plans aligned when work changes quickly.',
+            'Designers and developers used those findings together to shape the product direction. It led us to prioritize flexible scheduling logic, clearer status changes, and flows that could be updated without forcing users to restart each step.',
           ],
           bullets: [
             'Keep the scheduling flow short enough to use quickly on a busy day.',
@@ -111,7 +123,7 @@ export const projects: Project[] = [
             {
               src: tandemUserPersonas,
               alt: 'Tandem user personas used to guide product and flow decisions',
-              caption: 'User personas from early research',
+              caption: 'User personas used to align feature priorities with real parent needs.',
               linkUrl:
                 'https://www.figma.com/design/YszzNjMmTCjwBzJa5VBpNL/Tandem-App-Project?node-id=11023-21011&t=TRzCNkPmJS5u7xAs-0',
               linkLabel: 'Open Personas in Figma',
@@ -119,7 +131,7 @@ export const projects: Project[] = [
             {
               src: tandemUserFlow,
               alt: 'Tandem user flow diagram from research analysis',
-              caption: 'User flow used to validate scheduling interactions',
+              caption: 'User flow map used to validate scheduling and coordination interactions.',
               linkUrl:
                 'https://www.figma.com/design/YszzNjMmTCjwBzJa5VBpNL/Tandem-App-Project?node-id=11060-22776&t=h6eg8eUr56aQpeAi-0',
               linkLabel: 'Open User Flow in Figma',
@@ -127,10 +139,26 @@ export const projects: Project[] = [
           ],
         },
         {
-          title: '05. Code Rationale & Challenges',
+          title: '05. Wireframes & Interaction Planning',
           paragraphs: [
-            'The hardest part on the development side was handling unpredictable scheduling logic without making the code messy. I tried to keep components focused and reuse state where it made sense, instead of packing everything into one large form or page. That made the app easier to maintain and easier for the rest of the team to build on.',
-            'A big trade-off was simplicity versus scalability. I leaned toward a straightforward implementation first because the product needed to stay understandable for users and for the team, but I still structured the code so the scheduling flow could grow later without a full rewrite.',
+            'Before implementation, we used wireframes to map the core journey from schedule input to shared childcare coordination. This made the flow easier to explain, test, and align across design and development.',
+            'The wireframes show how key product decisions were made early, including reducing friction in scheduling steps, clarifying shared responsibilities, and preserving visibility for all household members.',
+          ],
+          embed: {
+            src: 'https://embed.figma.com/design/YszzNjMmTCjwBzJa5VBpNL/Tandem-App-Project?node-id=7635-13393&embed-host=share',
+            title: 'Tandem wireframes in Figma',
+            caption:
+              'Wireframe exploration used to validate navigation, information hierarchy, and scheduling interactions before final UI implementation.',
+            linkUrl:
+              'https://www.figma.com/design/YszzNjMmTCjwBzJa5VBpNL/Tandem-App-Project?node-id=7635-13393',
+            linkLabel: 'Open Wireframes in Figma',
+          },
+        },
+        {
+          title: '06. Engineering Challenges',
+          paragraphs: [
+            'The hardest technical challenge was handling unpredictable scheduling logic without letting the codebase become difficult to maintain. I kept components focused and reused state intentionally instead of centralizing everything into one large form.',
+            'A key trade-off was simplicity versus scalability. I prioritized a straightforward implementation that stayed clear for users and teammates, while still structuring the scheduling flow so it could grow later without a full rewrite.',
           ],
           bullets: [
             'Managing state across scheduling and booking steps so updates stayed predictable.',
@@ -142,7 +170,7 @@ export const projects: Project[] = [
             {
               src: tandemStyleGuide,
               alt: 'Tandem style guide for visual consistency and component standards',
-              caption: 'Style guide reference used during implementation',
+              caption: 'Style guide reference used to keep components visually consistent during implementation.',
               linkUrl:
                 'https://www.figma.com/design/YszzNjMmTCjwBzJa5VBpNL/Tandem-App-Project?node-id=11006-20590&t=qmkMnwELrzISRSVm-0',
               linkLabel: 'Open Style Guide in Figma',
@@ -150,17 +178,17 @@ export const projects: Project[] = [
           ],
         },
         {
-          title: '06. Marketing',
+          title: '07. Project Communication',
           paragraphs: [
-            'Even though I was focused on development, I still had to think about how the project would be presented. The blog, demo, and project summary all needed to describe the app clearly, so I made sure the features we built were easy to explain and matched what users would actually see in the product.',
-            'That also affected implementation. If a feature was hard to demo or hard to explain, it usually meant the logic or flow needed to be simplified. Keeping the product understandable made it easier for the team to present the project and easier for me to maintain the code behind it.',
+            'Even though I was focused on development, I also considered how the project would be presented. The blog, demo, and project summary needed to explain the app clearly, so I made sure implemented features were understandable and matched what users actually saw.',
+            'That influenced implementation decisions too. If a feature was hard to demo or explain, it usually signaled that the logic or flow needed to be simplified. Keeping the product understandable helped both team communication and long-term maintainability.',
           ],
         },
         {
-          title: '07. Reflection',
+          title: '08. Reflection',
           paragraphs: [
-            'This project taught me that good full-stack work is not just about making features work, but about making them easy to understand and maintain when a team is building together. Working with designers helped me translate UX ideas into actual components and state logic, and working with other developers pushed me to keep the code clean and practical.',
-            'If I had more time, I would tighten the scheduling validation, improve conflict detection, and add more edge-case handling around childcare changes. Even so, Tandem was a strong learning experience because it showed me how to build around a real-world problem and keep the product grounded in actual user needs.',
+            'This project reinforced that strong full-stack work is not only about shipping features, but about keeping them understandable and maintainable in a collaborative team environment. Working closely with designers helped me translate UX concepts into component architecture and state logic.',
+            'With more time, I would strengthen scheduling validation, improve conflict detection, and expand edge-case handling around childcare changes. Even so, Tandem was a valuable learning experience in building around a real user problem with practical product constraints.',
           ],
         },
       ],

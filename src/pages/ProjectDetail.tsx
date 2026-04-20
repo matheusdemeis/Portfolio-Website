@@ -67,6 +67,7 @@ export default function ProjectDetail(): ReactElement {
   const caseStudy = project.caseStudy;
   const caseStudyTopLinks = caseStudy && (
     <div className="mt-6 rounded-xl border border-slate-700 bg-slate-900/50 p-4 sm:p-5">
+      <p className="mb-3 text-xs font-semibold uppercase tracking-[0.12em] text-slate-300">Quick Links</p>
       <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
         <a
           href={project.link}
@@ -111,18 +112,39 @@ export default function ProjectDetail(): ReactElement {
     setCurrentImageIndex((prev: number) => (prev === imageCount - 1 ? 0 : prev + 1));
   };
 
-  const renderCaseStudySection = (section: ProjectCaseStudySection): ReactElement => (
-    <section key={section.title}>
-      <h3 className="mb-3 text-xl font-semibold sm:text-2xl">{section.title}</h3>
-      <div className="space-y-4 text-sm leading-relaxed text-slate-300 sm:text-base">
+  const renderCaseStudySection = (section: ProjectCaseStudySection): ReactElement => {
+    const titleMatch = section.title.match(/^(\d{2})\.\s+(.*)$/);
+    const sectionNumber = titleMatch?.[1];
+    const sectionHeading = titleMatch?.[2] ?? section.title;
+    const hasMultipleImages = (section.images?.length ?? 0) > 1;
+
+    return (
+    <section
+      key={section.title}
+      className="rounded-2xl border border-slate-700/70 bg-slate-900/40 p-5 shadow-sm shadow-slate-950/20 sm:p-7"
+    >
+      <header className="mb-5 border-b border-slate-700/70 pb-4">
+        <div className="flex flex-wrap items-center gap-3">
+          {sectionNumber ? (
+            <span
+              className="rounded-full px-3 py-1 text-xs font-semibold tracking-[0.12em]"
+              style={{ backgroundColor: `${project.brand.accent}33`, color: project.brand.accent }}
+            >
+              {sectionNumber}
+            </span>
+          ) : null}
+          <h3 className="text-xl font-semibold text-slate-50 sm:text-2xl">{sectionHeading}</h3>
+        </div>
+      </header>
+      <div className="space-y-4 text-sm leading-relaxed text-slate-200 sm:text-base">
         {section.paragraphs.map((paragraph: string, index: number) => (
-          <p key={`${section.title}-${index}`} className="max-w-4xl">
+          <p key={`${section.title}-${index}`} className="max-w-3xl">
             {paragraph}
           </p>
         ))}
       </div>
       {section.bullets?.length ? (
-        <ul className="mt-4 space-y-3 text-sm leading-relaxed text-slate-300 sm:text-base">
+        <ul className="mt-5 space-y-3 text-sm leading-relaxed text-slate-200 sm:text-base">
           {section.bullets.map((item: string, index: number) => (
             <li key={`${section.title}-${item}-${index}`} className="flex min-w-0 gap-3">
               <span
@@ -134,8 +156,35 @@ export default function ProjectDetail(): ReactElement {
           ))}
         </ul>
       ) : null}
+      {section.embed ? (
+        <div className="mt-7 space-y-3 rounded-2xl border border-slate-700 bg-slate-900/55 p-3 sm:p-4">
+          <div className="overflow-hidden rounded-xl border border-slate-700 bg-slate-950/70">
+            <div className="w-full" style={{ aspectRatio: '16 / 9' }}>
+              <iframe
+                src={section.embed.src}
+                title={section.embed.title}
+                className="h-full w-full"
+                allowFullScreen
+              />
+            </div>
+          </div>
+          {section.embed.caption ? (
+            <p className="text-sm leading-relaxed text-slate-300">{section.embed.caption}</p>
+          ) : null}
+          {section.embed.linkUrl ? (
+            <a
+              href={section.embed.linkUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-primary/70 bg-primary/15 px-4 py-2 text-sm font-semibold text-primary transition hover:border-primary hover:bg-primary/25 sm:w-auto"
+            >
+              {section.embed.linkLabel ?? 'Open Figma File'} <ExternalLink size={14} />
+            </a>
+          ) : null}
+        </div>
+      ) : null}
       {section.featureVisuals?.length ? (
-        <div className="mt-6 space-y-6">
+        <div className="mt-7 space-y-6">
           {section.featureVisuals.map((feature) => (
             <div
               key={`${section.title}-${feature.title}`}
@@ -156,32 +205,47 @@ export default function ProjectDetail(): ReactElement {
         </div>
       ) : null}
       {section.images?.length ? (
-        <div className="mt-6 space-y-6">
+        <div className={hasMultipleImages ? 'mt-7 grid gap-5 md:grid-cols-2' : 'mt-7'}>
           {section.images.map((image, index: number) => (
-            <figure key={`${section.title}-${image.alt}-${index}`} className="space-y-3">
-              <img
-                src={image.src}
-                alt={image.alt}
-                className="w-full max-w-4xl rounded-xl shadow-md object-contain"
-                loading="lazy"
-              />
-              {image.caption ? <figcaption className="text-sm text-slate-400">{image.caption}</figcaption> : null}
+            <figure
+              key={`${section.title}-${image.alt}-${index}`}
+              className={`space-y-3 rounded-2xl border border-slate-700 bg-slate-900/55 p-3 sm:p-4 ${
+                hasMultipleImages ? 'w-full' : 'mx-auto w-full max-w-4xl'
+              }`}
+            >
+              <div className="overflow-hidden rounded-xl border border-slate-700 bg-slate-950/70 p-2 sm:p-3">
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className={`mx-auto w-full object-contain ${
+                    hasMultipleImages ? 'max-h-[420px]' : 'max-h-[560px]'
+                  }`}
+                  loading="lazy"
+                />
+              </div>
+              {image.caption ? <figcaption className="text-sm text-slate-300">{image.caption}</figcaption> : null}
               {image.linkUrl ? (
-                <a
-                  href={image.linkUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm text-primary transition hover:text-primary/80"
-                >
-                  {image.linkLabel ?? 'Open in Figma'} <ExternalLink size={14} />
-                </a>
+                <div className="pt-1">
+                  <p className="mb-2 text-xs font-semibold uppercase tracking-[0.12em] text-slate-300">
+                    Figma Reference
+                  </p>
+                  <a
+                    href={image.linkUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-primary/70 bg-primary/15 px-4 py-2 text-sm font-semibold text-primary transition hover:border-primary hover:bg-primary/25 sm:w-auto"
+                  >
+                    {image.linkLabel ?? 'Open in Figma'} <ExternalLink size={14} />
+                  </a>
+                </div>
               ) : null}
             </figure>
           ))}
         </div>
       ) : null}
     </section>
-  );
+    );
+  };
 
   useEffect(() => {
     if (!isImageModalOpen) {
@@ -223,7 +287,7 @@ export default function ProjectDetail(): ReactElement {
           <ArrowLeft size={18} /> Back
         </Link>
 
-        <header className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+        <header className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
           <div className="min-w-0">
             <div className="mb-3 flex flex-wrap items-center gap-3">
               <span className="text-xs uppercase tracking-[0.3em] text-slate-300">
@@ -239,38 +303,38 @@ export default function ProjectDetail(): ReactElement {
             <h2 className="mb-3 break-words text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
               {project.title}
             </h2>
-            <p className="max-w-2xl text-sm leading-relaxed text-slate-300 sm:text-base">
+            <p className="max-w-3xl text-sm leading-relaxed text-slate-300 sm:text-base">
               {project.description}
             </p>
             {caseStudyTopLinks}
           </div>
           <div className="grid w-full grid-cols-1 gap-3 text-sm text-slate-200 sm:grid-cols-2 lg:max-w-xl">
-            <div className="min-w-0 rounded-lg bg-slate-900/50 p-4">
+            <div className="min-w-0 rounded-lg border border-slate-700/70 bg-slate-900/50 p-4">
               <p className="text-slate-400">Role</p>
               <p className="break-words font-semibold">{project.role}</p>
             </div>
             {project.team && (
-              <div className="min-w-0 rounded-lg bg-slate-900/50 p-4">
+              <div className="min-w-0 rounded-lg border border-slate-700/70 bg-slate-900/50 p-4">
                 <p className="text-slate-400">Team</p>
                 <p className="break-words font-semibold">{project.team}</p>
               </div>
             )}
-            <div className="min-w-0 rounded-lg bg-slate-900/50 p-4">
+            <div className="min-w-0 rounded-lg border border-slate-700/70 bg-slate-900/50 p-4">
               <p className="text-slate-400">Timeline</p>
               <p className="font-semibold">{project.timeline}</p>
             </div>
-            <div className="min-w-0 rounded-lg bg-slate-900/50 p-4">
+            <div className="min-w-0 rounded-lg border border-slate-700/70 bg-slate-900/50 p-4">
               <p className="text-slate-400">Year</p>
               <p className="font-semibold">{project.year}</p>
             </div>
-            <div className="min-w-0 rounded-lg bg-slate-900/50 p-4">
+            <div className="min-w-0 rounded-lg border border-slate-700/70 bg-slate-900/50 p-4">
               <p className="text-slate-400">Brand tone</p>
               <p className="break-words font-semibold">{project.brand.tone}</p>
             </div>
             {caseStudy && (
-              <div className="min-w-0 rounded-lg bg-slate-900/50 p-4">
+              <div className="min-w-0 rounded-lg border border-slate-700/70 bg-slate-900/50 p-4">
                 <p className="text-slate-400">Stack</p>
-                <p className="break-words font-semibold">{displayStack}</p>
+                <p className="break-words font-semibold leading-relaxed">{displayStack}</p>
               </div>
             )}
           </div>

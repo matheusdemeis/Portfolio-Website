@@ -20,6 +20,13 @@ export interface ProjectCaseStudySection {
   title: string;
   paragraphs: string[];
   bullets?: string[];
+  embed?: {
+    src: string;
+    title: string;
+    caption?: string;
+    linkUrl?: string;
+    linkLabel?: string;
+  };
   images?: {
     src: string;
     alt: string;
