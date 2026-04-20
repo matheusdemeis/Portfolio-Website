@@ -139,7 +139,7 @@ export const projects: Project[] = [
           ],
         },
         {
-          title: '05. Wireframes & Interaction Planning',
+          title: '05. Wireframes & Design Planning',
           paragraphs: [
             'Before implementation, we used wireframes to map the core journey from schedule input to shared childcare coordination. This made the flow easier to explain, test, and align across design and development.',
             'The wireframes show how key product decisions were made early, including reducing friction in scheduling steps, clarifying shared responsibilities, and preserving visibility for all household members.',
@@ -153,6 +153,17 @@ export const projects: Project[] = [
               'https://www.figma.com/design/YszzNjMmTCjwBzJa5VBpNL/Tandem-App-Project?node-id=7635-13393',
             linkLabel: 'Open Wireframes in Figma',
           },
+          images: [
+            {
+              src: tandemStyleGuide,
+              alt: 'Tandem style guide for visual consistency and component standards',
+              caption:
+                'Style guide used during planning and implementation to keep typography, spacing, and components consistent.',
+              linkUrl:
+                'https://www.figma.com/design/YszzNjMmTCjwBzJa5VBpNL/Tandem-App-Project?node-id=11006-20590&t=qmkMnwELrzISRSVm-0',
+              linkLabel: 'Open Style Guide in Figma',
+            },
+          ],
         },
         {
           title: '06. Engineering Challenges',
@@ -165,16 +176,6 @@ export const projects: Project[] = [
             'Keeping work and childcare data in sync when multiple users depended on the same information.',
             'Making the interface responsive without breaking the logic behind it.',
             'Fixing edge cases where schedule updates could leave the UI in an inconsistent state.',
-          ],
-          images: [
-            {
-              src: tandemStyleGuide,
-              alt: 'Tandem style guide for visual consistency and component standards',
-              caption: 'Style guide reference used to keep components visually consistent during implementation.',
-              linkUrl:
-                'https://www.figma.com/design/YszzNjMmTCjwBzJa5VBpNL/Tandem-App-Project?node-id=11006-20590&t=qmkMnwELrzISRSVm-0',
-              linkLabel: 'Open Style Guide in Figma',
-            },
           ],
         },
         {
