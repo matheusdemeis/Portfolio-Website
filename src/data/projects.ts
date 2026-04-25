@@ -1,22 +1,17 @@
-import tandemBlogImage from '../assets/tandem/tandem-blog.png';
-import tandemLogo from '../assets/tandem/tandem-logo.png';
-import tandemMock from '../assets/tandem/Tandem_Mock.png';
-import tandemUpload from '../assets/tandem/upload.png';
-import tandemUserFlow from '../assets/tandem/tandem_userflow.jpg';
-import tandemUserPersonas from '../assets/tandem/tandem_userpersonas.png';
-import tandemStyleGuide from '../assets/tandem/tandem_styleguide.png';
-import insurflowLogo from '../assets/insurflow/insurflow.png';
-import insurflowImage1 from '../assets/insurflow/insurflow1.png';
-import insurflowImage2 from '../assets/insurflow/insurflow2.png';
-import insurflowImage3 from '../assets/insurflow/insurflow3.png';
-import sudokuImage from '../assets/sudoku/sudoku.png';
-import vibeplayImage1 from '../assets/vibeplay/vibeplay.png';
-import vibeplayImage2 from '../assets/vibeplay/vibeplay2.png';
-import vibeplayImage3 from '../assets/vibeplay/vibeplay3.png';
-import bookstoreImage1 from '../assets/bookstore/bookstore1.png';
-import bookstoreImage2 from '../assets/bookstore/bookstore2.png';
-import bookstoreImage3 from '../assets/bookstore/bookstore3.png';
+import { projectImages } from '../lib/projectImages';
 import type { Project } from '../types';
+
+const [
+  tandemMock,
+  tandemStyleGuide,
+  tandemUserFlow,
+  tandemUserPersonas,
+  tandemBlogImage,
+  tandemLogo,
+  tandemUpload,
+] = projectImages.tandem;
+
+const [insurflowLogo, ...insurflowImages] = projectImages.insurflow;
 
 export const projects: Project[] = [
   {
@@ -223,7 +218,7 @@ export const projects: Project[] = [
     id: 1,
     slug: 'InsurFlow',
     logo: insurflowLogo,
-    images: [insurflowImage1, insurflowImage2, insurflowImage3],
+    images: [...insurflowImages],
     title: 'InsurFlow, AI-Enabled InsurTech SaaS',
     description:
       'A full-stack SaaS platform designed to help life insurance advisors perform Financial Needs Analysis, automate compliance documentation, and replace legacy spreadsheet workflows.',
@@ -259,7 +254,7 @@ export const projects: Project[] = [
     id: 3,
     slug: 'VibePlay',
     logo: '',
-    images: [vibeplayImage1, vibeplayImage2, vibeplayImage3],
+    images: [...projectImages.vibeplay],
     title: 'VibePlay',
     description:
       'A full-stack web application that generates Spotify playlists based on moods, genres, or artists. Users authenticate with Spotify, generate curated playlists using the Spotify Web API, and save them directly to their Spotify account.',
@@ -300,7 +295,7 @@ export const projects: Project[] = [
     id: 4,
     slug: 'bookstore',
     logo: '',
-    images: [bookstoreImage1, bookstoreImage2, bookstoreImage3],
+    images: [...projectImages.bookstore],
     title: 'Bookstore Web Application',
     description:
       'A full-stack bookstore web app where users can browse and sort books, view details, add items to a cart, place orders, and review order history with data persisted in Azure SQL.',
@@ -342,7 +337,7 @@ export const projects: Project[] = [
     id: 5,
     slug: 'sukodu',
     logo: '',
-    images: [sudokuImage],
+    images: [...projectImages.sudoku],
     title: 'Sukodu',
     description:
       'A polished Sudoku web game focused on clean UI, responsive design, and smooth gameplay across desktop and mobile.',
