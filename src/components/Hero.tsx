@@ -28,8 +28,7 @@ export default function Hero(): ReactElement {
             Matheus Demeis
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-relaxed text-stone-300 sm:text-[1.2rem]">
-            Full-stack developer focused on shipping clean, scalable web apps,
-            product-first and detail-driven.
+            Full-Stack Dev. Technology Enthusiast.
           </p>
           <p className="mt-4 text-sm tracking-[0.06em] text-stone-400">
             Vancouver, BC
@@ -65,17 +64,15 @@ export default function Hero(): ReactElement {
         <Section id="about" title="About">
           <div className="space-y-4 text-[1.06rem] leading-relaxed text-stone-300 sm:text-[1.1rem]">
             <p>
-              Full Stack Developer focused on building scalable SaaS products
-              with strong architectural foundations and real business impact.
-              I’m currently contributing to a greenfield platform at Vero
-              Ventures while completing my Full-Stack Web Development diploma at
-              BCIT.
+              Recent graduate from the Full-Stack Web Development program at
+              BCIT. I’m passionate about technology, building real-world
+              applications, and continuously improving as a developer.
             </p>
 
             <p>
-              I work primarily with Next.js and TypeScript, and I care deeply
-              about clean system design, maintainable code, and shipping
-              production-ready features that hold up as products grow.
+              Originally from Brazil, my background in sports and gaming have
+              shaped my competitive mindset and appreciation for strategy,
+              teamwork, and discipline.
             </p>
 
             <p>

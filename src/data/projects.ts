@@ -3,9 +3,6 @@ import type { Project } from '../types';
 
 const [
   tandemMock,
-  tandemStyleGuide,
-  tandemUserFlow,
-  tandemUserPersonas,
   tandemBlogImage,
   tandemLogo,
   tandemUpload,
@@ -63,8 +60,8 @@ export const projects: Project[] = [
         {
           title: '01. Project Overview',
           paragraphs: [
-            'Tandem is an AI-powered childcare scheduling app for trade parents in British Columbia who work unpredictable hours and need a better way to coordinate care around changing shifts. I contributed as a full-stack developer on an eight-person team, focusing on feature implementation, reusable component structure, and reliable data flow between frontend and backend.',
-            'We built with Next.js, React, TypeScript, Tailwind CSS, PostgreSQL, and Drizzle ORM. This stack helped us move quickly on the interface while keeping scheduling data structured, traceable, and maintainable.',
+            'Tandem is a childcare scheduling app for trade parents in British Columbia who need care plans that can adapt to changing shifts, early starts, overtime, and last-minute updates.',
+            'I worked as a full-stack developer on an eight-person team, contributing to feature implementation, reusable component structure, and reliable data flow between the interface and database-backed scheduling records.',
           ],
           images: [
             {
@@ -75,25 +72,23 @@ export const projects: Project[] = [
           ],
         },
         {
-          title: '02. Problem & Context',
+          title: '02. Problem Statement',
           paragraphs: [
-            'Trade parents often deal with changing shifts, early starts, overtime, and last-minute updates. Childcare planning becomes difficult when work schedules and care schedules move out of sync.',
-            'Most existing tools are designed for stable routines, so they struggle with childcare gaps, shared caregiving, and fast rescheduling. In practice, that leaves families coordinating through messages, calls, and memory, which quickly breaks down when plans change.',
+            'Childcare planning becomes fragile when work schedules change faster than family routines can keep up. Parents often have to compare shift details, caregiver availability, booking status, and household responsibilities across separate conversations.',
+            'The product needed to reduce that coordination burden without making the scheduling flow feel heavy. The core challenge was turning messy real-world schedule inputs into clear, shared planning data.',
           ],
         },
         {
-          title: '03. Features & Solution',
+          title: '03. Key Features',
           paragraphs: [
-            'A major part of my contribution was the intake workflow that lets parents submit schedule data through PDF upload and voice input. The goal was to keep input fast for users while still producing dependable structured data.',
-            'One of the biggest implementation challenges was validating extraction quality across inconsistent PDF formats without making the flow complicated. We combined PDF parsing with the Web Speech API for voice capture, then used Groq to normalize extracted text into clean JSON so records could be inserted into PostgreSQL safely and consistently.',
+            'The strongest parts of the product focus on fast schedule intake, shared visibility, and booking support. I contributed to the flow that lets parents submit schedule details through PDF upload and voice input, then review structured results before they affect the household schedule.',
           ],
           bullets: [
-            'Upload + extraction pipeline: Implemented the schedule upload flow and validation checks to reduce malformed data before persistence.',
-            'Voice input pipeline: Integrated the Web Speech API to capture spoken schedule details as an alternative input path for busy users.',
-            'Groq normalization: Converted extracted and transcribed text into clean, predictable JSON so data could be mapped into PostgreSQL with fewer edge-case failures.',
-            'Nanny booking: We built a booking flow where parents can review caregiver availability, submit requests, and track booking status without losing context.',
-            'Nanny sharing: We supported shared caregiver coordination so multiple families could plan around the same nanny arrangement with less manual back-and-forth.',
-            'Shared visibility: We kept work shifts and childcare schedules connected in one place so household updates remained transparent and easier to manage.',
+            'Schedule upload flow for importing shift details from PDF files.',
+            'Voice input support for quick schedule capture when typing is inconvenient.',
+            'AI-assisted normalization that converts extracted text into predictable JSON.',
+            'Shared schedule visibility for work shifts, childcare coverage, and household updates.',
+            'Nanny booking and shared-care coordination for families planning around the same caregiver.',
           ],
           images: [
             {
@@ -104,87 +99,49 @@ export const projects: Project[] = [
           ],
         },
         {
-          title: '04. Research & Team Process',
+          title: '04. Tech Stack',
           paragraphs: [
-            'We used interviews and surveys to understand how parents actually handle unpredictable schedules. A key takeaway was that the hardest part is not only finding childcare, but keeping plans aligned when work changes quickly.',
-            'Designers and developers used those findings together to shape the product direction. It led us to prioritize flexible scheduling logic, clearer status changes, and flows that could be updated without forcing users to restart each step.',
+            'We built Tandem with Next.js, React, TypeScript, Tailwind CSS, PostgreSQL, and Drizzle ORM. The stack gave us a strong balance between fast interface development and structured backend data modeling.',
+            'For schedule intake, we combined PDF parsing, browser speech capture, and Groq-powered text normalization. That allowed the app to support flexible input methods while still saving schedule data in a consistent relational format.',
           ],
           bullets: [
-            'Keep the scheduling flow short enough to use quickly on a busy day.',
-            'Make conflicts easier to spot before they become a problem.',
-            'Support shared planning without making the UI feel crowded.',
-          ],
-          images: [
-            {
-              src: tandemUserPersonas,
-              alt: 'Tandem user personas used to guide product and flow decisions',
-              caption: 'User personas used to align feature priorities with real parent needs.',
-              linkUrl:
-                'https://www.figma.com/design/YszzNjMmTCjwBzJa5VBpNL/Tandem-App-Project?node-id=11023-21011&t=TRzCNkPmJS5u7xAs-0',
-              linkLabel: 'Open Personas in Figma',
-            },
-            {
-              src: tandemUserFlow,
-              alt: 'Tandem user flow diagram from research analysis',
-              caption: 'User flow map used to validate scheduling and coordination interactions.',
-              linkUrl:
-                'https://www.figma.com/design/YszzNjMmTCjwBzJa5VBpNL/Tandem-App-Project?node-id=11060-22776&t=h6eg8eUr56aQpeAi-0',
-              linkLabel: 'Open User Flow in Figma',
-            },
+            'Frontend: Next.js, React, TypeScript, Tailwind CSS.',
+            'Database layer: PostgreSQL with Drizzle ORM.',
+            'Input processing: PDF parsing, Web Speech API, and Groq text normalization.',
+            'Product workflow: Agile collaboration across development and design.',
           ],
         },
         {
-          title: '05. Wireframes & Design Planning',
+          title: '05. Code Rationale',
           paragraphs: [
-            'Before implementation, we used wireframes to map the core journey from schedule input to shared childcare coordination. This made the flow easier to explain, test, and align across design and development.',
-            'The wireframes show how key product decisions were made early, including reducing friction in scheduling steps, clarifying shared responsibilities, and preserving visibility for all household members.',
-          ],
-          embed: {
-            src: 'https://embed.figma.com/design/YszzNjMmTCjwBzJa5VBpNL/Tandem-App-Project?node-id=7635-13393&embed-host=share',
-            title: 'Tandem wireframes in Figma',
-            caption:
-              'Wireframe exploration used to validate navigation, information hierarchy, and scheduling interactions before final UI implementation.',
-            linkUrl:
-              'https://www.figma.com/design/YszzNjMmTCjwBzJa5VBpNL/Tandem-App-Project?node-id=7635-13393',
-            linkLabel: 'Open Wireframes in Figma',
-          },
-          images: [
-            {
-              src: tandemStyleGuide,
-              alt: 'Tandem style guide for visual consistency and component standards',
-              caption:
-                'Style guide used during planning and implementation to keep typography, spacing, and components consistent.',
-              linkUrl:
-                'https://www.figma.com/design/YszzNjMmTCjwBzJa5VBpNL/Tandem-App-Project?node-id=11006-20590&t=qmkMnwELrzISRSVm-0',
-              linkLabel: 'Open Style Guide in Figma',
-            },
-          ],
-        },
-        {
-          title: '06. Engineering Challenges',
-          paragraphs: [
-            'The hardest technical challenge was handling unpredictable scheduling logic without letting the codebase become difficult to maintain. I kept components focused and reused state intentionally instead of centralizing everything into one large form.',
-            'A key trade-off was simplicity versus scalability. I prioritized a straightforward implementation that stayed clear for users and teammates, while still structuring the scheduling flow so it could grow later without a full rewrite.',
+            'I kept the scheduling flow split into focused UI pieces instead of building one large form. That made the work easier to test, review, and adjust as the product direction changed.',
+            'The upload and voice-input paths both needed to produce dependable structured data, so the implementation emphasized validation before persistence. Keeping that boundary clear helped reduce malformed records and made the database layer easier to reason about.',
           ],
           bullets: [
-            'Managing state across scheduling and booking steps so updates stayed predictable.',
-            'Keeping work and childcare data in sync when multiple users depended on the same information.',
-            'Making the interface responsive without breaking the logic behind it.',
-            'Fixing edge cases where schedule updates could leave the UI in an inconsistent state.',
+            'Reusable components kept scheduling screens consistent across related flows.',
+            'Typed data shapes reduced ambiguity between extracted schedule content and saved records.',
+            'Validation happened before database writes so the UI could catch problems while users still had context.',
+            'Drizzle ORM kept relational schedule data explicit without adding unnecessary backend complexity.',
           ],
         },
         {
-          title: '07. Project Communication',
+          title: '06. Challenges',
           paragraphs: [
-            'Even though I was focused on development, I also considered how the project would be presented. The blog, demo, and project summary needed to explain the app clearly, so I made sure implemented features were understandable and matched what users actually saw.',
-            'That influenced implementation decisions too. If a feature was hard to demo or explain, it usually signaled that the logic or flow needed to be simplified. Keeping the product understandable helped both team communication and long-term maintainability.',
+            'The hardest part was supporting unpredictable schedules while keeping the user experience calm. Schedule PDFs are not consistent, spoken input can be imprecise, and childcare changes often affect multiple people at once.',
+            'I focused on making state changes predictable and keeping the review step visible before new schedule data was saved. That gave users a clearer way to catch mistakes and gave the team a cleaner path for future conflict detection.',
+          ],
+          bullets: [
+            'Handling inconsistent PDF formats without making the upload flow feel technical.',
+            'Keeping work shifts, childcare coverage, and bookings understandable in one shared view.',
+            'Managing state across multi-step scheduling and booking interactions.',
+            'Balancing a simple MVP with a data model that could support stronger conflict detection later.',
           ],
         },
         {
-          title: '08. Reflection',
+          title: '07. Reflection',
           paragraphs: [
-            'This project reinforced that strong full-stack work is not only about shipping features, but about keeping them understandable and maintainable in a collaborative team environment. Working closely with designers helped me translate UX concepts into component architecture and state logic.',
-            'With more time, I would strengthen scheduling validation, improve conflict detection, and expand edge-case handling around childcare changes. Even so, Tandem was a valuable learning experience in building around a real user problem with practical product constraints.',
+            'Tandem was a valuable full-stack project because it required practical product judgment, not just feature delivery. Working closely with designers helped me translate research and UX decisions into component structure, state logic, and database-backed flows.',
+            'The next improvements I would prioritize are stronger schedule validation, clearer conflict alerts, and more robust edge-case handling around last-minute childcare changes.',
           ],
         },
       ],
@@ -289,85 +246,6 @@ export const projects: Project[] = [
       'Focused on building a clean, responsive UI while maintaining a reliable API integration flow and handling edge cases like API errors and permission scopes.',
     ],
 
-    visuals: [],
-  },
-  {
-    id: 4,
-    slug: 'bookstore',
-    logo: '',
-    images: [...projectImages.bookstore],
-    title: 'Bookstore Web Application',
-    description:
-      'A full-stack bookstore web app where users can browse and sort books, view details, add items to a cart, place orders, and review order history with data persisted in Azure SQL.',
-    tags: [
-      'ASP.NET Core',
-      'C#',
-      'Entity Framework Core',
-      'Azure App Service',
-      'Azure SQL Database',
-      'Bootstrap',
-      'MVC',
-      'CRUD',
-    ],
-
-    link: 'https://github.com/matheusdemeis/bookstore-app',
-    liveUrl: 'https://bookstore-app-gjdgbyagbqcmgcds.canadacentral-01.azurewebsites.net/myorders',
-
-    brand: {
-      name: 'Bookstore',
-      tone: 'Cloud-connected full-stack bookstore focused on practical e-commerce flow and clean CRUD architecture',
-      accent: '#22C55E',
-    },
-
-    timeline: 'Academic assignment',
-    role: 'Full Stack Developer',
-    year: '2026',
-
-    rationale: [
-      'I built this project to practice a complete e-commerce flow, from catalog browsing to order creation, using real backend logic and database persistence instead of hardcoded data.',
-      'Key features include a searchable visual catalog flow with sorting by price, detailed book pages, cart interactions, order placement, and order history with timestamps, quantities, and totals.',
-      'On the backend, I modeled Books, Orders, and OrderItems with Entity Framework Core so order creation and history retrieval could be handled cleanly through relational data instead of manual data wiring.',
-      'I deployed the app to Azure App Service and connected it to Azure SQL Database, which gave me hands-on experience with cloud deployment, connection management, and full-stack data flow in production-like conditions.',
-      'This project strengthened how I design MVC-based features with separation of concerns, and taught me to think more carefully about state management, database relationships, and maintainable backend structure.',
-    ],
-
-    visuals: [],
-  },
-  {
-    id: 5,
-    slug: 'sukodu',
-    logo: '',
-    images: [...projectImages.sudoku],
-    title: 'Sukodu',
-    description:
-      'A polished Sudoku web game focused on clean UI, responsive design, and smooth gameplay across desktop and mobile.',
-    tags: [
-      'Next.js',
-      'TypeScript',
-      'Tailwind CSS',
-      'Game Development',
-      'Responsive Design',
-      'UI/UX',
-      'Frontend Architecture',
-      'Interactive State Management',
-    ],
-    link: 'https://github.com/matheusdemeis/Sudoku',
-    liveUrl: 'https://sudoku-sigma-two.vercel.app/',
-    brand: {
-      name: 'Sukodu',
-      tone: 'Modern, focused, and playful Sudoku experience with polished interaction design.',
-      accent: '#F59E0B',
-    },
-    timeline: '2026',
-    role: 'Full Stack Developer',
-    year: '2026',
-    stack: ['Next.js', 'TypeScript', 'Tailwind CSS'],
-    rationale: [
-      'Built to turn classic 9x9 Sudoku gameplay into a refined browser experience with modern UI patterns.',
-      'Designed to work smoothly on both desktop and mobile with a responsive board and touch-friendly controls.',
-      'Implemented practical gameplay systems like difficulty selection, timer tracking, and notes mode for pencil entries.',
-      'Focused on interaction polish with board highlighting, validation feedback, and mistake checking to keep play engaging.',
-    ],
     visuals: [],
   },
 ];
