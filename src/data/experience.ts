@@ -16,4 +16,27 @@ export const experience: ExperienceItem[] = [
     ],
     tech: ['Next.js', 'TypeScript', 'PostgreSQL', 'Drizzle ORM'],
   },
+  {
+    id: 'bcit-full-stack-web-development',
+    year: '2024-2026',
+    role: 'Full-Stack Web Development Diploma',
+    title: 'British Columbia Institute of Technology (BCIT)',
+    timeline: 'British Columbia, Canada',
+    impacts: [
+      'Completed a two-year, full-time diploma focused on designing, developing, and deploying modern web applications.',
+      'Built full-stack applications using React, Next.js, Node.js, REST APIs, databases, and SQL.',
+      'Practiced modern development workflows with TypeScript, HTML, CSS, Git, GitHub, and deployment tools.',
+    ],
+    tech: [
+      'JavaScript',
+      'TypeScript',
+      'React',
+      'Next.js',
+      'Node.js',
+      'HTML/CSS',
+      'SQL',
+      'REST APIs',
+      'Git/GitHub',
+    ],
+  },
 ];
