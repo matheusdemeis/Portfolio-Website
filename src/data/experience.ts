@@ -37,6 +37,9 @@ export const experience: ExperienceItem[] = [
       'SQL',
       'REST APIs',
       'Git/GitHub',
+      'PHP',
+      'C#',
+      'DevOPS'
     ],
   },
 ];
