@@ -23,7 +23,7 @@ export const experience: ExperienceItem[] = [
     title: 'British Columbia Institute of Technology (BCIT)',
     timeline: 'British Columbia, Canada',
     impacts: [
-      'Completed a two-year, full-time diploma focused on designing, developing, and deploying modern web applications.',
+      'Completed a two-year, full-time diploma focused on developing, deploying, and designing modern web applications.',
       'Built full-stack applications using React, Next.js, Node.js, REST APIs, databases, and SQL.',
       'Practiced modern development workflows with TypeScript, HTML, CSS, Git, GitHub, and deployment tools.',
     ],
