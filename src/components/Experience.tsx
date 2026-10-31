@@ -7,16 +7,16 @@ interface ExperienceProps {
 
 export default function Experience({ items }: ExperienceProps): ReactElement {
   return (
-    <div className="space-y-8">
+    <div className="experience-list">
       {items.map((item) => (
         <article
           key={item.id}
-          className="grid gap-4 border-t border-slate-800 pt-5 md:grid-cols-[96px_1fr] md:gap-6"
+          className="experience-entry"
         >
-          <p className="text-sm tracking-[0.12em] text-stone-500">{item.year}</p>
+          <p className="text-sm tracking-[0.12em] text-stone-400">{item.year}</p>
           <div>
-            <h2 className="text-lg font-medium text-white">{item.role}</h2>
-            <p className="mt-1 text-sm text-stone-300">{item.title} · {item.timeline}</p>
+            <h3 className="text-xl font-medium text-white">{item.role}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-primary">{item.title} · {item.timeline}</p>
             <ul className="mt-3 space-y-2 text-sm leading-relaxed text-stone-300">
               {item.impacts.map((impact) => (
                 <li key={impact} className="flex gap-2">
@@ -25,7 +25,7 @@ export default function Experience({ items }: ExperienceProps): ReactElement {
                 </li>
               ))}
             </ul>
-            <p className="mt-3 text-xs uppercase tracking-[0.12em] text-stone-500">
+            <p className="mt-3 text-xs leading-relaxed tracking-[0.04em] text-stone-400">
               Tech: {item.tech.join(' · ')}
             </p>
           </div>

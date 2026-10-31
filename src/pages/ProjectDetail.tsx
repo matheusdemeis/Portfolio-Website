@@ -20,6 +20,38 @@ export default function ProjectDetail(): ReactElement {
     setIsImageModalOpen(false);
   }, [slug]);
 
+  const imageCount = project?.images?.length ?? 0;
+
+  useEffect(() => {
+    if (!isImageModalOpen) {
+      return;
+    }
+
+    const onKeyDown = (event: KeyboardEvent): void => {
+      if (event.key === 'Escape') {
+        setIsImageModalOpen(false);
+        return;
+      }
+
+      if (imageCount <= 1) {
+        return;
+      }
+
+      if (event.key === 'ArrowLeft') {
+        setCurrentImageIndex((prev: number) => (prev === 0 ? imageCount - 1 : prev - 1));
+      }
+
+      if (event.key === 'ArrowRight') {
+        setCurrentImageIndex((prev: number) => (prev === imageCount - 1 ? 0 : prev + 1));
+      }
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [imageCount, isImageModalOpen]);
+
   if (!project) {
     return (
       <div className="pt-28 pb-20 px-4">
@@ -103,7 +135,6 @@ export default function ProjectDetail(): ReactElement {
   const displayStack = (project.stack && project.stack.length > 0 ? project.stack : project.tags).join(
     ', ',
   );
-  const imageCount = project.images?.length ?? 0;
   const activeImage = imageCount > 0 ? project.images?.[currentImageIndex % imageCount] : undefined;
   const goToPreviousImage = (): void => {
     setCurrentImageIndex((prev: number) => (prev === 0 ? imageCount - 1 : prev - 1));
@@ -247,35 +278,7 @@ export default function ProjectDetail(): ReactElement {
     );
   };
 
-  useEffect(() => {
-    if (!isImageModalOpen) {
-      return;
-    }
 
-    const onKeyDown = (event: KeyboardEvent): void => {
-      if (event.key === 'Escape') {
-        setIsImageModalOpen(false);
-        return;
-      }
-
-      if (imageCount <= 1) {
-        return;
-      }
-
-      if (event.key === 'ArrowLeft') {
-        setCurrentImageIndex((prev: number) => (prev === 0 ? imageCount - 1 : prev - 1));
-      }
-
-      if (event.key === 'ArrowRight') {
-        setCurrentImageIndex((prev: number) => (prev === imageCount - 1 ? 0 : prev + 1));
-      }
-    };
-
-    window.addEventListener('keydown', onKeyDown);
-    return () => {
-      window.removeEventListener('keydown', onKeyDown);
-    };
-  }, [imageCount, isImageModalOpen]);
 
   return (
     <section className="overflow-x-clip bg-slate-800/50 px-4 pb-20 pt-24 sm:px-6 sm:pt-28">
@@ -344,41 +347,13 @@ export default function ProjectDetail(): ReactElement {
           <article className="mt-10 space-y-10">
             {caseStudy.sections.map((section: ProjectCaseStudySection) => renderCaseStudySection(section))}
 
-            {project.demoUrl && (
-              <section>
-                <h3 className="mb-4 text-xl font-semibold sm:text-2xl">Live Demo</h3>
-                <p className="mb-5 max-w-4xl text-sm leading-relaxed text-slate-300 sm:text-base">
-                  {caseStudy.demoCaption}
-                </p>
-                <div className="rounded-2xl border border-slate-700 bg-slate-900/50 p-4 sm:p-6">
-                  <div className="mx-auto flex justify-center">
-                    <div
-                      className="w-full max-w-[402px] overflow-hidden rounded-[2rem] border-[10px] border-gray-800 bg-gray-800 shadow-2xl sm:rounded-[2.5rem] sm:border-[14px]"
-                      style={{ aspectRatio: '402 / 874' }}
-                    >
-                      <iframe
-                        src={project.demoUrl}
-                        className="h-full w-full"
-                        title={`${project.brand.name} App`}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
-                      />
-                    </div>
-                  </div>
-                  {!!caseStudy.demoCallouts?.length && (
-                    <ul className="mt-5 space-y-2 text-sm text-slate-300">
-                      {caseStudy.demoCallouts.map((item: string, index: number) => (
-                        <li key={`${item}-${index}`} className="flex min-w-0 gap-3">
-                          <span
-                            className="mt-2 h-2 w-2 rounded-full"
-                            style={{ backgroundColor: project.brand.accent }}
-                          />
-                          <span className="break-words">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
+            {project.liveUrl && (
+              <section className="rounded-2xl border border-slate-700 p-5">
+                <h3 className="mb-3 text-xl font-semibold">Explore the application</h3>
+                <p className="mb-4 text-sm text-slate-300">The project is available on its own website. Sign-in may be required.</p>
+                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="text-action text-primary">
+                  Open {project.brand.name} <ExternalLink size={16} aria-hidden="true" />
+                </a>
               </section>
             )}
 

@@ -17,3 +17,10 @@ export const projectImages = {
     'https://res.cloudinary.com/df4jmriki/image/upload/v1777143508/vibeplay3_fkfgys.png',
   ],
 } as const;
+
+// Local copies of inspected, authentic project media. Provenance is in the Phase 2 report.
+export const showcaseImages = {
+  vibeplay: '/images/projects/vibeplay-development.png',
+  tandem: '/images/projects/tandem-upload.png',
+  insurflow: '/images/projects/insurflow-intake.png',
+} as const;
