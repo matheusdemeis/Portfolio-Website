@@ -30,7 +30,7 @@ export default function ProjectDetail(): ReactElement {
             to="/"
             className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition"
           >
-            <ArrowLeft size={18} /> Back
+            <ArrowLeft size={18} /> Back to Portfolio
           </Link>
         </div>
       </div>
@@ -84,7 +84,7 @@ export default function ProjectDetail(): ReactElement {
             rel="noopener noreferrer"
             className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-slate-700 bg-slate-900/70 px-4 py-2 text-primary transition hover:text-primary/80 sm:min-h-0 sm:w-auto sm:justify-start sm:border-none sm:bg-transparent sm:px-0 sm:py-0"
           >
-            Live <ExternalLink size={16} />
+            View Live App <ExternalLink size={16} />
           </a>
         )}
         {project.blog && (
@@ -94,7 +94,7 @@ export default function ProjectDetail(): ReactElement {
             rel="noopener noreferrer"
             className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-slate-700 bg-slate-900/70 px-4 py-2 text-primary transition hover:text-primary/80 sm:min-h-0 sm:w-auto sm:justify-start sm:border-none sm:bg-transparent sm:px-0 sm:py-0"
           >
-            Blog <ExternalLink size={16} />
+            Development Blog <ExternalLink size={16} />
           </a>
         )}
       </div>
@@ -284,7 +284,7 @@ export default function ProjectDetail(): ReactElement {
           to="/"
           className="mb-8 inline-flex items-center gap-2 text-sm text-primary transition hover:text-primary/80 sm:text-base"
         >
-          <ArrowLeft size={18} /> Back
+          <ArrowLeft size={18} /> Back to Portfolio
         </Link>
 
         <header className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">

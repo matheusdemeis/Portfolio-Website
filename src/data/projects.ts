@@ -19,7 +19,7 @@ export const projects: Project[] = [
     logo: tandemLogo,
     title: 'Tandem: AI-Powered Childcare Scheduling for Trade Parents',
     description:
-      'Tandem is an AI-powered childcare scheduling app that helps trade parents in British Columbia coordinate unpredictable work schedules, childcare coverage, nanny bookings, and shared caregivers.',
+      'An AI-assisted childcare coordination app for parents in skilled trades with unpredictable work schedules. Built as a BCIT capstone with three developers and five designers; I contributed backend processing that turns voice and PDF schedule inputs into structured scheduling data.',
     tags: [
       'Next.js',
       'TypeScript',
@@ -45,7 +45,7 @@ export const projects: Project[] = [
       accent: '#4A9B9B',
     },
     timeline: '16 weeks',
-    role: 'Full Stack Developer',
+    role: 'Full-Stack Developer',
     team: '3 Developers + 5 Designers',
     year: '2025',
     stack: ['Next.js', 'TypeScript', 'React', 'Tailwind CSS', 'PostgreSQL', 'Drizzle ORM', 'AI Scheduling'],
@@ -178,7 +178,7 @@ export const projects: Project[] = [
     images: [...insurflowImages],
     title: 'InsurFlow, AI-Enabled InsurTech SaaS',
     description:
-      'A full-stack SaaS platform designed to help life insurance advisors perform Financial Needs Analysis, automate compliance documentation, and replace legacy spreadsheet workflows.',
+      'An InsurTech SaaS platform designed to help insurance advisors move financial needs analysis and documentation beyond spreadsheets. At Vero Ventures, I contributed to its architecture and core features as part of a five-person engineering team.',
     tags: [
       'Next.js',
       'TypeScript',
@@ -197,7 +197,7 @@ export const projects: Project[] = [
       accent: '#38BDF8',
     },
     timeline: '16 weeks',
-    role: 'Full stack web developer',
+    role: 'Full-Stack Developer',
     year: '2026',
     rationale: [
       'Built as a greenfield InsurTech SaaS to modernize legacy spreadsheet-based financial analysis workflows used by life insurance advisors.',
@@ -214,14 +214,14 @@ export const projects: Project[] = [
     images: [...projectImages.vibeplay],
     title: 'VibePlay',
     description:
-      'A full-stack web application that generates Spotify playlists based on moods, genres, or artists. Users authenticate with Spotify, generate curated playlists using the Spotify Web API, and save them directly to their Spotify account.',
+      'A personal full-stack project for building Spotify playlists around moods, genres, artists, and musical preferences. My recent work focuses on playlist selection, authentication reliability, and error handling. The latest repository improvements are not yet verified in the live app.',
     tags: [
       'Next.js',
       'TypeScript',
       'Spotify Web API',
       'OAuth 2.0',
       'REST APIs',
-      'TailwindCSS',
+      'Tailwind CSS',
       'Product Development',
       'Full-Stack Development',
     ],
@@ -236,7 +236,7 @@ export const projects: Project[] = [
     },
 
     timeline: '2026',
-    role: 'Full Stack Developer',
+    role: 'Full-Stack Developer',
     year: '2026',
 
     rationale: [

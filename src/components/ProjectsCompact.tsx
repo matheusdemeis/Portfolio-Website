@@ -46,7 +46,7 @@ export default function ProjectsCompact({
               to={`/projects/${project.slug}`}
               className="rounded-md border border-slate-700 px-3 py-1.5 text-stone-300 transition hover:border-primary hover:text-primary"
             >
-              Details
+              {project.caseStudy ? 'View Case Study' : 'View Project'}
             </Link>
           </div>
         </article>

@@ -28,10 +28,15 @@ export default function Hero(): ReactElement {
             Matheus Demeis
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-relaxed text-stone-300 sm:text-[1.2rem]">
-            Full-Stack Dev. Technology Enthusiast.
+            Full-Stack Developer building thoughtful digital products.
+          </p>
+          <p className="mt-4 max-w-3xl text-base leading-relaxed text-stone-300">
+            I turn complex ideas into practical web applications, connecting
+            product decisions and interface design with backend logic and
+            real-world integrations.
           </p>
           <p className="mt-4 text-sm tracking-[0.06em] text-stone-400">
-            Vancouver, BC
+            São Paulo, Brazil
           </p>
           <nav
             className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm"
@@ -64,21 +69,25 @@ export default function Hero(): ReactElement {
         <Section id="about" title="About">
           <div className="space-y-4 text-[1.06rem] leading-relaxed text-stone-300 sm:text-[1.1rem]">
             <p>
-              Recent graduate from the Full-Stack Web Development program at
-              BCIT. I’m passionate about technology, building real-world
-              applications, and continuously improving as a developer.
+              I’m a full-stack developer from Brazil, based in São Paulo. I
+              completed the Full-Stack Web Development diploma at the British
+              Columbia Institute of Technology (BCIT) in Canada, where I built
+              applications across the frontend and backend.
             </p>
 
             <p>
-              Originally from Brazil, my background in sports and gaming have
-              shaped my competitive mindset and appreciation for strategy,
-              teamwork, and discipline.
+              I’m interested in how technology and product decisions come
+              together to solve everyday problems. My work spans a personal
+              music-discovery project, a collaborative childcare scheduling
+              capstone, and professional SaaS development for insurance advisors.
             </p>
 
             <p>
-              I’m drawn to environments where technical decisions matter,
-              ownership is expected, and shipping real solutions is the
-              priority.
+              These projects have taught me to think beyond individual features:
+              understand the problem, work through tradeoffs with teammates, and
+              take responsibility for how the pieces fit together. I value clear
+              communication, thoughtful feedback, and improving the work through
+              each iteration.
             </p>
           </div>
         </Section>
