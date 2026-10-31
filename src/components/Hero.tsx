@@ -12,7 +12,7 @@ export default function Hero() {
           <p>I turn complex ideas into practical web applications, connecting product decisions and interface design with backend logic and real-world integrations.</p>
           <div className="hero-actions">
             <a href="#projects" className="primary-action">Explore My Work <ArrowDown size={17} aria-hidden="true" /></a>
-            <a href={socialLinks[2].href} target="_blank" rel="noopener noreferrer" className="text-action">View Résumé <ArrowUpRight size={16} aria-hidden="true" /></a>
+            <a href={socialLinks[2].href} target="_blank" rel="noopener noreferrer" className="text-action">View Resume <ArrowUpRight size={16} aria-hidden="true" /></a>
           </div>
         </div>
       </div>

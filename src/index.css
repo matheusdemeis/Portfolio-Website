@@ -198,3 +198,28 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 2px s
  .vibe-mobile-preview { max-width: 240px; }
 }
 @media (max-width: 374px) { .vibe-study { padding: 0 16px; } }
+
+/* Phase 3B additions only: shared presentation for the two team projects. */
+.team-study .study-metadata { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; border-top: 1px solid #383d44; margin-top: 38px; padding-top: 24px; }
+.team-study .study-metadata dt { color: #cbb48a; font-size: 11px; margin-bottom: 8px; }
+.team-study .study-metadata dd { color: #edece8; font-size: 14px; line-height: 1.7; }
+.team-study .study-stack { display: flex; flex-wrap: wrap; gap: 12px 24px; color: #bcc1c8; font-size: 12px; margin: 24px 0 8px; }
+.team-study .study-flow { margin-top: 28px; border-top: 1px solid #383d44; }
+.team-study .study-flow li { padding: 20px 0; border-bottom: 1px solid #383d44; }
+.team-study .study-flow strong { display: block; color: #d9c5a2; font-size: 15px; font-weight: 500; margin-bottom: 8px; }
+.team-study .study-flow span { display: block; color: #bcc1c8; font-size: 14px; line-height: 1.8; }
+.team-study .study-phone { width: 100%; max-width: 290px; margin: 0 auto; }
+.team-study .study-phone .project-image-frame { aspect-ratio: 308 / 668; padding: 0; }
+.team-study .study-phone figcaption { padding: 14px 0; line-height: 1.7; }
+.team-study .project-media figcaption { line-height: 1.7; }
+.team-study .vibe-decisions article:last-child:nth-child(odd) { grid-column: 1 / -1; max-width: 800px; }
+.team-study .vibe-closing > .text-action { align-self: center; }
+@media (max-width: 767px) {
+ .team-study .study-metadata { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+ .team-study .study-phone { max-width: 260px; }
+ .team-study .vibe-hero h1 { font-size: clamp(54px, 12vw, 92px); }
+}
+.team-study .study-product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+.team-study .study-product-grid .project-image-frame { aspect-ratio: 2940 / 1892; padding: 0; }
+.team-study .study-decisions-block { margin-top: 48px; }
+@media (max-width: 767px) { .team-study .study-product-grid { grid-template-columns: 1fr; gap: 28px; } }

@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState, type ReactElement } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ExternalLink, ArrowLeft } from 'lucide-react';
+import InsurFlowCaseStudy from '../components/InsurFlowCaseStudy';
+import TandemCaseStudy from '../components/TandemCaseStudy';
 import VibePlayCaseStudy from '../components/VibePlayCaseStudy';
 import { projects } from '../data/projects';
 import type { Project, ProjectCaseStudySection } from '../types';
@@ -72,6 +74,14 @@ export default function ProjectDetail(): ReactElement {
 
   if (project.slug === 'VibePlay') {
     return <VibePlayCaseStudy project={project} />;
+  }
+
+  if (project.slug === 'tandem') {
+    return <TandemCaseStudy project={project} />;
+  }
+
+  if (project.slug === 'InsurFlow') {
+    return <InsurFlowCaseStudy project={project} />;
   }
 
   const projectLinks = (
