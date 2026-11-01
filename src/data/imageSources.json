@@ -1,0 +1,37 @@
+{
+  "/images/projects/insurflow-intake.png": {
+    "width": 2940,
+    "height": 1890,
+    "srcSet": "/images/projects/insurflow-intake-640.webp 640w, /images/projects/insurflow-intake-1280.webp 1280w, /images/projects/insurflow-intake-2940.webp 2940w"
+  },
+  "/images/projects/insurflow-scenarios.png": {
+    "width": 2940,
+    "height": 1860,
+    "srcSet": "/images/projects/insurflow-scenarios-640.webp 640w, /images/projects/insurflow-scenarios-1280.webp 1280w, /images/projects/insurflow-scenarios-2940.webp 2940w"
+  },
+  "/images/projects/tandem-overview.png": {
+    "width": 1600,
+    "height": 1200,
+    "srcSet": "/images/projects/tandem-overview-640.webp 640w, /images/projects/tandem-overview-1280.webp 1280w, /images/projects/tandem-overview-1600.webp 1600w"
+  },
+  "/images/projects/tandem-upload.png": {
+    "width": 308,
+    "height": 668,
+    "srcSet": "/images/projects/tandem-upload-308.webp 308w"
+  },
+  "/images/projects/vibeplay-development-mobile.png": {
+    "width": 390,
+    "height": 844,
+    "srcSet": "/images/projects/vibeplay-development-mobile-390.webp 390w"
+  },
+  "/images/projects/vibeplay-development.png": {
+    "width": 1440,
+    "height": 900,
+    "srcSet": "/images/projects/vibeplay-development-640.webp 640w, /images/projects/vibeplay-development-1280.webp 1280w, /images/projects/vibeplay-development-1440.webp 1440w"
+  },
+  "/images/projects/vibeplay-previous.png": {
+    "width": 1562,
+    "height": 1518,
+    "srcSet": "/images/projects/vibeplay-previous-640.webp 640w, /images/projects/vibeplay-previous-1280.webp 1280w, /images/projects/vibeplay-previous-1562.webp 1562w"
+  }
+}

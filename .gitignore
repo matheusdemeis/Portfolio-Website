@@ -23,3 +23,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local QA outputs
+playwright-report/
+test-results/
+*.tsbuildinfo
+
+docs/qa/phase-4/*.json
+docs/portfolio-phase-*-report.md
+

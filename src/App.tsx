@@ -1,47 +1,26 @@
 import type { ReactElement } from 'react';
-import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import ProjectDetail from './pages/ProjectDetail';
+import NotFound from './pages/NotFound';
+import RouteEffects from './components/RouteEffects';
 
 export default function App(): ReactElement {
-  const location = useLocation();
-
+  const { pathname } = useLocation();
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
-      <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
-          <Route
-            path="/"
-            element={(
-              <motion.main
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.35, ease: 'easeOut' }}
-              >
-                <Home />
-              </motion.main>
-            )}
-          />
-          <Route path="/projects" element={<Navigate to="/" replace />} />
-          <Route
-            path="/projects/:slug"
-            element={(
-              <motion.main
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.35, ease: 'easeOut' }}
-              >
-                <ProjectDetail />
-              </motion.main>
-            )}
-          />
+    <div className="min-h-screen bg-[#10151c] text-white">
+      {pathname !== '/' && <a className="skip-link" href="#main-content">Skip to content</a>}
+      <main id="main-content" tabIndex={-1}>
+        <Routes>
+          <Route caseSensitive path="/" element={<Home />} />
+          <Route caseSensitive path="/projects" element={<Navigate to="/" replace />} />
+          <Route caseSensitive path="/projects/:slug" element={<ProjectDetail />} />
+          <Route caseSensitive path="*" element={<NotFound />} />
         </Routes>
-      </AnimatePresence>
+      </main>
       <Footer />
+      <RouteEffects />
     </div>
   );
 }

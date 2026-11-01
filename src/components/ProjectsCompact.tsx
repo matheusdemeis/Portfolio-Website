@@ -1,56 +1,40 @@
-import type { ReactElement } from 'react';
+import { ArrowUpRight, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { featuredProjects } from '../data/featuredProjects';
 import type { Project } from '../types';
+import ProjectMedia from './ProjectMedia';
 
-interface ProjectsCompactProps {
-  projects: Project[];
-}
-
-export default function ProjectsCompact({
-  projects,
-}: ProjectsCompactProps): ReactElement {
-  const sorted = [...projects].sort((a, b) => Number(b.year) - Number(a.year));
-
+export default function ProjectsCompact({ projects }: { projects: Project[] }) {
   return (
-    <div className="space-y-8">
-      {sorted.map((project) => (
-        <article
-          key={project.id}
-          className="grid gap-4 border-t border-slate-800 pt-5 md:grid-cols-[96px_1fr_auto] md:gap-6"
-        >
-          <p className="text-sm tracking-[0.12em] text-stone-500">{project.year}</p>
-          <div>
-            <div className="flex flex-wrap items-center gap-2">
-              <h3 className="text-lg font-medium text-white">{project.brand.name}</h3>
-              {project.caseStudy && (
-                <span className="rounded-full border border-slate-700 bg-slate-900/60 px-2 py-0.5 text-[10px] uppercase tracking-[0.14em] text-stone-300">
-                  Case Study
-                </span>
-              )}
+    <div className="project-grid">
+      {featuredProjects.map((feature, index) => {
+        const project = projects.find(item => item.slug === feature.slug);
+        if (!project) return null;
+        return (
+          <article key={project.id} className={`project-card ${index === 0 ? 'project-featured' : ''}`} aria-labelledby={`project-${project.slug}`}>
+            <ProjectMedia src={feature.image} alt={feature.alt} caption={feature.caption} featured={index === 0} />
+            <div className="project-content">
+              <div className="project-identity">
+                <p className="eyebrow">{feature.type} <span aria-hidden="true">/</span> {project.year}</p>
+                <h3 id={`project-${project.slug}`}>{project.brand.name}</h3>
+                <ul className="project-tech" aria-label={`${project.brand.name} technologies`}>
+                  {feature.technologies.map(tech => <li key={tech}>{tech}</li>)}
+                </ul>
+              </div>
+              <div className="project-summary">
+                <p>{feature.description}</p>
+                <div className="project-actions">
+                  <Link to={`/projects/${project.slug}`} className="text-action project-detail-link" aria-label={`${project.caseStudy ? 'View case study' : 'View project'}: ${project.brand.name}`}>
+                    {project.caseStudy ? 'View Case Study' : 'View Project'} <ArrowRight size={16} aria-hidden="true" />
+                  </Link>
+                  {project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="text-action" aria-label={`Visit ${project.brand.name} website`}>Visit Site <ArrowUpRight size={15} aria-hidden="true" /></a>}
+                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-action" aria-label={`${project.brand.name} on GitHub`}>GitHub <ArrowUpRight size={15} aria-hidden="true" /></a>
+                </div>
+              </div>
             </div>
-            <p className="mt-2 text-sm leading-relaxed text-stone-300">{project.description}</p>
-            <p className="mt-3 text-xs uppercase tracking-[0.12em] text-stone-500">
-              Tech: {project.tags.slice(0, 4).join(' · ')}
-            </p>
-          </div>
-          <div className="flex gap-2 text-sm md:justify-end md:self-start">
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-md border border-slate-700 px-3 py-1.5 text-stone-300 transition hover:border-primary hover:text-primary"
-            >
-              GitHub
-            </a>
-            <Link
-              to={`/projects/${project.slug}`}
-              className="rounded-md border border-slate-700 px-3 py-1.5 text-stone-300 transition hover:border-primary hover:text-primary"
-            >
-              Details
-            </Link>
-          </div>
-        </article>
-      ))}
+          </article>
+        );
+      })}
     </div>
   );
 }

@@ -10,10 +10,13 @@ if (!rootElement) {
   throw new Error('Root element not found');
 }
 
-ReactDOM.createRoot(rootElement).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>,
-);
+const app = <React.StrictMode><BrowserRouter><App /></BrowserRouter></React.StrictMode>;
+// Hydrate generated HTML only when it belongs to this route. SPA fallback
+// hosts may serve the homepage document for an unknown URL.
+const renderedPath = rootElement.dataset.route;
+const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
+if (rootElement.hasChildNodes() && (renderedPath === currentPath || (renderedPath === '/404' && !['/', '/projects/VibePlay', '/projects/tandem', '/projects/InsurFlow'].includes(currentPath)))) {
+  ReactDOM.hydrateRoot(rootElement, app);
+} else {
+  ReactDOM.createRoot(rootElement).render(app);
+}
