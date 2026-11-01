@@ -17,7 +17,7 @@ export function StudyNavigation({ chapters }: { chapters: [string, string][] }) 
   return <nav className="vibe-contents" aria-label="Case study chapters">{chapters.map(([id, label], index) => <a key={id} href={`#${id}`}>{String(index + 1).padStart(2, '0')} {label}</a>)}</nav>;
 }
 export function StudyChapter({ id, number, title, children }: { id: string; number: string; title: string; children: ReactNode }) {
-  return <section id={id} className="vibe-chapter" aria-labelledby={`${id}-heading`}><header><span className="eyebrow">{number}</span><h2 id={`${id}-heading`}>{title}</h2></header>{children}</section>;
+  return <section id={id} className="vibe-chapter" tabIndex={-1} aria-labelledby={`${id}-heading`}><header><span className="eyebrow">{number}</span><h2 id={`${id}-heading`}>{title}</h2></header>{children}</section>;
 }
 export function StudyDecisions({ items }: { items: StudyDecision[] }) {
   return <div className="vibe-decisions">{items.map(item => <article key={item.title}><h3>{item.title}</h3><dl><dt>Problem</dt><dd>{item.problem}</dd><dt>Decision</dt><dd>{item.decision}</dd><dt>Why it matters</dt><dd>{item.value}</dd></dl></article>)}</div>;

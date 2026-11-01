@@ -1,0 +1,26 @@
+{
+  "/": {
+    "title": "Matheus Demeis | Full-Stack Developer",
+    "description": "Explore the portfolio of Matheus Demeis, a full-stack developer building digital products with React, Next.js, TypeScript, and modern web technologies.",
+    "image": "/images/social/portfolio.png",
+    "imageAlt": "Matheus Demeis — Full-Stack Developer"
+  },
+  "/projects/VibePlay": {
+    "title": "VibePlay | Matheus Demeis",
+    "description": "A personal full-stack project for building Spotify playlists around moods and musical preferences. Explore the product, integration decisions, and development work.",
+    "image": "/images/projects/vibeplay-development.png",
+    "imageAlt": "VibePlay development preview"
+  },
+  "/projects/tandem": {
+    "title": "Tandem | Matheus Demeis",
+    "description": "A collaborative BCIT childcare coordination capstone. Explore Matheus's backend contribution turning PDF and voice work schedules into structured scheduling data.",
+    "image": "/images/projects/tandem-overview.png",
+    "imageAlt": "Original Tandem care-planning interface mockup"
+  },
+  "/projects/InsurFlow": {
+    "title": "InsurFlow | Matheus Demeis",
+    "description": "Professional SaaS engineering at Vero Ventures: contributing to financial needs analysis and documentation workflows within a five-person engineering team.",
+    "image": "/images/projects/insurflow-intake.png",
+    "imageAlt": "InsurFlow demo intake with sample information"
+  }
+}

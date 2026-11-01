@@ -223,3 +223,12 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 2px s
 .team-study .study-product-grid .project-image-frame { aspect-ratio: 2940 / 1892; padding: 0; }
 .team-study .study-decisions-block { margin-top: 48px; }
 @media (max-width: 767px) { .team-study .study-product-grid { grid-template-columns: 1fr; gap: 28px; } }
+
+/* Keep responsive picture sources inside the existing reserved media frame. */
+.project-image-frame picture { display: contents; }
+/* Route headings receive programmatic focus; keyboard links retain visible rings. */
+main h1[tabindex="-1"]:focus { outline: none; }
+/* Preserve reflow when users enlarge text beyond the default presentation. */
+.hero h1, .vibe-hero h1 { overflow-wrap: anywhere; }
+.site-header { flex-wrap: wrap; }
+.vibe-study { overflow-wrap: anywhere; }
